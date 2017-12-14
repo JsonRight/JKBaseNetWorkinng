@@ -28,7 +28,7 @@
     DDLog(@"控制台出现");
 }
 
--(void)viewDidLayoutSubviews{
+- (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     if (self.view.bounds.size.width == [UIScreen mainScreen].bounds.size.width) {
         self.textView.scrollEnabled = YES;
@@ -36,13 +36,13 @@
         self.textView.scrollEnabled = NO;
     }
 }
--(NSMutableString *)logStr{
+- (NSMutableString *)logStr{
     if (!_logStr) {
         _logStr = [NSMutableString stringWithCapacity:0];
     }
     return _logStr;
 }
--(UITextView *)textView{
+- (UITextView *)textView{
     if (!_textView) {
         _textView = [[UITextView alloc] initWithFrame:self.view.bounds];
         _textView.backgroundColor = [UIColor blackColor];
@@ -132,15 +132,6 @@
     }
     return _debugVC;
 }
-- (void)show{
-    
-    [self makeKeyAndVisible];
-    self.hidden = NO;
-}
-- (void)dissmiss{
-    
-    self.hidden = YES;
-}
 
 #pragma mark-  三种手势的添加
 //右滑隐藏
@@ -207,6 +198,16 @@
     self.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 120, 50, 50);
     self.layer.cornerRadius = 25;
 }
+- (void)show{
+    
+    [self makeKeyAndVisible];
+    self.hidden = NO;
+}
+- (void)dissmiss{
+    
+    self.hidden = YES;
+}
+
 @end
 CA_EXTERN void Delog_(const char *className, NSUInteger line, NSString* format, ... ){
     va_list args;
