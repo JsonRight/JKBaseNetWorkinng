@@ -7,19 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "MyHelper.h"
+#import <UIKit/UIKit.h>
 @class BaseSessionMessage,UpLoadFileModel;
 
 typedef NS_OPTIONS(NSUInteger, HTTPMethodTypes) {
     PostType                = 1 << 0,
     GetType                 = 1 << 1,
-    UpLoadDataType          = 1<<2,
+    UpLoadDataType          = 1 << 2,
+    HEADType                = 1 << 3,
+    PUTType                 = 1 << 4,
+    PATCHType               = 1 << 5,
+    DELETEType              = 1 << 6,
     DefaultHTTPMethodType   = PostType,
 };
 typedef NS_OPTIONS(NSUInteger, RequestBodyTypes) {
     HTTPBodyType            = 1 << 0,
-    PropertyListBodyType    = 1<<1,
-    JSONBodyType            = 1<<2,
+    PropertyListBodyType    = 1 << 1,
+    JSONBodyType            = 1 << 2,
     DefaultBodyType         = HTTPBodyType,
 };
 typedef NS_OPTIONS(NSUInteger, ResponseDataTypes) {

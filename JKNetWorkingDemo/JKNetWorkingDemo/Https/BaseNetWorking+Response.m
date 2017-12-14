@@ -10,6 +10,15 @@
 #import "BaseNetWorking+FailureRefresh.h"
 #import "BaseNetWorking+Encrypt.h"
 @implementation BaseNetWorking (Response)
+-(void)responseForm_HEAD_RequestToMsgWith:(NSURLSessionDataTask* )task msg:(BaseSessionMessage*)sessionMsg{
+    if (sessionMsg.isDlog) {
+        DLog(@"%@===>\n%@",sessionMsg.requestUrl,task);
+    }
+    
+    if (sessionMsg.successBlock) {
+        sessionMsg.successBlock(sessionMsg);
+    }
+}
 
 -(void)responseForJsonToMsgWith:(NSURLSessionDataTask* )task responseObject:(id )responseObject msg:(BaseSessionMessage*)sessionMsg{
     
@@ -32,24 +41,11 @@
     if (sessionMsg.isDlog) {
         DLog(@"%@===>\n%@",sessionMsg.requestUrl,sessionMsg.responseString);
     }
-    if (([sessionMsg.jsonItems containsObjectForKey:@"flag"]&&[sessionMsg.jsonItems[@"flag"] isEqualToString:@"0000"])||(![sessionMsg.jsonItems containsObjectForKey:@"flag"])) {
-        if (sessionMsg.successBlock) {
-            sessionMsg.successBlock(sessionMsg);
-        }
-    }else if([sessionMsg.jsonItems containsObjectForKey:@"flag"]&&[sessionMsg.jsonItems[@"flag"] isEqualToString:@"0003"]){
-        showMsg(sessionMsg.msg, nil).completionBlock= ^{
-            [GlobalCenter login:^(BOOL success) {
-                
-            }];
-        };
-        if (sessionMsg.failureBlock) {
-            sessionMsg.failureBlock(sessionMsg);
-        }
-    }else{
-        if (sessionMsg.failureBlock) {
-            sessionMsg.failureBlock(sessionMsg);
-        }
+    
+    if (sessionMsg.successBlock) {
+        sessionMsg.successBlock(sessionMsg);
     }
+    
     
 }
 -(void)responseForDataToMsgWith:(NSURLSessionDataTask* )task responseObject:(id )responseObject msg:(BaseSessionMessage*)sessionMsg{
@@ -70,27 +66,14 @@
     if (sessionMsg.isDlog) {
         DLog(@"%@===>\n%@",sessionMsg.requestUrl,sessionMsg.responseString);
     }
-    if (([sessionMsg.jsonItems containsObjectForKey:@"flag"]&&[sessionMsg.jsonItems[@"flag"] isEqualToString:@"0000"])||(![sessionMsg.jsonItems containsObjectForKey:@"flag"])) {
-        if (sessionMsg.successBlock) {
-            sessionMsg.successBlock(sessionMsg);
-        }
-    }else if([sessionMsg.jsonItems containsObjectForKey:@"flag"]&&[sessionMsg.jsonItems[@"flag"] isEqualToString:@"0003"]){
-        showMsg(sessionMsg.msg, nil).completionBlock= ^{
-            [GlobalCenter login:^(BOOL success) {
-                
-            }];
-        };
-        if (sessionMsg.failureBlock) {
-            sessionMsg.failureBlock(sessionMsg);
-        }
-    }else{
-        if (sessionMsg.failureBlock) {
-            sessionMsg.failureBlock(sessionMsg);
-        }
+    
+    if (sessionMsg.successBlock) {
+        sessionMsg.successBlock(sessionMsg);
     }
+   
 }
 -(void)responseFailureWith:(NSURLSessionDataTask* )task error:(NSError*)error msg:(BaseSessionMessage*)sessionMsg{
-    hidenRequestHUD();
+   
     NSHTTPURLResponse * response=error.userInfo[@"com.alamofire.serialization.response.error.response"];
     NSData * data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
     NSString * str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];

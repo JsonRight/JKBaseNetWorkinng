@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPSessionManager.h"
 #import "BaseSessionMessage.h"
+#import "MyHelper.h"
 @interface BaseNetWorking : NSObject{
     NSString* _baseUrl;
 }

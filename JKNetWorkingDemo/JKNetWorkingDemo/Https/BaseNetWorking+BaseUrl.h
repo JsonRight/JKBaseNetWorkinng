@@ -9,6 +9,5 @@
 #import "BaseNetWorking.h"
 
 @interface BaseNetWorking (BaseUrl)
--(NSString *)baseUrl;
--(UIButton*)createApiSelectBtn;
+
 @end

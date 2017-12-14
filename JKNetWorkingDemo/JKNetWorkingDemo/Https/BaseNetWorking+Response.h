@@ -12,6 +12,8 @@
 /*
  数据返回处理
  */
+-(void)responseForm_HEAD_RequestToMsgWith:(NSURLSessionDataTask* )task msg:(BaseSessionMessage*)sessionMsg;
+
 -(void)responseForJsonToMsgWith:(NSURLSessionDataTask* )task responseObject:(id )responseObject msg:(BaseSessionMessage*)sessionMsg;
 
 -(void)responseForDataToMsgWith:(NSURLSessionDataTask* )task responseObject:(id )responseObject msg:(BaseSessionMessage*)sessionMsg;

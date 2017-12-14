@@ -87,5 +87,99 @@
     
     return dataTask;
 }
+- (NSURLSessionDataTask *)HEADT_MethodWithSessionMessage:(BaseSessionMessage *)sessionMsg{
+    AFHTTPSessionManager *sessionManager=[self configSessionManagerWithSessionMessage:sessionMsg];
+    [self encryptedUrlWithSessionMessage:sessionMsg];
+    NSURLSessionDataTask *dataTask = [sessionManager HEAD:sessionMsg.encryptedUrlString parameters:sessionMsg.paramsDic success:^(NSURLSessionDataTask * _Nonnull task) {
+        DLog(@"post")
+        
+        if ([sessionManager.responseSerializer isKindOfClass:[AFJSONResponseSerializer class]]) {
+            
+//            [self responseForJsonToMsgWith:task responseObject:responseObject msg:sessionMsg];
+            
+        }else{
+            
+//            [self responseForDataToMsgWith:task responseObject:responseObject msg:sessionMsg];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        DLog(@"post网络错误———————————— %@",error);
+        [self responseFailureWith:task error:error msg:sessionMsg];
+    }];
+   
+    
+    return dataTask;
+}
+- (NSURLSessionDataTask *)PUT_MethodWithSessionMessage:(BaseSessionMessage *)sessionMsg{
+    AFHTTPSessionManager *sessionManager=[self configSessionManagerWithSessionMessage:sessionMsg];
+    [self encryptedUrlWithSessionMessage:sessionMsg];
+    NSURLSessionDataTask *dataTask = [sessionManager PUT:sessionMsg.encryptedUrlString parameters:sessionMsg.paramsDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        DLog(@"post")
+        
+        if ([sessionManager.responseSerializer isKindOfClass:[AFJSONResponseSerializer class]]) {
+            
+            [self responseForJsonToMsgWith:task responseObject:responseObject msg:sessionMsg];
+            
+        }else{
+            
+            [self responseForDataToMsgWith:task responseObject:responseObject msg:sessionMsg];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        DLog(@"post网络错误———————————— %@",error);
+        [self responseFailureWith:task error:error msg:sessionMsg];
+        
+    }];
+    
+    return dataTask;
+}
+- (NSURLSessionDataTask *)PATCH_MethodWithSessionMessage:(BaseSessionMessage *)sessionMsg{
+    AFHTTPSessionManager *sessionManager=[self configSessionManagerWithSessionMessage:sessionMsg];
+    [self encryptedUrlWithSessionMessage:sessionMsg];
+    NSURLSessionDataTask *dataTask = [sessionManager PATCH:sessionMsg.encryptedUrlString parameters:sessionMsg.paramsDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        DLog(@"post")
+        
+        if ([sessionManager.responseSerializer isKindOfClass:[AFJSONResponseSerializer class]]) {
+            
+            [self responseForJsonToMsgWith:task responseObject:responseObject msg:sessionMsg];
+            
+        }else{
+            
+            [self responseForDataToMsgWith:task responseObject:responseObject msg:sessionMsg];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        DLog(@"post网络错误———————————— %@",error);
+        [self responseFailureWith:task error:error msg:sessionMsg];
+        
+    }];
+    
+    
+    return dataTask;
+}
+- (NSURLSessionDataTask *)DELETE_MethodWithSessionMessage:(BaseSessionMessage *)sessionMsg{
+    AFHTTPSessionManager *sessionManager=[self configSessionManagerWithSessionMessage:sessionMsg];
+    [self encryptedUrlWithSessionMessage:sessionMsg];
+    NSURLSessionDataTask *dataTask = [sessionManager DELETE:sessionMsg.encryptedUrlString parameters:sessionMsg.paramsDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        DLog(@"post")
+        
+        if ([sessionManager.responseSerializer isKindOfClass:[AFJSONResponseSerializer class]]) {
+            
+            [self responseForJsonToMsgWith:task responseObject:responseObject msg:sessionMsg];
+            
+        }else{
+            
+            [self responseForDataToMsgWith:task responseObject:responseObject msg:sessionMsg];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        DLog(@"post网络错误———————————— %@",error);
+        [self responseFailureWith:task error:error msg:sessionMsg];
+        
+    }];
+ 
+    
+    return dataTask;
+}
 
 @end

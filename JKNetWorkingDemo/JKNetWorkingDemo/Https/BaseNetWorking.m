@@ -25,7 +25,7 @@
 }
 -(NSString *)baseUrl{
     if (!_baseUrl) {
-        _baseUrl = API_HostNameHTTP;
+        _baseUrl = @"";
     }
     return _baseUrl;
 }
@@ -49,7 +49,26 @@
             return [self postMethodWithSessionMessage:sessionMsg];
         }
             break;
-        
+        case HEADType:
+        {
+            return [self HEADT_MethodWithSessionMessage:sessionMsg];
+        }
+        break;
+        case PUTType:
+        {
+            return [self PUT_MethodWithSessionMessage:sessionMsg];
+        }
+        break;
+        case PATCHType:
+        {
+            return [self PATCH_MethodWithSessionMessage:sessionMsg];
+        }
+        break;
+        case DELETEType:
+        {
+            return [self DELETE_MethodWithSessionMessage:sessionMsg];
+        }
+        break;
         
         default:
         {
@@ -61,18 +80,11 @@
 }
 
 
-
 #pragma mark - 配置sessionManager
 - (AFHTTPSessionManager *)configSessionManagerWithSessionMessage:(BaseSessionMessage *)sessionMsg {
     
     //初始化一个网络会话管理器
     AFHTTPSessionManager *sessionManager=[AFHTTPSessionManager manager];
-    //设置服务器响应数据序列化格式
-    if (sessionMsg.baseResponseDataType == DefaultDataType) {
-        sessionManager.responseSerializer=[AFJSONResponseSerializer serializer];
-    }else{
-        sessionManager.responseSerializer=[AFHTTPResponseSerializer serializer];
-    }
     //设置客户端可接受服务器端响应数据格式
     sessionManager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:
                                                               @"text/plain",
@@ -83,8 +95,31 @@
                                                               @"text/html",
                                                               @"text/xml",
                                                               nil];
-    
+    //设置服务器响应数据序列化格式
+    [self updateResponseSerializerWith:sessionManager sessionMessage:sessionMsg];
     //设置请求体序列化格式
+    [self updateResponseSerializerWith:sessionManager sessionMessage:sessionMsg];
+    //设置请求超时时间
+    [self updateTimeoutIntervalWith:sessionManager sessionMessage:sessionMsg];
+    //配置https安全证书
+    sessionManager.securityPolicy  = [self updateSecurityPolicyWith:sessionManager sessionMessage:sessionMsg];
+    
+    return sessionManager;
+}
+
+//设置服务器响应数据序列化格式
+- (void)updateResponseSerializerWith:(AFHTTPSessionManager*)sessionManager sessionMessage:(BaseSessionMessage *)sessionMsg {
+    
+    if (sessionMsg.baseResponseDataType == DefaultDataType) {
+        sessionManager.responseSerializer=[AFJSONResponseSerializer serializer];
+    }else{
+        sessionManager.responseSerializer=[AFHTTPResponseSerializer serializer];
+    }
+}
+
+//设置请求体序列化格式
+- (void)updateRequestSerializerWith:(AFHTTPSessionManager*)sessionManager sessionMessage:(BaseSessionMessage *)sessionMsg {
+    
     if (sessionMsg.baseRequestBodyType == DefaultBodyType) {
         sessionManager.requestSerializer=[AFHTTPRequestSerializer serializer];
     } else if (sessionMsg.baseRequestBodyType == JSONBodyType) {
@@ -92,20 +127,24 @@
     }  else if (sessionMsg.baseRequestBodyType == PropertyListBodyType) {
         sessionManager.requestSerializer=[AFPropertyListRequestSerializer serializer];
     }
-    //设置请求超时时间
+    
+}
+
+//设置请求超时时间
+- (void)updateTimeoutIntervalWith:(AFHTTPSessionManager*)sessionManager sessionMessage:(BaseSessionMessage *)sessionMsg {
+    
     [sessionManager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     sessionManager.requestSerializer.timeoutInterval=sessionMsg.timeOut;//设置请求超时时间
     [sessionManager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-     AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:(AFSSLPinningModeNone)];
-    [securityPolicy setValidatesDomainName:NO];
-    sessionManager.securityPolicy  = securityPolicy;    
-    return sessionManager;
 }
 
-
-
-
-
+//配置https安全证书
+- (AFSecurityPolicy*)updateSecurityPolicyWith:(AFHTTPSessionManager*)sessionManager sessionMessage:(BaseSessionMessage *)sessionMsg {
+    
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:(AFSSLPinningModeNone)];
+    [securityPolicy setValidatesDomainName:NO];
+    return securityPolicy;
+}
 
 #pragma mark - 是否有网络
 - (BOOL)isConnected {
@@ -150,9 +189,9 @@
     [mgr startMonitoring];
     
     // 2.设置网络状态改变后的处理
-    @weakify(self);
+//    @weakify(self);
     [mgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        @strongify(self);
+//        @strongify(self);
         //这里是监测到网络改变的block  可以写成switch方便
         //在里面可以随便写事件
         switch (status) {
@@ -160,11 +199,10 @@
                 DLog(@"未知网络")
                 self.networkStatus=AFNetworkReachabilityStatusUnknown;
                 break;
+            
             case AFNetworkReachabilityStatusNotReachable:
-                
                 DLog(@"无网络");
                 self.networkStatus=AFNetworkReachabilityStatusNotReachable;
-                [MBProgressHUD showImage:@"fw-abnormal" withStr:@"网络异常..." toView:nil];
                 break;
                 
             case AFNetworkReachabilityStatusReachableViaWWAN:
@@ -175,7 +213,6 @@
             case AFNetworkReachabilityStatusReachableViaWiFi:
                 self.networkStatus=AFNetworkReachabilityStatusReachableViaWiFi;
                 DLog(@"WiFi网络");
-                
                 break;
                 
             default:
