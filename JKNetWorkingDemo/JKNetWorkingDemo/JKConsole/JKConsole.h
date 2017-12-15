@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#ifdef DEBUG
+#if defined (DebugNet) || defined (PreNet) || DEBUG //如果测试环境才有
 #define DDLog(frmt, ...)  _Delog_([[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, (frmt), ##__VA_ARGS__);
 #else
 #define DDLog(frmt, ...)
