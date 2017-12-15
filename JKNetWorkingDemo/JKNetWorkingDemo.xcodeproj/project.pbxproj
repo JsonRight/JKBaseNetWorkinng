@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0429114D1FE36CB800812F17 /* InterfacesURLList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0429114A1FE36CB800812F17 /* InterfacesURLList.plist */; };
+		0429114E1FE36CB800812F17 /* JKConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 0429114C1FE36CB800812F17 /* JKConsole.m */; };
+		042911551FE3C99800812F17 /* JKGuidePageWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 042911541FE3C99800812F17 /* JKGuidePageWindow.m */; };
 		044DEB5E1FE0DC28006F5C35 /* BaseNetWorking+BaseUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9D71F7B7F95008A3F66 /* BaseNetWorking+BaseUrl.m */; };
 		044DEB5F1FE0DC2E006F5C35 /* BaseNetWorking+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9D91F7B7F95008A3F66 /* BaseNetWorking+Encrypt.m */; };
 		044DEB601FE0DC33006F5C35 /* BaseNetWorking+FailureRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9DB1F7B7F95008A3F66 /* BaseNetWorking+FailureRefresh.m */; };
@@ -14,8 +17,6 @@
 		044DEB621FE0DC3C006F5C35 /* BaseNetWorking+Response.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9DF1F7B7F95008A3F66 /* BaseNetWorking+Response.m */; };
 		044DEB631FE0DC41006F5C35 /* BaseNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9E11F7B7F95008A3F66 /* BaseNetWorking.m */; };
 		044DEB641FE0DC45006F5C35 /* BaseSessionMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9E31F7B7F95008A3F66 /* BaseSessionMessage.m */; };
-		044DEB6D1FE13A55006F5C35 /* hehViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DEB6C1FE13A55006F5C35 /* hehViewController.m */; };
-		044DEB701FE23ED7006F5C35 /* JKConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DEB6F1FE23ED7006F5C35 /* JKConsole.m */; };
 		52C2AB303A85FE3FD72776C6 /* libPods-JKNetWorkingDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA38D6422FA13D7D2CD99420 /* libPods-JKNetWorkingDemo.a */; };
 		BF08F9C11F7B7F0E008A3F66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9C01F7B7F0E008A3F66 /* AppDelegate.m */; };
 		BF08F9C41F7B7F0E008A3F66 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9C31F7B7F0E008A3F66 /* ViewController.m */; };
@@ -26,12 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0429114A1FE36CB800812F17 /* InterfacesURLList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InterfacesURLList.plist; sourceTree = "<group>"; };
+		0429114B1FE36CB800812F17 /* JKConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKConsole.h; sourceTree = "<group>"; };
+		0429114C1FE36CB800812F17 /* JKConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKConsole.m; sourceTree = "<group>"; };
+		042911531FE3C99800812F17 /* JKGuidePageWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKGuidePageWindow.h; sourceTree = "<group>"; };
+		042911541FE3C99800812F17 /* JKGuidePageWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKGuidePageWindow.m; sourceTree = "<group>"; };
 		044DEB661FE113E3006F5C35 /* MyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHelper.h; sourceTree = "<group>"; };
 		044DEB6A1FE116FD006F5C35 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
-		044DEB6B1FE13A55006F5C35 /* hehViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hehViewController.h; sourceTree = "<group>"; };
-		044DEB6C1FE13A55006F5C35 /* hehViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hehViewController.m; sourceTree = "<group>"; };
-		044DEB6E1FE23ED7006F5C35 /* JKConsole.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKConsole.h; sourceTree = "<group>"; };
-		044DEB6F1FE23ED7006F5C35 /* JKConsole.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKConsole.m; sourceTree = "<group>"; };
 		680CCE8123418F9C37A49840 /* Pods-JKNetWorkingDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JKNetWorkingDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JKNetWorkingDemo/Pods-JKNetWorkingDemo.release.xcconfig"; sourceTree = "<group>"; };
 		759587BABC79822948681959 /* Pods-JKNetWorkingDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JKNetWorkingDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JKNetWorkingDemo/Pods-JKNetWorkingDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		BA38D6422FA13D7D2CD99420 /* libPods-JKNetWorkingDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JKNetWorkingDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +75,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042911491FE36CB800812F17 /* JKConsole */ = {
+			isa = PBXGroup;
+			children = (
+				0429114B1FE36CB800812F17 /* JKConsole.h */,
+				0429114C1FE36CB800812F17 /* JKConsole.m */,
+				0429114A1FE36CB800812F17 /* InterfacesURLList.plist */,
+			);
+			path = JKConsole;
+			sourceTree = "<group>";
+		};
+		0429114F1FE3838400812F17 /* JKGuidePage */ = {
+			isa = PBXGroup;
+			children = (
+				042911531FE3C99800812F17 /* JKGuidePageWindow.h */,
+				042911541FE3C99800812F17 /* JKGuidePageWindow.m */,
+			);
+			path = JKGuidePage;
+			sourceTree = "<group>";
+		};
 		2179777892839B7DEA61BDB1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,13 +132,13 @@
 		BF08F9BE1F7B7F0E008A3F66 /* JKNetWorkingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0429114F1FE3838400812F17 /* JKGuidePage */,
+				042911491FE36CB800812F17 /* JKConsole */,
 				BF08F9D51F7B7F95008A3F66 /* Https */,
 				BF08F9BF1F7B7F0E008A3F66 /* AppDelegate.h */,
 				BF08F9C01F7B7F0E008A3F66 /* AppDelegate.m */,
 				BF08F9C21F7B7F0E008A3F66 /* ViewController.h */,
 				BF08F9C31F7B7F0E008A3F66 /* ViewController.m */,
-				044DEB6B1FE13A55006F5C35 /* hehViewController.h */,
-				044DEB6C1FE13A55006F5C35 /* hehViewController.m */,
 				BF08F9C51F7B7F0E008A3F66 /* Main.storyboard */,
 				BF08F9C81F7B7F0E008A3F66 /* Assets.xcassets */,
 				BF08F9CA1F7B7F0E008A3F66 /* LaunchScreen.storyboard */,
@@ -146,8 +167,6 @@
 				BF08F9E11F7B7F95008A3F66 /* BaseNetWorking.m */,
 				BF08F9E21F7B7F95008A3F66 /* BaseSessionMessage.h */,
 				BF08F9E31F7B7F95008A3F66 /* BaseSessionMessage.m */,
-				044DEB6E1FE23ED7006F5C35 /* JKConsole.h */,
-				044DEB6F1FE23ED7006F5C35 /* JKConsole.m */,
 			);
 			path = Https;
 			sourceTree = "<group>";
@@ -213,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0429114D1FE36CB800812F17 /* InterfacesURLList.plist in Resources */,
 				BF08F9CC1F7B7F0E008A3F66 /* LaunchScreen.storyboard in Resources */,
 				BF08F9C91F7B7F0E008A3F66 /* Assets.xcassets in Resources */,
 				BF08F9C71F7B7F0E008A3F66 /* Main.storyboard in Resources */,
@@ -274,17 +294,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				044DEB701FE23ED7006F5C35 /* JKConsole.m in Sources */,
 				044DEB641FE0DC45006F5C35 /* BaseSessionMessage.m in Sources */,
 				044DEB631FE0DC41006F5C35 /* BaseNetWorking.m in Sources */,
+				042911551FE3C99800812F17 /* JKGuidePageWindow.m in Sources */,
 				044DEB621FE0DC3C006F5C35 /* BaseNetWorking+Response.m in Sources */,
 				044DEB611FE0DC38006F5C35 /* BaseNetWorking+HTTPMethod.m in Sources */,
 				044DEB601FE0DC33006F5C35 /* BaseNetWorking+FailureRefresh.m in Sources */,
-				044DEB6D1FE13A55006F5C35 /* hehViewController.m in Sources */,
 				044DEB5F1FE0DC2E006F5C35 /* BaseNetWorking+Encrypt.m in Sources */,
 				044DEB5E1FE0DC28006F5C35 /* BaseNetWorking+BaseUrl.m in Sources */,
 				BF08F9C41F7B7F0E008A3F66 /* ViewController.m in Sources */,
 				BF08F9CF1F7B7F0E008A3F66 /* main.m in Sources */,
+				0429114E1FE36CB800812F17 /* JKConsole.m in Sources */,
 				BF08F9C11F7B7F0E008A3F66 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

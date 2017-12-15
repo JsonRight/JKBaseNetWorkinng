@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "JKConsole.h"
 @interface AppDelegate ()
 
 @end
@@ -18,6 +18,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    
+    //控制台显示
+    [JKConsole sheareConsoleShowAndVisible];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        for (int i = 0; i<10; i++) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(i * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                //测试打印效果
+                DDLog(@"日志打印：%ld",i)
+            });
+        }
+    });
     return YES;
 }
 

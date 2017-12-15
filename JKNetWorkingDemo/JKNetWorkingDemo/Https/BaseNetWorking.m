@@ -98,7 +98,7 @@
     //设置服务器响应数据序列化格式
     [self updateResponseSerializerWith:sessionManager sessionMessage:sessionMsg];
     //设置请求体序列化格式
-    [self updateResponseSerializerWith:sessionManager sessionMessage:sessionMsg];
+    [self updateRequestSerializerWith:sessionManager sessionMessage:sessionMsg];
     //设置请求超时时间
     [self updateTimeoutIntervalWith:sessionManager sessionMessage:sessionMsg];
     //配置https安全证书

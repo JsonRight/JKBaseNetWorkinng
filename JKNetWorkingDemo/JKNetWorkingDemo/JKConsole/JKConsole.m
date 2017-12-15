@@ -12,12 +12,19 @@
 @property (nonatomic, strong) UITextView *textView;
 /**<#Description#>*/
 @property (nonatomic, strong) NSMutableString *logStr;
+/**接口控制*/
+@property (nonatomic, strong) UIButton *interfacesBtn;
+/**接口地址*/
+@property (nonatomic, strong) NSMutableDictionary *urlDict;
+/**<#Description#>*/
+@property (nonatomic, strong) NSString *currentURL;
 
 
 @end
 @interface JKDebugViewController ()
 {
     NSMutableString* _logStr;
+    
 }
 
 @end
@@ -25,6 +32,8 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.interfacesBtn];
+    self.navigationItem.title = @"测试控制台";
     DDLog(@"控制台出现");
 }
 
@@ -35,6 +44,18 @@
     }else{
         self.textView.scrollEnabled = NO;
     }
+}
+
+-(UIButton *)interfacesBtn{
+    if (!_interfacesBtn) {
+        _interfacesBtn = [UIButton  buttonWithType:(UIButtonTypeCustom)];
+        _interfacesBtn.frame = CGRectMake(0, 0, 80,25);
+        [_interfacesBtn setTitle:@"接口切换" forState:(UIControlStateNormal)];
+        _interfacesBtn.backgroundColor = [UIColor lightGrayColor];
+        _interfacesBtn.layer.cornerRadius = 3;
+        [_interfacesBtn addTarget:self action:@selector(showAllInterfacesUrl:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _interfacesBtn;
 }
 - (NSMutableString *)logStr{
     if (!_logStr) {
@@ -65,6 +86,41 @@
     [self.textView scrollRectToVisible:CGRectMake(0, self.textView.contentSize.height-15, self.textView.contentSize.width, 10) animated:YES];
 }
 
+- (void)showAllInterfacesUrl:(UIButton*)btn{
+    //获取preference
+    NSString* path = [[NSBundle mainBundle]pathForResource:@"InterfacesURLList" ofType:@"plist"];
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc]initWithContentsOfFile:path];
+    
+    self.urlDict = [dict objectForKey:@"interfacesUrls"];
+    self.currentURL = [dict objectForKey:@"currentURL"];
+
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"当前URL" message:self.currentURL preferredStyle:(UIAlertControllerStyleAlert)];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"临时地址";
+    }];
+
+    [alert addAction:[UIAlertAction actionWithTitle:@"确认更改" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSString *input = ((UITextField *)alert.textFields.firstObject).text;
+        self.currentURL = input;
+        [dict setObject:input forKey:@"currentURL"];
+        [dict writeToFile:path atomically:YES];
+        DDLog(@"地址切换为：%@",self.currentURL);
+    }]];
+    for (NSString* str in self.urlDict.allKeys) {
+        [alert addAction:[UIAlertAction actionWithTitle:str style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            self.currentURL = self.urlDict[action.title];
+            [dict setObject:self.currentURL forKey:@"currentURL"];
+            [dict writeToFile:path atomically:YES];
+            DDLog(@"地址切换为：%@",self.currentURL);
+        }]];
+    }
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+}
 - (void)printMSGFromJKConsole:(const char *)msg{
         [self.logStr appendString:[NSString stringWithUTF8String:msg]];
         self.logStr  = _logStr;
@@ -75,10 +131,8 @@
 
 
 #pragma mark -- console
-@interface JKConsole (){
-    
-}
 
+@interface JKConsole ()
 /**<#Description#>*/
 @property (nonatomic, strong) JKDebugViewController *debugVC;
 /**<#Description#>*/
@@ -90,13 +144,14 @@
 @end
 
 @implementation JKConsole
+static JKConsole* console = nil;
++ (JKConsole* )sheareConsoleShowAndVisible{
 
-+ (JKConsole* )console{
+    #if defined (DebugNet) || defined (PreNet) || DEBUG //如果测试环境才有
     static dispatch_once_t onceToken;
-    static JKConsole* console = nil;
     dispatch_once(&onceToken, ^{
         console = [JKConsole new];
-        console.windowLevel = UIWindowLevelStatusBar + 101;
+        console.windowLevel = UIWindowLevelStatusBar -1;
         console.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 120, 50, 50);
         console.layer.masksToBounds = YES;
         console.layer.cornerRadius = 25;
@@ -104,7 +159,11 @@
         [console addGestureRecognizer:console.swipe];
         [console addGestureRecognizer:console.tap];
         [console addGestureRecognizer:console.pan];
+        [console show];
     });
+    #endif
+
+
     return console;
 }
 - (UISwipeGestureRecognizer *)swipe{
@@ -177,14 +236,12 @@
         [UIView animateWithDuration:0.2 animations:^{
             [self maxmize];
         } completion:^(BOOL finished) {
-            
             [self removeGestureRecognizer:self.pan];
         }];
     }else{//退出全屏
         [UIView animateWithDuration:0.2 animations:^{
             [self minimize];
         } completion:^(BOOL finished) {
-           
             [self addGestureRecognizer:self.pan];
         }];
     }
@@ -199,17 +256,17 @@
     self.layer.cornerRadius = 25;
 }
 - (void)show{
-    
     [self makeKeyAndVisible];
     self.hidden = NO;
 }
-- (void)dissmiss{
-    
-    self.hidden = YES;
++ (void)dissmiss{
+    if (console) {
+         console.hidden = YES;
+    }
 }
 
 @end
-CA_EXTERN void Delog_(const char *className, NSUInteger line, NSString* format, ... ){
+CA_EXTERN void _Delog_(const char *className, NSUInteger line, NSString* format, ... ){
     va_list args;
     if (format) {
         va_start(args, format);
@@ -224,6 +281,6 @@ CA_EXTERN void Delog_(const char *className, NSUInteger line, NSString* format, 
         //控制台打印
         printf("%s", resultCString);
         //UI上去展示日志内容
-        [[JKConsole console].debugVC printMSGFromJKConsole:resultCString];
+        [[JKConsole sheareConsoleShowAndVisible].debugVC printMSGFromJKConsole:resultCString];
     }
 }
