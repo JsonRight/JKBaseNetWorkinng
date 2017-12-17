@@ -150,7 +150,13 @@
             layout = [[UICollectionViewFlowLayout alloc]init];
             self.scrollDirectionVertical = scrollDirectionVertical;
             layout.scrollDirection = scrollDirectionVertical?UICollectionViewScrollDirectionVertical:UICollectionViewScrollDirectionHorizontal;
-            layout.itemSize = itemSize;
+            if (itemSize.height != 0.0&&itemSize.width != 0.0) {
+                layout.itemSize = itemSize;
+            }else if(frame.size.height != 0.0&&frame.size.width != 0.0){
+                layout.itemSize = frame.size;
+            }else{
+                layout.itemSize = self.customView.bounds.size;
+            }
             layout.minimumInteritemSpacing = 0.0;
             layout.minimumLineSpacing = 0.0;
         }

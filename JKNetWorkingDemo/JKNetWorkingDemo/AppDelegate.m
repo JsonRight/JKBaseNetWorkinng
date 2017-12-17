@@ -23,6 +23,7 @@
     [JKGuidePageWindow makeShowImage:^(JKGuidePageViewController *make) {
         make.setImageArr(@[@"引导页750x1334",@"引导页750x1334",@"引导页750x1334"], NO);
         make.setTimer(3);
+        make.setScrollViewStyle(nil, CGRectNull, CGSizeZero, YES);
         make.setCustomViewAnimateWhenHiddenBlock(^CABasicAnimation *{
             CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"transform.scale"];
             
