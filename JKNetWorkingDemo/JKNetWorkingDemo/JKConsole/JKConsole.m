@@ -134,6 +134,8 @@
 
 @interface JKConsole ()
 /**<#Description#>*/
+@property (nonatomic, assign) BOOL isShow;
+/**<#Description#>*/
 @property (nonatomic, strong) JKDebugViewController *debugVC;
 /**<#Description#>*/
 @property (nonatomic, strong) UISwipeGestureRecognizer *swipe;
@@ -145,13 +147,13 @@
 
 @implementation JKConsole
 static JKConsole* console = nil;
-+ (JKConsole* )sheareConsoleShowAndVisible{
++ (JKConsole* )sheareConsole{
 
     #if defined (DebugNet) || defined (PreNet) || DEBUG //如果测试环境才有
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         console = [JKConsole new];
-        console.windowLevel = UIWindowLevelStatusBar -1;
+        console.windowLevel = UIWindowLevelNormal +2;
         console.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 120, 50, 50);
         console.layer.masksToBounds = YES;
         console.layer.cornerRadius = 25;
@@ -159,7 +161,6 @@ static JKConsole* console = nil;
         [console addGestureRecognizer:console.swipe];
         [console addGestureRecognizer:console.tap];
         [console addGestureRecognizer:console.pan];
-        [console show];
     });
     #endif
 
@@ -255,13 +256,15 @@ static JKConsole* console = nil;
     self.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 120, 50, 50);
     self.layer.cornerRadius = 25;
 }
-- (void)show{
+- (void)showAndVisible{
+    self.isShow=YES;
     [self makeKeyAndVisible];
     self.hidden = NO;
 }
 + (void)dissmiss{
     if (console) {
-         console.hidden = YES;
+        console.isShow=YES;
+        console.hidden = YES;
     }
 }
 
@@ -281,6 +284,8 @@ CA_EXTERN void _Delog_(const char *className, NSUInteger line, NSString* format,
         //控制台打印
         printf("%s", resultCString);
         //UI上去展示日志内容
-        [[JKConsole sheareConsoleShowAndVisible].debugVC printMSGFromJKConsole:resultCString];
+        if ([JKConsole sheareConsole].isShow) {
+            [[JKConsole sheareConsole].debugVC printMSGFromJKConsole:resultCString];
+        }
     }
 }

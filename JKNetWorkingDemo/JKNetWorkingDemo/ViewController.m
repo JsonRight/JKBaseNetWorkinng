@@ -21,16 +21,16 @@
 
     
     
-    //网络请求
-    [BaseSessionMessage createRequestHTTPWithURLString:@"" paramsDic:@{} progress:^(NSProgress *progress) {
-        //进度
-    } success:^(BaseSessionMessage *sessionMsg) {
-        DDLog(@"%@",sessionMsg.responseString);
-    } failure:^(BaseSessionMessage *sessionMsg) {
-        DDLog(@"!%@!  %@",nil,@"2");
-    }].requestDlog(YES)//是否打印
-      .sendSessionMessage();//发送请求：必写，否则不会发送网络请求
-    
+//    //网络请求
+//    [BaseSessionMessage createRequestHTTPWithURLString:@"" paramsDic:@{} progress:^(NSProgress *progress) {
+//        //进度
+//    } success:^(BaseSessionMessage *sessionMsg) {
+//        DDLog(@"%@",sessionMsg.responseString);
+//    } failure:^(BaseSessionMessage *sessionMsg) {
+//        DDLog(@"!%@!  %@",nil,@"2");
+//    }].requestDlog(YES)//是否打印
+//      .sendSessionMessage();//发送请求：必写，否则不会发送网络请求
+//    
     
    
     

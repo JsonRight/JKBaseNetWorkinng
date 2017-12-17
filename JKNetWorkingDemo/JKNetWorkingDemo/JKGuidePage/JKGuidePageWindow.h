@@ -7,21 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <WebKit/WebKit.h>
-@class JKGuidePageWindow;
-typedef JKGuidePageWindow *(^TimerMax)(NSUInteger timeMax);
-typedef JKGuidePageWindow *(^TimerDelay)(NSUInteger timeDelay);
-typedef JKGuidePageWindow *(^ImageArr)(NSArray *imageArr,CGSize itemSize,BOOL scrollDirectionVertical);
-typedef JKGuidePageWindow *(^CustomView)(UIView *customView);
+#import "JKGuidePageViewController.h"
+
 @interface JKGuidePageWindow : UIWindow
-/**<#Description#>*/
-@property (nonatomic,copy) TimerMax subTimerMax;
-/**<#Description#>*/
-@property (nonatomic,copy) TimerDelay subTimerDelay;
-/**<#Description#>*/
-@property (nonatomic,copy) ImageArr subImageArr;
-/**<#Description#>*/
-@property (nonatomic,copy) CustomView subCustomView;
+
++ (void)makeShowImage:(void(^)(JKGuidePageViewController *make))make
+clickImageActionBlock:(ClickImageActionBlock)clickImageActionBlock
+       btnActionBlock:(BtnActionBlock)btnActionBlock
+      animateFinished:(AnimateFinishedBlock)finished;
 + (JKGuidePageWindow*)sheareGuidePageWindow;
 + (void)dismiss;
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "JKConsole.h"
+//#import "JKConsole.h"
+#import "JKGuidePageWindow.h"
 @interface AppDelegate ()
 
 @end
@@ -18,18 +19,47 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    
+
+    [JKGuidePageWindow makeShowImage:^(JKGuidePageViewController *make) {
+        make.setImageArr(@[@"引导页750x1334",@"引导页750x1334",@"引导页750x1334"], NO);
+        make.setTimer(3);
+        make.setCustomViewAnimateWhenHiddenBlock(^CABasicAnimation *{
+            CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"transform.scale"];
+            
+            animation.fromValue=@1;
+            
+            animation.toValue=@1.5;
+            
+            animation.duration=0.5;
+            
+            animation.autoreverses=YES;
+            
+            animation.repeatCount=1;
+            
+            animation.removedOnCompletion=NO;
+            
+            animation.fillMode=kCAFillModeForwards;
+            
+            return animation;
+        });
+    } clickImageActionBlock:^(NSInteger selectIndex, NSString *selectImageStr) {
+        
+    } btnActionBlock:^{
+        
+    } animateFinished:^{
+        
+    }];
     //控制台显示
-    [JKConsole sheareConsoleShowAndVisible];
+//    [JKConsole sheareConsoleShowAndVisible];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        for (int i = 0; i<10; i++) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(i * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                //测试打印效果
-                DDLog(@"日志打印：%ld",i)
-            });
-        }
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        for (int i = 0; i<10; i++) {
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(i * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                //测试打印效果
+//                DDLog(@"日志打印：%ld",i)
+//            });
+//        }
+//    });
     return YES;
 }
 

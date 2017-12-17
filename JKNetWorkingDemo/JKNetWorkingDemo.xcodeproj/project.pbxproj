@@ -24,6 +24,7 @@
 		BF08F9C91F7B7F0E008A3F66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF08F9C81F7B7F0E008A3F66 /* Assets.xcassets */; };
 		BF08F9CC1F7B7F0E008A3F66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF08F9CA1F7B7F0E008A3F66 /* LaunchScreen.storyboard */; };
 		BF08F9CF1F7B7F0E008A3F66 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9CE1F7B7F0E008A3F66 /* main.m */; };
+		BF6240961FE635F900B336DE /* JKGuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6240951FE635F900B336DE /* JKGuidePageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,8 @@
 		BF08F9E11F7B7F95008A3F66 /* BaseNetWorking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNetWorking.m; sourceTree = "<group>"; };
 		BF08F9E21F7B7F95008A3F66 /* BaseSessionMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseSessionMessage.h; sourceTree = "<group>"; };
 		BF08F9E31F7B7F95008A3F66 /* BaseSessionMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseSessionMessage.m; sourceTree = "<group>"; };
+		BF6240941FE635F900B336DE /* JKGuidePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKGuidePageViewController.h; sourceTree = "<group>"; };
+		BF6240951FE635F900B336DE /* JKGuidePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKGuidePageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 			children = (
 				042911531FE3C99800812F17 /* JKGuidePageWindow.h */,
 				042911541FE3C99800812F17 /* JKGuidePageWindow.m */,
+				BF6240941FE635F900B336DE /* JKGuidePageViewController.h */,
+				BF6240951FE635F900B336DE /* JKGuidePageViewController.m */,
 			);
 			path = JKGuidePage;
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 				044DEB641FE0DC45006F5C35 /* BaseSessionMessage.m in Sources */,
 				044DEB631FE0DC41006F5C35 /* BaseNetWorking.m in Sources */,
 				042911551FE3C99800812F17 /* JKGuidePageWindow.m in Sources */,
+				BF6240961FE635F900B336DE /* JKGuidePageViewController.m in Sources */,
 				044DEB621FE0DC3C006F5C35 /* BaseNetWorking+Response.m in Sources */,
 				044DEB611FE0DC38006F5C35 /* BaseNetWorking+HTTPMethod.m in Sources */,
 				044DEB601FE0DC33006F5C35 /* BaseNetWorking+FailureRefresh.m in Sources */,

@@ -15,7 +15,8 @@
 #endif
 CA_EXTERN void _Delog_(const char *className, NSUInteger line, NSString* format, ... );
 @interface JKConsole : UIWindow
-+ (JKConsole* )sheareConsoleShowAndVisible;
++ (JKConsole* )sheareConsole;
+- (void)showAndVisible;
 + (void)dissmiss;
 @end
 
