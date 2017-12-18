@@ -17,7 +17,7 @@ typedef NS_OPTIONS(NSUInteger, APPLaunchStateOptions){
     APPLaunchStateFirst     = 1 << 1, //第一次启动   default
     APPLaunchStateUpdate    = 1 << 2 //APP更新后启动
 };//default APPLaunchStateFirst 才弹出启动页
-
+#pragma mark -- UserDefaults
 //从UserDefault 读取 NSString
 CA_EXTERN NSString* JKGetStrFromUserDefaults(NSString* key);
 
@@ -70,8 +70,13 @@ CA_EXTERN void JKSetObjectFromUserDefaults(NSString* key, id value);
 //通过Key 删除 UserDefaults值
 CA_EXTERN void JKRemoveObjFromUserDefaults(NSString* key, ...);
 
+#pragma mark -- app信息
 //获取 app当前版本号
 CA_EXTERN NSString* JKGetAppVersonString(void);
 
 //获取 app 使用状态：首次启动，日常启动，更新后首次启动
 CA_EXTERN APPLaunchStateOptions JKGetAppLaunchState(void);
+
+//获取 app LaunchImage --->仅支持竖屏
+CA_EXTERN NSString* JKGetLaunchImageName(void);
+

@@ -2,5 +2,5 @@ platform :ios, "7.0"
 
 target 'JKNetWorkingDemo' do
 pod 'AFNetworking'
-
+pod 'SDWebImage'
 end

@@ -100,7 +100,7 @@ CA_EXTERN void JKRemoveObjFromUserDefaults(NSString* key, ...) {
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
-CA_EXTERN NSString* JKGetAppVersonString() {
+CA_EXTERN NSString* JKGetAppVersonString(void) {
     NSDictionary* info = [NSBundle mainBundle].infoDictionary;
     return info[kAppVersionString];
 }
@@ -117,4 +117,20 @@ CA_EXTERN APPLaunchStateOptions JKGetAppLaunchState() {
         }
     }
     return option;
+}
+CA_EXTERN NSString* JKGetLaunchImageName(void){
+    CGSize viewSize = [UIScreen mainScreen].bounds.size;
+    // 竖屏
+    NSString *viewOrientation = @"Portrait";
+    NSString *launchImageName = nil;
+    NSArray* imagesDict = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchImages"];
+    for (NSDictionary* dict in imagesDict)
+    {
+        CGSize imageSize = CGSizeFromString(dict[@"UILaunchImageSize"]);
+        if (CGSizeEqualToSize(imageSize, viewSize) && [viewOrientation isEqualToString:dict[@"UILaunchImageOrientation"]])
+        {
+            launchImageName = dict[@"UILaunchImageName"];
+        }
+    }
+    return launchImageName;
 }
