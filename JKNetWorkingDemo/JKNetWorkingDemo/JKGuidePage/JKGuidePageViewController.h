@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
+#import "JKUtility.h"
+
 @class JKGuidePageViewController;
 
 typedef JKGuidePageViewController *(^TimerBlock)(NSUInteger timeMax);
@@ -18,9 +20,11 @@ typedef UIView*(^CreateViewBlock)(void);
 typedef JKGuidePageViewController *(^CustomViewBlock)(CreateViewBlock block);
 typedef CABasicAnimation*(^CreateAnimateBlock)(void);
 typedef JKGuidePageViewController *(^CustomViewAnimateWhenHiddenBlock)(CreateAnimateBlock block);
-typedef void(^ClickImageActionBlock)(NSInteger selectIndex,NSString *selectImageStr);
-typedef void(^BtnActionBlock)(void);
-typedef void(^AnimateFinishedBlock)(void);
+typedef void(^ClickImageActionBlock)(NSInteger selectIndex,NSString *selectImageStr ,id guidePageinfo);
+typedef void(^BtnActionBlock)(id guidePageinfo);
+typedef void(^AnimateFinishedBlock)(id guidePageinfo);
+
+
 
 @interface JKGuidePageViewController : UIViewController
 
@@ -38,6 +42,8 @@ typedef void(^AnimateFinishedBlock)(void);
 /**<#Description#>*/
 @property (nonatomic,copy) CustomViewAnimateWhenHiddenBlock setCustomViewAnimateWhenHiddenBlock;
 
-- (instancetype)initWithClickImageActionBlock:(ClickImageActionBlock)clickImageActionBlock btnActionBlock:(BtnActionBlock)btnActionBlock;
+- (instancetype)initWithClickImageActionBlock:(ClickImageActionBlock)clickImageActionBlock
+                               btnActionBlock:(BtnActionBlock)btnActionBlock
+                                      options:(APPLaunchStateOptions)options;
 - (void)reloadData;
 @end

@@ -11,6 +11,8 @@
 
 @interface JKGuidePageWindow ()
 @property (nonatomic,copy) AnimateFinishedBlock finished;
+/**app启动状态*/
+@property (nonatomic,assign) APPLaunchStateOptions options;
 @end
 @implementation JKGuidePageWindow
 
@@ -18,33 +20,47 @@
     
     
 }
-+ (void)makeShowImage:(void (^)(JKGuidePageViewController *make))make  clickImageActionBlock:(ClickImageActionBlock)clickImageActionBlock btnActionBlock:(BtnActionBlock)btnActionBlock animateFinished:(AnimateFinishedBlock)finished{
-    JKGuidePageWindow* win = [JKGuidePageWindow sheareGuidePageWindow];
-    win.finished = finished;
-    JKGuidePageViewController* root = [[JKGuidePageViewController alloc]initWithClickImageActionBlock:clickImageActionBlock btnActionBlock:btnActionBlock];
-    win.rootViewController = root;
+- (JKGuidePageViewController *)makeJKGuidePageWindow:(void (^)(JKGuidePageViewController *make))make
+          clickImageActionBlock:(ClickImageActionBlock)clickImageActionBlock
+                 btnActionBlock:(BtnActionBlock)btnActionBlock
+                animateFinished:(AnimateFinishedBlock)finished{
+    self.finished = finished;
+    JKGuidePageViewController* root = [[JKGuidePageViewController alloc]initWithClickImageActionBlock:clickImageActionBlock btnActionBlock:btnActionBlock options:self.options];
+    self.rootViewController = root;
     make(root);
     [root reloadData];
-    [guidePageWindow makeKeyAndVisible];
+    if (self.options & JKGetAppLaunchState()) {
+        [JKGuidePageWindow show];
+    }
+    return root;
 }
-
+- (id)makeGuidePageWindowWithCustomVC:(UIViewController*)vc{
+    self.rootViewController = vc;
+    return vc;
+}
 static JKGuidePageWindow* guidePageWindow=nil;
-+ (JKGuidePageWindow*)sheareGuidePageWindow{
++ (JKGuidePageWindow*)sheareGuidePageWithOptions:(APPLaunchStateOptions)options{
     if (!guidePageWindow) {
         guidePageWindow = [[JKGuidePageWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
         guidePageWindow.backgroundColor  =[UIColor whiteColor];
         guidePageWindow.windowLevel = UIWindowLevelNormal+1;
     }
+    guidePageWindow.options = options?options:APPLaunchStateFirst;
     return guidePageWindow;
 }
+
++ (void)show{
+    [guidePageWindow makeKeyAndVisible];
+}
 + (void)dismiss{
-  
+    JKSetBoolFromUserDefaults(kAppFirstInstall, YES);
+    JKSetStrFromUserDefaults(kAppLastVersion, JKGetAppVersonString());
     [UIView animateWithDuration:0.5 animations:^{
         guidePageWindow.alpha=0.0;
     } completion:^(BOOL finished) {
         [guidePageWindow resignKeyWindow];
         if (guidePageWindow.finished) {
-            guidePageWindow.finished();
+            guidePageWindow.finished(nil);
         }
         guidePageWindow=nil;
     }];

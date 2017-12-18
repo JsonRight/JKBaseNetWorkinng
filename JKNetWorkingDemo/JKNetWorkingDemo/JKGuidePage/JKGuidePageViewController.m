@@ -51,15 +51,18 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic,copy) ClickImageActionBlock clickImageActionBlock;
 @property (nonatomic,copy) BtnActionBlock btnActionBlock;
+/**app启动状态*/
+@property (nonatomic,assign) APPLaunchStateOptions options;
 @end
 
 @implementation JKGuidePageViewController
 
--(instancetype)initWithClickImageActionBlock:(ClickImageActionBlock)clickImageActionBlock btnActionBlock:(BtnActionBlock)btnActionBlock{
+-(instancetype)initWithClickImageActionBlock:(ClickImageActionBlock)clickImageActionBlock btnActionBlock:(BtnActionBlock)btnActionBlock options:(APPLaunchStateOptions)options{
     self = [super init];
     if (self) {
         self.clickImageActionBlock = clickImageActionBlock;
         self.btnActionBlock = btnActionBlock;
+        self.options = options;
     }
     return self;
 }
@@ -223,9 +226,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     JKCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"JKCollectionViewCell" forIndexPath:indexPath];
     if (self.isURL&&self.imageArr.count>indexPath.item&&self.imageArr[indexPath.item]) {
-        [cell.imageView setImageWithURL:[NSURL URLWithString:self.imageArr[indexPath.item]] placeholderImage:nil];
+        [cell.imageView setImageWithURL:[NSURL URLWithString:self.imageArr[indexPath.item]] placeholderImage:[UIImage imageNamed:[self getLaunchImageName]]];
     }else if(self.imageArr.count>indexPath.item&&self.imageArr[indexPath.item]){
         [cell.imageView setImage:[UIImage imageNamed:self.imageArr[indexPath.item]]];
+//        [cell.imageView setImage:[UIImage imageNamed:[self getLaunchImageName]]];
     }
     if (self.imageArr.count==1) {
         [self scrollViewDidScroll:collectionView];
@@ -235,7 +239,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (self.clickImageActionBlock) {
-        self.clickImageActionBlock(indexPath.item, self.imageArr[indexPath.item]);
+        self.clickImageActionBlock(indexPath.item, self.imageArr[indexPath.item],nil);
     }
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -262,8 +266,9 @@
 
 - (void)btnAction:(UIButton* )btn{
      [self invalidate];
+    btn.hidden=YES;
     if (self.btnActionBlock) {
-        self.btnActionBlock();
+        self.btnActionBlock(nil);
     }
     [self.customView.layer addAnimation:self.animate forKey:@"animate"];
     [JKGuidePageWindow dismiss];
@@ -274,6 +279,23 @@
         [_timer invalidate];
         _timer = nil;
     }
+}
+- (NSString *)getLaunchImageName
+{
+    CGSize viewSize = [UIScreen mainScreen].bounds.size;
+    // 竖屏
+    NSString *viewOrientation = @"Portrait";
+    NSString *launchImageName = nil;
+    NSArray* imagesDict = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchImages"];
+    for (NSDictionary* dict in imagesDict)
+    {
+        CGSize imageSize = CGSizeFromString(dict[@"UILaunchImageSize"]);
+        if (CGSizeEqualToSize(imageSize, viewSize) && [viewOrientation isEqualToString:dict[@"UILaunchImageOrientation"]])
+        {
+            launchImageName = dict[@"UILaunchImageName"];
+        }
+    }
+    return launchImageName;
 }
 - (void)dealloc{
     

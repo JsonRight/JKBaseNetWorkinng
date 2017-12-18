@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-//#import "JKConsole.h"
+#import "JKConsole.h"
 #import "JKGuidePageWindow.h"
 @interface AppDelegate ()
 
@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     
 
-    [JKGuidePageWindow makeShowImage:^(JKGuidePageViewController *make) {
+    [[JKGuidePageWindow sheareGuidePageWithOptions:APPLaunchStateFirst |APPLaunchStateNormal] makeJKGuidePageWindow:^(JKGuidePageViewController *make) {
         make.setImageArr(@[@"引导页750x1334",@"引导页750x1334",@"引导页750x1334"], NO);
         make.setTimer(3);
         make.setScrollViewStyle(nil, CGRectNull, CGSizeZero, YES);
@@ -43,15 +43,15 @@
             
             return animation;
         });
-    } clickImageActionBlock:^(NSInteger selectIndex, NSString *selectImageStr) {
-        
-    } btnActionBlock:^{
-        
-    } animateFinished:^{
-        
+    } clickImageActionBlock:^(NSInteger selectIndex, NSString *selectImageStr ,id info) {
+        DDLog(@"点击第%ld张，图片名称：%@，其他参数：%@",selectIndex,selectImageStr,info)
+    } btnActionBlock:^(id info){
+        DDLog(@"其他参数：%@",info)
+    } animateFinished:^(id info){
+        DDLog(@"动画结束，其他参数：%@",info)
     }];
     //控制台显示
-//    [JKConsole sheareConsoleShowAndVisible];
+    [[JKConsole sheareConsole] showAndVisible];
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        for (int i = 0; i<10; i++) {

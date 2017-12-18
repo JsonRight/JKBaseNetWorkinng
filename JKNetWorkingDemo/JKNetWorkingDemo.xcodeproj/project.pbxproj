@@ -17,6 +17,7 @@
 		044DEB621FE0DC3C006F5C35 /* BaseNetWorking+Response.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9DF1F7B7F95008A3F66 /* BaseNetWorking+Response.m */; };
 		044DEB631FE0DC41006F5C35 /* BaseNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9E11F7B7F95008A3F66 /* BaseNetWorking.m */; };
 		044DEB641FE0DC45006F5C35 /* BaseSessionMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9E31F7B7F95008A3F66 /* BaseSessionMessage.m */; };
+		04CE17E71FE7A30A002ECD5D /* JKUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE17E61FE7A30A002ECD5D /* JKUtility.m */; };
 		52C2AB303A85FE3FD72776C6 /* libPods-JKNetWorkingDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA38D6422FA13D7D2CD99420 /* libPods-JKNetWorkingDemo.a */; };
 		BF08F9C11F7B7F0E008A3F66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9C01F7B7F0E008A3F66 /* AppDelegate.m */; };
 		BF08F9C41F7B7F0E008A3F66 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9C31F7B7F0E008A3F66 /* ViewController.m */; };
@@ -35,6 +36,8 @@
 		042911541FE3C99800812F17 /* JKGuidePageWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKGuidePageWindow.m; sourceTree = "<group>"; };
 		044DEB661FE113E3006F5C35 /* MyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHelper.h; sourceTree = "<group>"; };
 		044DEB6A1FE116FD006F5C35 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		04CE17E51FE7A30A002ECD5D /* JKUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKUtility.h; sourceTree = "<group>"; };
+		04CE17E61FE7A30A002ECD5D /* JKUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKUtility.m; sourceTree = "<group>"; };
 		680CCE8123418F9C37A49840 /* Pods-JKNetWorkingDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JKNetWorkingDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JKNetWorkingDemo/Pods-JKNetWorkingDemo.release.xcconfig"; sourceTree = "<group>"; };
 		759587BABC79822948681959 /* Pods-JKNetWorkingDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JKNetWorkingDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JKNetWorkingDemo/Pods-JKNetWorkingDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		BA38D6422FA13D7D2CD99420 /* libPods-JKNetWorkingDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JKNetWorkingDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +94,8 @@
 		0429114F1FE3838400812F17 /* JKGuidePage */ = {
 			isa = PBXGroup;
 			children = (
+				04CE17E51FE7A30A002ECD5D /* JKUtility.h */,
+				04CE17E61FE7A30A002ECD5D /* JKUtility.m */,
 				042911531FE3C99800812F17 /* JKGuidePageWindow.h */,
 				042911541FE3C99800812F17 /* JKGuidePageWindow.m */,
 				BF6240941FE635F900B336DE /* JKGuidePageViewController.h */,
@@ -302,6 +307,7 @@
 				044DEB641FE0DC45006F5C35 /* BaseSessionMessage.m in Sources */,
 				044DEB631FE0DC41006F5C35 /* BaseNetWorking.m in Sources */,
 				042911551FE3C99800812F17 /* JKGuidePageWindow.m in Sources */,
+				04CE17E71FE7A30A002ECD5D /* JKUtility.m in Sources */,
 				BF6240961FE635F900B336DE /* JKGuidePageViewController.m in Sources */,
 				044DEB621FE0DC3C006F5C35 /* BaseNetWorking+Response.m in Sources */,
 				044DEB611FE0DC38006F5C35 /* BaseNetWorking+HTTPMethod.m in Sources */,
@@ -446,6 +452,7 @@
 			baseConfigurationReference = 759587BABC79822948681959 /* Pods-JKNetWorkingDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7C8N34NN9S;
 				INFOPLIST_FILE = JKNetWorkingDemo/Info.plist;
@@ -461,6 +468,7 @@
 			baseConfigurationReference = 680CCE8123418F9C37A49840 /* Pods-JKNetWorkingDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7C8N34NN9S;
 				INFOPLIST_FILE = JKNetWorkingDemo/Info.plist;
