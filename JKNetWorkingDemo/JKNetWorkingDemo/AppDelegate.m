@@ -21,8 +21,8 @@
     
 
     [[JKGuidePageWindow sheareGuidePageWithOptions:APPLaunchStateFirst |APPLaunchStateNormal] makeJKGuidePageWindow:^(JKGuidePageViewController *make) {
-        make.setImageArr(@[@"引导页750x1334",@"引导页750x1334",@"引导页750x1334"], NO);
-        make.setTimer(3);
+        make.setImageArr(@[@"https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Ftimgsa.baidu.com%2Ftimg%3Fimage%26quality%3D80%26size%3Db9999_10000%26sec%3D1513602295155%26di%3Db2a2f6126cebfc8ec7093118d92e1584%26imgtype%3D0%26src%3Dhttp%253A%252F%252Fimg.zcool.cn%252Fcommunity%252F0121be5715d3e132f8758c9b7e43de.gif&thumburl=https%3A%2F%2Fss3.bdstatic.com%2F70cFv8Sh_Q1YnxGkpoWK1HF6hhy%2Fit%2Fu%3D2128235232%2C2821001689%26fm%3D27%26gp%3D0.jpg"], YES ,YES);
+        make.setTimer(0,@"跳过");
         make.setScrollViewStyle(nil, CGRectNull, CGSizeZero, YES);
         make.setCustomViewAnimateWhenHiddenBlock(^CABasicAnimation *{
             CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"transform.scale"];

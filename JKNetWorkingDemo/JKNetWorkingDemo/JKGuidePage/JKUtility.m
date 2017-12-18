@@ -134,3 +134,7 @@ CA_EXTERN NSString* JKGetLaunchImageName(void){
     }
     return launchImageName;
 }
+CA_EXTERN BOOL JKContainsString(NSString*str,NSString* subStr){
+    if (str == nil||subStr == nil) return NO;
+    return [str rangeOfString:subStr].location != NSNotFound;
+}

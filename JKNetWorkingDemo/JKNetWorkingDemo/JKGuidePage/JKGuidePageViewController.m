@@ -29,19 +29,26 @@
 /**计时时间*/
 @property (nonatomic, assign) NSUInteger timeMax;
 /**<#Description#>*/
-@property (nonatomic,assign) NSUInteger timeDelay;
+@property (nonatomic,assign) BOOL hasTimer;
 /**<#Description#>*/
 @property (nonatomic,assign) BOOL scrollDirectionVertical;//default is NO
 /**展示图片数组*/
 @property (nonatomic, strong) NSMutableArray *imageArr;
 /**展示图片数组*/
 @property (nonatomic, assign) BOOL isURL;
+/**展示图片数组*/
+@property (nonatomic, assign) BOOL isGif;
+
 /**collection*/
 @property (nonatomic, strong) UICollectionView *collectionView;
 /**web*/
 @property (nonatomic, strong) WKWebView *webView;
 /**Btn*/
 @property (nonatomic, strong) UIButton *disBtn;
+/**<#Description#>*/
+@property (nonatomic, strong) NSString *btnTitle;
+/**<#Description#>*/
+@property (nonatomic, strong) NSString *timerTitle;
 /**URL*/
 @property (nonatomic, strong) NSString *webUrl;
 /**custom*/
@@ -73,12 +80,15 @@
 }
 - (void)reloadData{
     [self.collectionView reloadData];
+    if ((self.options & JKGetAppLaunchState()) && (self.imageArr.count>0 || self.webUrl.length>0)) {
+        [JKGuidePageWindow show];
+    }
 }
 - (void)addTimer{
     if ((!_timer)&&(self.timeMax>0)) {
         _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doSomething:) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-    }else{
+    }else if((!_timer)&&(self.timeMax<=0)){
         self.disBtn.hidden = NO;
     }
 }
@@ -88,7 +98,6 @@
     }
     return _imageArr;
 }
-
 
 - (UIView *)customView{
     if (!_customView) {
@@ -101,13 +110,6 @@
 - (UIButton *)disBtn{
     if (!_disBtn) {
         _disBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        [_disBtn setTitle:@"立即前往" forState:(UIControlStateNormal)];
-//        [_disBtn setTitleColor:[UIColor redColor] forState:(UIControlStateNormal)];
-        _disBtn.titleLabel.textColor = [UIColor redColor];
-        _disBtn.backgroundColor = [UIColor blueColor];
-        _disBtn.frame = CGRectMake(self.view.bounds.size.width-100, 88, 80, 30);
-        _disBtn.layer.masksToBounds = YES;
-        _disBtn.layer.cornerRadius = 15;
         _disBtn.hidden = YES;
         [_disBtn addTarget:self action:@selector(btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -125,8 +127,9 @@
 }
 
 - (TimerBlock)setTimer{
-    return ^(NSUInteger timeMax){
+    return ^(NSUInteger timeMax,NSString* timerTitle){
         self.timeMax = timeMax;
+        self.timerTitle = timerTitle;
         return self;
     };
 }
@@ -136,9 +139,8 @@
         if (backColor) self.disBtn.backgroundColor = backColor;
         if (textColor) [self.disBtn setTitleColor:textColor forState:(UIControlStateNormal)];
         if (backImage) [self.disBtn setBackgroundImage:backImage forState:(UIControlStateNormal)];
-//        if (normelImage) [self.disBtn setImage:normelImage forState:(UIControlStateNormal)];
-//        if (selectedImage) [self.disBtn setImage:selectedImage forState:(UIControlStateSelected)];
-//        if (highlightedImage) [self.disBtn setImage:highlightedImage forState:(UIControlStateHighlighted)];
+        self.btnTitle = btnTitle;
+        
         if (frame.size.height != 0.0&&frame.size.width != 0.0) {
             self.disBtn.frame = frame;
             self.disBtn.layer.cornerRadius = cornerRadius;
@@ -182,18 +184,19 @@
         }
         [_collectionView  registerClass:[JKCollectionViewCell class] forCellWithReuseIdentifier:@"JKCollectionViewCell"];
         [self.customView addSubview:_collectionView];
-        self.setDismissBtn(@"立即使用", [UIColor whiteColor], [UIColor redColor], nil,  CGRectMake(self.view.bounds.size.width-100, 88, 80, 30), 15);
+        self.setDismissBtn(@"立即前往", [UIColor whiteColor], [UIColor redColor], nil,  CGRectMake(self.view.bounds.size.width-100, 88, 80, 30), 15);
         return self;
     };
 }
 -(ImageArrBlock)setImageArr{
-    return ^(NSArray *imageArr,BOOL isURL){
+    return ^(NSArray *imageArr,BOOL isURL,BOOL isGif){
         if (imageArr.count>0) {
             self.imageArr = [imageArr mutableCopy];
         }else{
             self.imageArr = [imageArr mutableCopy];
         }
         self.isURL = isURL;
+        self.isGif = isGif;
         if (!_collectionView) {
             self.setScrollViewStyle(nil, self.view.bounds, self.view.bounds.size, NO);
         }
@@ -218,19 +221,45 @@
     };
 }
 
-
 #pragma mark -- UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.imageArr.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     JKCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"JKCollectionViewCell" forIndexPath:indexPath];
-    if (self.isURL&&self.imageArr.count>indexPath.item&&self.imageArr[indexPath.item]) {
-        [cell.imageView setImageWithURL:[NSURL URLWithString:self.imageArr[indexPath.item]] placeholderImage:[UIImage imageNamed:[self getLaunchImageName]]];
+    
+    if(self.isURL&&self.imageArr.count>indexPath.item&&self.imageArr[indexPath.item]){
+        DDLog(@"网络图片")
+        if (self.isGif) {
+            [cell.imageView setImage:[UIImage imageNamed:JKGetLaunchImageName()]];
+            [SDWebImageManager.sharedManager loadImageWithURL:[NSURL URLWithString:self.imageArr[indexPath.item]] options:0 progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                [cell.imageView setImage:[UIImage sd_animatedGIFWithData:data]];
+            }];
+        }else{
+           [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageArr[indexPath.item]] placeholderImage:[UIImage imageNamed:JKGetLaunchImageName()]];
+        }
+    }else if (self.isGif&&self.imageArr.count>indexPath.item&&self.imageArr[indexPath.item]){
+        
+        UIImage * image= nil;
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:self.imageArr[indexPath.item] ofType:@"gif"];
+        
+        NSData* data = [NSData dataWithContentsOfFile:path];
+        if (data) {
+            image = [UIImage sd_animatedGIFWithData:data];
+        }
+        DDLog(@"本地gif")
+        [cell.imageView setImage:image?image:[UIImage imageNamed:JKGetLaunchImageName()]];
+
+        
     }else if(self.imageArr.count>indexPath.item&&self.imageArr[indexPath.item]){
-        [cell.imageView setImage:[UIImage imageNamed:self.imageArr[indexPath.item]]];
-//        [cell.imageView setImage:[UIImage imageNamed:[self getLaunchImageName]]];
+        DDLog(@"本地图片")
+        UIImage* image = [UIImage imageNamed:self.imageArr[indexPath.item]];
+        [cell.imageView setImage:image?image:[UIImage imageNamed:JKGetLaunchImageName()]];
+    }else{
+        [cell.imageView setImage:[UIImage imageNamed:JKGetLaunchImageName()]];
     }
+    
     if (self.imageArr.count==1) {
         [self scrollViewDidScroll:collectionView];
     }
@@ -259,7 +288,7 @@
     if (self.timeMax==0) {
         [self btnAction:self.disBtn];
     }
-    [self.disBtn setTitle:[NSString stringWithFormat:@"%lds跳过",self.timeMax] forState:(UIControlStateNormal)];
+    [self.disBtn setTitle:[NSString stringWithFormat:@"%ld%@",self.timeMax,self.timerTitle] forState:(UIControlStateNormal)];
     self.disBtn.hidden = NO;
     self.timeMax--; 
 }

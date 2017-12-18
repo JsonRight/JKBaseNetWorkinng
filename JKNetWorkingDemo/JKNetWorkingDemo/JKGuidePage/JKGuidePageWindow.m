@@ -29,9 +29,6 @@
     self.rootViewController = root;
     make(root);
     [root reloadData];
-    if (self.options & JKGetAppLaunchState()) {
-        [JKGuidePageWindow show];
-    }
     return root;
 }
 - (id)makeGuidePageWindowWithCustomVC:(UIViewController*)vc{
