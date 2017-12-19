@@ -11,7 +11,7 @@
 #import "JKUtility.h"
 #import "UIImage+GIF.h"
 #import "UIImageView+WebCache.h"
-
+#import <AVFoundation/AVFoundation.h>
 @class JKGuidePageViewController;
 
 typedef JKGuidePageViewController *(^TimerBlock)(NSUInteger timeMax,NSUInteger timeDelay,NSString* timerTitle);

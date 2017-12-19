@@ -47,6 +47,10 @@
 @property (nonatomic, strong) WKWebView *webView;
 /**avUrl*/
 @property (nonatomic, strong) NSURL *avUrl;
+/**<#Description#>*/
+@property (nonatomic, strong) AVAsset *avAset;
+/**avUrl*/
+@property (nonatomic, assign) CGRect avFrame;
 ///**<#Description#>*/
 //@property (nonatomic, strong) WKWebViewConfiguration *configuration;
 /**Btn*/
@@ -64,6 +68,9 @@
 @property (nonatomic, strong) CABasicAnimation *animate;
 /**Timer*/
 @property (nonatomic, strong) NSTimer *timer;
+
+/**AVplayer*/
+@property (nonatomic, strong) AVPlayerLayer *playerLayer;
 @property (nonatomic,copy) ClickImageActionBlock clickImageActionBlock;
 @property (nonatomic,copy) BtnActionBlock btnActionBlock;
 @property (nonatomic,copy) UploadDismissBtnBlock setDisBtnBlock;
@@ -96,6 +103,7 @@
     if (_webView&&self.webUrl) {
         [self.customView addSubview:self.webView];
     }
+    
      [self.customView addSubview:self.backGroundImageView];
 
     if (!_disBtn) {
@@ -107,6 +115,31 @@
             btn.layer.cornerRadius = 15;
             btn.hidden = YES;
         });
+    }
+    
+    if (self.avAset) {
+        self.backGroundImageView.hidden = NO;
+        [self.avAset loadValuesAsynchronouslyForKeys:@[@"tracks"] completionHandler:^{
+            AVKeyValueStatus stacks=[self.avAset statusOfValueForKey:@"tracks" error:nil];
+            if (stacks==AVKeyValueStatusLoaded) {
+//                dispatch_queue_async_safe(dispatch_get_main_queue(), bloc)
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.backGroundImageView.hidden = YES;
+                    [self addTimer];
+                });
+                AVPlayerItem*item = [AVPlayerItem playerItemWithAsset:self.avAset];
+                AVPlayer*player = [[AVPlayer alloc]initWithPlayerItem:item];
+                self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
+                self.playerLayer.frame = self.avFrame;
+                [self.customView.layer addSublayer:self.playerLayer];
+                [player play];
+            }else if (stacks==AVKeyValueStatusFailed||stacks==AVKeyValueStatusCancelled){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.backGroundImageView.hidden = NO;
+                    [self addTimer];
+                });
+            }
+        }];
     }
     [self.customView addSubview:self.disBtn];
     
@@ -132,7 +165,7 @@
         });
     }
    
-    if ((self.options & JKGetAppLaunchState()) && (self.imageArr.count>0 || self.webUrl.absoluteString.length>0)) {
+    if ((self.options & JKGetAppLaunchState()) && (self.imageArr.count>0 || self.webUrl.absoluteString.length>0 || self.avAset)) {
         [JKGuidePageWindow show];
     }
 }
@@ -246,7 +279,6 @@
             self.automaticallyAdjustsScrollViewInsets = NO;
         }
         [_collectionView  registerClass:[JKCollectionViewCell class] forCellWithReuseIdentifier:@"JKCollectionViewCell"];
-//        self.setDismissBtn(@"立即前往", [UIColor whiteColor], [UIColor redColor], nil,  CGRectMake(self.view.bounds.size.width-100, 64, 100, 30), 15);
         return self;
     };
 }
@@ -279,8 +311,15 @@
 }
 - (AVPlayerBlock)setAVPlayer{
     return ^(CGRect frame, NSURL *url){
-        
         self.avUrl = url;
+        if (url.absoluteString) {
+            self.avAset = [AVAsset assetWithURL:url];
+        }
+        if(frame.size.height != 0.0&&frame.size.width != 0.0){
+            self.avFrame = frame;
+        }else{
+            self.avFrame = self.view.bounds;
+        }
         return self;
     };
 }
