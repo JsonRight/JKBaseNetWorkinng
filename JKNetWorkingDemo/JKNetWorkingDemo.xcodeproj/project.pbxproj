@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040C941C1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C941B1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.m */; };
+		040C941F1FE8D876005727A7 /* NSObject+SelectorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C941E1FE8D876005727A7 /* NSObject+SelectorExtension.m */; };
+		040C94221FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C94211FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m */; };
 		0429114D1FE36CB800812F17 /* InterfacesURLList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0429114A1FE36CB800812F17 /* InterfacesURLList.plist */; };
 		0429114E1FE36CB800812F17 /* JKConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 0429114C1FE36CB800812F17 /* JKConsole.m */; };
 		042911551FE3C99800812F17 /* JKGuidePageWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 042911541FE3C99800812F17 /* JKGuidePageWindow.m */; };
@@ -29,6 +32,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040C941A1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JK_WKScriptMessageHandler.h; sourceTree = "<group>"; };
+		040C941B1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JK_WKScriptMessageHandler.m; sourceTree = "<group>"; };
+		040C941D1FE8D876005727A7 /* NSObject+SelectorExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+SelectorExtension.h"; sourceTree = "<group>"; };
+		040C941E1FE8D876005727A7 /* NSObject+SelectorExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SelectorExtension.m"; sourceTree = "<group>"; };
+		040C94201FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURLProtocol+WebKitCache.h"; sourceTree = "<group>"; };
+		040C94211FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WebKitCache.m"; sourceTree = "<group>"; };
 		0429114A1FE36CB800812F17 /* InterfacesURLList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InterfacesURLList.plist; sourceTree = "<group>"; };
 		0429114B1FE36CB800812F17 /* JKConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKConsole.h; sourceTree = "<group>"; };
 		0429114C1FE36CB800812F17 /* JKConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKConsole.m; sourceTree = "<group>"; };
@@ -96,10 +105,16 @@
 			children = (
 				04CE17E51FE7A30A002ECD5D /* JKUtility.h */,
 				04CE17E61FE7A30A002ECD5D /* JKUtility.m */,
+				040C941D1FE8D876005727A7 /* NSObject+SelectorExtension.h */,
+				040C941E1FE8D876005727A7 /* NSObject+SelectorExtension.m */,
+				040C94201FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.h */,
+				040C94211FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m */,
 				042911531FE3C99800812F17 /* JKGuidePageWindow.h */,
 				042911541FE3C99800812F17 /* JKGuidePageWindow.m */,
 				BF6240941FE635F900B336DE /* JKGuidePageViewController.h */,
 				BF6240951FE635F900B336DE /* JKGuidePageViewController.m */,
+				040C941A1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.h */,
+				040C941B1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.m */,
 			);
 			path = JKGuidePage;
 			sourceTree = "<group>";
@@ -310,10 +325,13 @@
 				044DEB641FE0DC45006F5C35 /* BaseSessionMessage.m in Sources */,
 				044DEB631FE0DC41006F5C35 /* BaseNetWorking.m in Sources */,
 				042911551FE3C99800812F17 /* JKGuidePageWindow.m in Sources */,
+				040C941C1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.m in Sources */,
+				040C94221FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m in Sources */,
 				04CE17E71FE7A30A002ECD5D /* JKUtility.m in Sources */,
 				BF6240961FE635F900B336DE /* JKGuidePageViewController.m in Sources */,
 				044DEB621FE0DC3C006F5C35 /* BaseNetWorking+Response.m in Sources */,
 				044DEB611FE0DC38006F5C35 /* BaseNetWorking+HTTPMethod.m in Sources */,
+				040C941F1FE8D876005727A7 /* NSObject+SelectorExtension.m in Sources */,
 				044DEB601FE0DC33006F5C35 /* BaseNetWorking+FailureRefresh.m in Sources */,
 				044DEB5F1FE0DC2E006F5C35 /* BaseNetWorking+Encrypt.m in Sources */,
 				044DEB5E1FE0DC28006F5C35 /* BaseNetWorking+BaseUrl.m in Sources */,
@@ -459,6 +477,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7C8N34NN9S;
 				INFOPLIST_FILE = JKNetWorkingDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhaobei.JKNetWorkingDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -475,6 +494,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7C8N34NN9S;
 				INFOPLIST_FILE = JKNetWorkingDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhaobei.JKNetWorkingDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

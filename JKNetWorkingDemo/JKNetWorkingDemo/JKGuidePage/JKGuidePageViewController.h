@@ -11,13 +11,19 @@
 #import "JKUtility.h"
 #import "UIImage+GIF.h"
 #import "UIImageView+WebCache.h"
+
 @class JKGuidePageViewController;
 
-typedef JKGuidePageViewController *(^TimerBlock)(NSUInteger timeMax,NSString* timerTitle);
+typedef JKGuidePageViewController *(^TimerBlock)(NSUInteger timeMax,NSUInteger timeDelay,NSString* timerTitle);
 typedef JKGuidePageViewController *(^ImageArrBlock)(NSArray *imageArr,BOOL isURL,BOOL isGif);
 typedef JKGuidePageViewController *(^ScrollViewStyleBlock)(UICollectionViewFlowLayout *layout,CGRect frame,CGSize itemSize,BOOL scrollDirectionVertical);
-typedef JKGuidePageViewController *(^DismissBtnBlock)(NSString *btnTitle,UIColor *backColor,UIColor *textColor,UIImage *backImage,CGRect frame,CGFloat cornerRadius);
+typedef JKGuidePageViewController *(^WKWebViewBlock)(CGRect frame, NSURL *url);
+typedef JKGuidePageViewController *(^AVPlayerBlock)(CGRect frame, NSURL *url);
+typedef void (^UploadDismissBtnBlock)(UIButton* btn);
+//typedef JKGuidePageViewController *(^DismissBtnBlock)(NSString *btnTitle,UIColor *backColor,UIColor *textColor,UIImage *backImage,CGRect frame,CGFloat cornerRadius);
+typedef JKGuidePageViewController *(^SetDismissBtnBlock)(UploadDismissBtnBlock block);
 typedef UIView*(^CreateViewBlock)(void);
+
 typedef JKGuidePageViewController *(^CustomViewBlock)(CreateViewBlock block);
 typedef CABasicAnimation*(^CreateAnimateBlock)(void);
 typedef JKGuidePageViewController *(^CustomViewAnimateWhenHiddenBlock)(CreateAnimateBlock block);
@@ -27,22 +33,16 @@ typedef void(^AnimateFinishedBlock)(id guidePageinfo);
 
 @interface JKGuidePageViewController : UIViewController
 
-
 /**设置计时器相关属性
  timeMax 倒计时 时间
  timerTitle 倒计时 秒数后的文字
  */
 @property (nonatomic,copy) TimerBlock setTimer;
 
-/**设置dismissBtn按钮部分属性
- btnTitle 按钮默认文字
- backColor 按钮背景颜色
- textColor 文字颜色
- backImage 背景图片
- frame 按钮坐标
- cornerRadius 按钮圆角处理
+/**设置ismissBtn按钮部分属性
+ block btn属性设置
  */
-@property (nonatomic,copy) DismissBtnBlock setDismissBtn;
+@property (nonatomic,copy) SetDismissBtnBlock setDismissBtnBlock;
 
 /**设置滚动视图相关属性
  layout 滚动视图布局样式
@@ -58,6 +58,18 @@ typedef void(^AnimateFinishedBlock)(id guidePageinfo);
  isGif 是否为Gif
  */
 @property (nonatomic,copy) ImageArrBlock setImageArr;
+
+/**WKWeb
+ frame WKWeb 显示位置
+ url 加载链接
+ */
+@property (nonatomic,copy) WKWebViewBlock setWKWebView;
+
+/**视频播放
+ frame 播放器坐标
+ url 播放链接 网络／本地
+ */
+@property (nonatomic,copy) AVPlayerBlock setAVPlayer;
 
 /**自定义视图
  block 返回一个定制的视图
@@ -85,4 +97,5 @@ typedef void(^AnimateFinishedBlock)(id guidePageinfo);
  刷新视图
  */
 - (void)reloadData;
+- (void)dismiss;
 @end
