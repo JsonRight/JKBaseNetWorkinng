@@ -96,6 +96,7 @@
     
 }
 - (void)reloadData{
+    
     [self.view addSubview:self.customView];
     if (_collectionView) {
         [self.customView addSubview:self.collectionView];
@@ -155,30 +156,6 @@
         }
     }
 
-    if (!self.animate) {
-        self.setCustomViewAnimateWhenHiddenBlock(^CABasicAnimation *{
-            CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"transform.scale"];
-            
-            animation.fromValue=@1;
-            
-            animation.toValue=@1.5;
-            
-            animation.duration=0.5;
-            
-            animation.autoreverses=YES;
-            
-            animation.repeatCount=1;
-            
-            animation.removedOnCompletion=NO;
-            
-            animation.fillMode=kCAFillModeForwards;
-            
-            return animation;
-        });
-    }
-    if (!self.options) {
-        self.setAPPLaunchStateOptions(APPLaunchStateFirst | APPLaunchStateNormal);
-    }
     if ((self.options & JKGetAppLaunchState()) && (self.imageArr.count>0 || self.webUrl.absoluteString.length>0 || self.avAset)) {
         [[JKGuidePageWindow sheareGuidePageWindow] show];
     }
@@ -257,7 +234,25 @@
     }
     return _backGroundImageView;
 }
-
+- (CABasicAnimation *)animate{
+    if (!_animate) {
+        _animate=[CABasicAnimation animationWithKeyPath:@"transform.scale"];
+        _animate.fromValue=@1;
+        _animate.toValue=@1.5;
+        _animate.duration=0.5;
+        _animate.autoreverses=YES;
+        _animate.repeatCount=1;
+        _animate.removedOnCompletion=NO;
+        _animate.fillMode=kCAFillModeForwards;
+    }
+    return _animate;
+}
+- (APPLaunchStateOptions)options{
+    if (!_options) {
+        _options = APPLaunchStateFirst;
+    }
+    return _options;
+}
 - (TimerBlock)setTimer{
     return ^(NSUInteger timeMax,NSUInteger timeDelay,NSString* timerTitle){
         self.timeMax = timeMax;
@@ -360,10 +355,6 @@
 }
 -(CustomViewBlock)setCustomView{
     return ^(CreateViewBlock block){
-        if (_customView) {
-            [_customView removeFromSuperview];
-            _customView = nil;
-        }
         _customView = block();
         return self;
     };
@@ -623,7 +614,9 @@
     }else if (btn&&(btn == _centerBtn)&&self.centerBtnActionBlock) {
         self.centerBtnActionBlock(nil);
     }
-    [self.customView.layer addAnimation:self.animate forKey:@"animate"];
+    if (_animate) {
+        [self.customView.layer addAnimation:_animate forKey:@"animate"];
+    }
     [[JKGuidePageWindow sheareGuidePageWindow] dismiss];
 }
 

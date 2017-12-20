@@ -20,52 +20,82 @@
     // Override point for customization after application launch.
     
     JKGuidePageWindow* guidePageWindow =[JKGuidePageWindow sheareGuidePageWindow];
-    [guidePageWindow makeJKGuidePageWindow:^(JKGuidePageViewController *make) {
-//        make.setImageArr(@[@"https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Ftimgsa.baidu.com%2Ftimg%3Fimage%26quality%3D80%26size%3Db9999_10000%26sec%3D1513602295155%26di%3Db2a2f6126cebfc8ec7093118d92e1584%26imgtype%3D0%26src%3Dhttp%253A%252F%252Fimg.zcool.cn%252Fcommunity%252F0121be5715d3e132f8758c9b7e43de.gif&thumburl=https%3A%2F%2Fss3.bdstatic.com%2F70cFv8Sh_Q1YnxGkpoWK1HF6hhy%2Fit%2Fu%3D2128235232%2C2821001689%26fm%3D27%26gp%3D0.jpg",@"https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Ftimgsa.baidu.com%2Ftimg%3Fimage%26quality%3D80%26size%3Db9999_10000%26sec%3D1513602295155%26di%3Db2a2f6126cebfc8ec7093118d92e1584%26imgtype%3D0%26src%3Dhttp%253A%252F%252Fimg.zcool.cn%252Fcommunity%252F0121be5715d3e132f8758c9b7e43de.gif&thumburl=https%3A%2F%2Fss3.bdstatic.com%2F70cFv8Sh_Q1YnxGkpoWK1HF6hhy%2Fit%2Fu%3D2128235232%2C2821001689%26fm%3D27%26gp%3D0.jpg"], YES ,YES);
+    {
+        //启动页，全部属性设置
         
-        make.setTimer(0,3,@"s跳过");
-        make.setCountdownBtnBlock(^(UIButton *btn) {
-//            btn.hidden = NO;
-        });
+        [guidePageWindow makeJKGuidePageWindow:^(JKGuidePageViewController *make) {
+            //图片数组 ---是否网络--- 是否gif
+//            make.setImageArr(@[@"ggg",@"ggg"], NO ,YES);
+            //设置计时器 ---倒计时总时间----延时开始倒计时时间----秒数后面的按钮文字（右上角按钮）
+            //当总时间为0，不进行倒计时，延时显示右上角按钮，文字显示默认/设置文字
+            make.setTimer(0,3,@"s跳过");
+            //设置右上角按钮属性，当倒计时延时时间>0时，请不要设置hidden=NO，(默认状态隐藏)
+            make.setCountdownBtnBlock(^(UIButton *btn) {
+                //            btn.hidden = NO;
+            });
+            //设置中间按钮属性，(默认状态隐藏)
+            make.setCenterBtnBlock(^(UIButton *btn) {
+                //            btn.hidden = NO;
+            });
+            //设置图片滚动的item属性，（UICollectionView）
+            make.setScrollViewStyle(nil, CGRectNull, CGSizeZero, YES);
+            //设置web'加载，url请转成NSURL
+//            make.setWKWebView([UIScreen mainScreen].bounds, [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ajaxHtml" ofType:@"html"]]);
+            //设置视频播放器  url请转成NSURL
+            make.setAVPlayer(CGRectZero, [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]]);
+            //设置倒计时按钮点击回调（启动页消失不需在block内处理）
+            make.setCountdownBtnActionBlock(^(id info) {
+                DDLog(@"倒计时按钮事件：%@",info)
+            });
+            //设置中间按钮点击回调（启动页消失不需在block内处理）
+            make.setCenterBtnActionBlock(^(id info) {
+                DDLog(@"中间按钮事件：%@",info)
+            });
+            //设置滚动图片点击回调（启动页消失不需在block内处理）
+            make.setClickImageActionBlock(^(NSInteger selectIndex, NSString *selectImageStr, id info) {
+                DDLog(@"点击第%ld张，图片名称：%@，其他参数：%@",selectIndex,selectImageStr,info)
+            });
+            make.setAnimateFinishedBlock(^(id info) {
+                DDLog(@"启动页消失动画结束：%@",info)
+            });
+            //设置启动页显示时机：首次安装、更新后首次启动、正常启动（可传多种）
+            make.setAPPLaunchStateOptions(APPLaunchStateFirst |APPLaunchStateNormal);
+            //设置启动页消失时整个弹层的动画（估计用不到）
+            make.setCustomViewAnimateWhenHiddenBlock(^CABasicAnimation *{
+                //                CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"transform.scale"];
+                //
+                //                animation.fromValue=@1;
+                //
+                //                animation.toValue=@0.5;
+                //
+                //                animation.duration=0.5;
+                //
+                //                animation.autoreverses=YES;
+                //
+                //                animation.repeatCount=1;
+                //
+                //                animation.removedOnCompletion=NO;
+                //
+                //                animation.fillMode=kCAFillModeForwards;
+                //
+                return nil;
+            });
+            //自定义CustomView，那么以上所有设定 如果设置，则会重新添加
+            make.setCustomView(^UIView *{
+                return [[UIView alloc]initWithFrame: [UIScreen mainScreen].bounds];
+            });
+            
+        }];
         
-//        make.setScrollViewStyle(nil, CGRectNull, CGSizeZero, YES);
+    }
+    
+    {
         
-        make.setWKWebView([UIScreen mainScreen].bounds, [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ajaxHtml" ofType:@"html"]]);
+        //居然还支持替换VC，但是好像，并没有什么卵用
+        //[guidePageWindow makeGuidePageWindowWithCustomVC:[UIViewController new]];
         
-//        make.setCustomViewAnimateWhenHiddenBlock(^CABasicAnimation *{
-//            CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"transform.scale"];
-//            
-//            animation.fromValue=@1;
-//            
-//            animation.toValue=@0.5;
-//            
-//            animation.duration=0.5;
-//            
-//            animation.autoreverses=YES;
-//            
-//            animation.repeatCount=1;
-//            
-//            animation.removedOnCompletion=NO;
-//            
-//            animation.fillMode=kCAFillModeForwards;
-//            
-//            return animation;
-//        });
-        
-        make.setAVPlayer(CGRectZero, [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]]);
-        make.setCenterBtnBlock(^(UIButton *btn) {
-            btn.hidden = NO;
-        });
-        make.setCountdownBtnActionBlock(^(id info) {
-            DDLog(@"倒计时按钮事件：%@",info)
-        });
-        make.setClickImageActionBlock(^(NSInteger selectIndex, NSString *selectImageStr, id info) {
-            DDLog(@"点击第%ld张，图片名称：%@，其他参数：%@",selectIndex,selectImageStr,info)
-        });
-        make.setCenterBtnActionBlock(^(id info) {
-            DDLog(@"中间按钮事件：%@",info)
-        });
-    } ];
+    }
+   
     //控制台显示
     [[JKConsole sheareConsole] showAndVisible];
     

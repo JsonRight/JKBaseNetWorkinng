@@ -12,6 +12,7 @@
 		040C94221FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C94211FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m */; };
 		040C94251FE91C90005727A7 /* 1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 040C94241FE91C90005727A7 /* 1.mp4 */; };
 		040C94271FE9FC95005727A7 /* ajaxHtml.html in Resources */ = {isa = PBXBuildFile; fileRef = 040C94261FE9FC95005727A7 /* ajaxHtml.html */; };
+		040C942A1FEA60DC005727A7 /* ggg.gif in Resources */ = {isa = PBXBuildFile; fileRef = 040C94291FEA60DC005727A7 /* ggg.gif */; };
 		0429114D1FE36CB800812F17 /* InterfacesURLList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0429114A1FE36CB800812F17 /* InterfacesURLList.plist */; };
 		0429114E1FE36CB800812F17 /* JKConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 0429114C1FE36CB800812F17 /* JKConsole.m */; };
 		042911551FE3C99800812F17 /* JKGuidePageWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 042911541FE3C99800812F17 /* JKGuidePageWindow.m */; };
@@ -43,6 +44,7 @@
 		040C94241FE91C90005727A7 /* 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.mp4; sourceTree = "<group>"; };
 		040C94261FE9FC95005727A7 /* ajaxHtml.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ajaxHtml.html; sourceTree = "<group>"; };
 		040C94281FEA2C36005727A7 /* JKGuidePage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKGuidePage.h; sourceTree = "<group>"; };
+		040C94291FEA60DC005727A7 /* ggg.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ggg.gif; sourceTree = "<group>"; };
 		0429114A1FE36CB800812F17 /* InterfacesURLList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InterfacesURLList.plist; sourceTree = "<group>"; };
 		0429114B1FE36CB800812F17 /* JKConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKConsole.h; sourceTree = "<group>"; };
 		0429114C1FE36CB800812F17 /* JKConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKConsole.m; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				040C94261FE9FC95005727A7 /* ajaxHtml.html */,
+				040C94291FEA60DC005727A7 /* ggg.gif */,
 				040C94241FE91C90005727A7 /* 1.mp4 */,
 				BF08F9BE1F7B7F0E008A3F66 /* JKNetWorkingDemo */,
 				BF08F9BD1F7B7F0E008A3F66 /* Products */,
@@ -268,6 +271,7 @@
 				0429114D1FE36CB800812F17 /* InterfacesURLList.plist in Resources */,
 				BF08F9CC1F7B7F0E008A3F66 /* LaunchScreen.storyboard in Resources */,
 				040C94251FE91C90005727A7 /* 1.mp4 in Resources */,
+				040C942A1FEA60DC005727A7 /* ggg.gif in Resources */,
 				040C94271FE9FC95005727A7 /* ajaxHtml.html in Resources */,
 				BF08F9C91F7B7F0E008A3F66 /* Assets.xcassets in Resources */,
 				BF08F9C71F7B7F0E008A3F66 /* Main.storyboard in Resources */,
