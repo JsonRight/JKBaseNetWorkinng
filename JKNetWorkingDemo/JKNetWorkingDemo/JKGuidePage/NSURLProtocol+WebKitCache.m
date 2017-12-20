@@ -34,7 +34,6 @@ FOUNDATION_STATIC_INLINE SEL UnregisterSchemeSelector() {
         for (NSString* str in schemes) {
              [(id)cls runSelector:sel withObjects:@[str]];
         }
-       
     }
 }
 

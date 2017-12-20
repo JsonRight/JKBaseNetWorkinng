@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
 #import "NSObject+SelectorExtension.h"
-#import "JKConsole.h"
+#import "JKUtility.h"
 @interface JK_WKScriptMessageHandler : NSObject<WKScriptMessageHandler>
 /**delegate*/
 @property (nonatomic,weak) id delegate;

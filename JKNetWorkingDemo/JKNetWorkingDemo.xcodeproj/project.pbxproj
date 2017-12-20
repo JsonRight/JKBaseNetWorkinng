@@ -42,6 +42,7 @@
 		040C94211FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WebKitCache.m"; sourceTree = "<group>"; };
 		040C94241FE91C90005727A7 /* 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.mp4; sourceTree = "<group>"; };
 		040C94261FE9FC95005727A7 /* ajaxHtml.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ajaxHtml.html; sourceTree = "<group>"; };
+		040C94281FEA2C36005727A7 /* JKGuidePage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKGuidePage.h; sourceTree = "<group>"; };
 		0429114A1FE36CB800812F17 /* InterfacesURLList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InterfacesURLList.plist; sourceTree = "<group>"; };
 		0429114B1FE36CB800812F17 /* JKConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKConsole.h; sourceTree = "<group>"; };
 		0429114C1FE36CB800812F17 /* JKConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKConsole.m; sourceTree = "<group>"; };
@@ -119,6 +120,7 @@
 				BF6240951FE635F900B336DE /* JKGuidePageViewController.m */,
 				040C941A1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.h */,
 				040C941B1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.m */,
+				040C94281FEA2C36005727A7 /* JKGuidePage.h */,
 			);
 			path = JKGuidePage;
 			sourceTree = "<group>";

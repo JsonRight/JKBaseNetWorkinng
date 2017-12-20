@@ -8,7 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "JKConsole.h"
+
+#ifdef DEBUG
+#define JKDlog(...) printf("<%s : %d>%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],__LINE__, [[NSString stringWithFormat:__VA_ARGS__]UTF8String]);
+#else
+#define JKDlog(...)
+#endif
 CA_EXTERN NSString * const kAppFirstInstall;                //app首次启动保存至UserDefaults Key
 CA_EXTERN NSString * const kAppLastVersion;                 //app每次更新保存版本号至UserDefaults Key
 CA_EXTERN NSString * const kAppVersionString;               //app获取当前版本 Key--CFBundleShortVersionString

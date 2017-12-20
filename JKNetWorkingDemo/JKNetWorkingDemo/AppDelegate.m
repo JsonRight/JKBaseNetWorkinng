@@ -19,11 +19,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    JKGuidePageWindow* guidePageWindow =[JKGuidePageWindow sheareGuidePageWithOptions:APPLaunchStateFirst |APPLaunchStateNormal];
+    JKGuidePageWindow* guidePageWindow =[JKGuidePageWindow sheareGuidePageWindow];
     [guidePageWindow makeJKGuidePageWindow:^(JKGuidePageViewController *make) {
-//        make.setImageArr(@[@"https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Ftimgsa.baidu.com%2Ftimg%3Fimage%26quality%3D80%26size%3Db9999_10000%26sec%3D1513602295155%26di%3Db2a2f6126cebfc8ec7093118d92e1584%26imgtype%3D0%26src%3Dhttp%253A%252F%252Fimg.zcool.cn%252Fcommunity%252F0121be5715d3e132f8758c9b7e43de.gif&thumburl=https%3A%2F%2Fss3.bdstatic.com%2F70cFv8Sh_Q1YnxGkpoWK1HF6hhy%2Fit%2Fu%3D2128235232%2C2821001689%26fm%3D27%26gp%3D0.jpg"], YES ,YES);
+//        make.setImageArr(@[@"https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Ftimgsa.baidu.com%2Ftimg%3Fimage%26quality%3D80%26size%3Db9999_10000%26sec%3D1513602295155%26di%3Db2a2f6126cebfc8ec7093118d92e1584%26imgtype%3D0%26src%3Dhttp%253A%252F%252Fimg.zcool.cn%252Fcommunity%252F0121be5715d3e132f8758c9b7e43de.gif&thumburl=https%3A%2F%2Fss3.bdstatic.com%2F70cFv8Sh_Q1YnxGkpoWK1HF6hhy%2Fit%2Fu%3D2128235232%2C2821001689%26fm%3D27%26gp%3D0.jpg",@"https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Ftimgsa.baidu.com%2Ftimg%3Fimage%26quality%3D80%26size%3Db9999_10000%26sec%3D1513602295155%26di%3Db2a2f6126cebfc8ec7093118d92e1584%26imgtype%3D0%26src%3Dhttp%253A%252F%252Fimg.zcool.cn%252Fcommunity%252F0121be5715d3e132f8758c9b7e43de.gif&thumburl=https%3A%2F%2Fss3.bdstatic.com%2F70cFv8Sh_Q1YnxGkpoWK1HF6hhy%2Fit%2Fu%3D2128235232%2C2821001689%26fm%3D27%26gp%3D0.jpg"], YES ,YES);
         
-//        make.setTimer(3,0,@"s跳过");
+        make.setTimer(0,3,@"s跳过");
+        make.setCountdownBtnBlock(^(UIButton *btn) {
+//            btn.hidden = NO;
+        });
         
 //        make.setScrollViewStyle(nil, CGRectNull, CGSizeZero, YES);
         
@@ -49,26 +52,23 @@
 //            return animation;
 //        });
         
-//        make.setAVPlayer(CGRectZero, [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]]);
-        
-    } clickImageActionBlock:^(NSInteger selectIndex, NSString *selectImageStr ,id info) {
-        DDLog(@"点击第%ld张，图片名称：%@，其他参数：%@",selectIndex,selectImageStr,info)
-    } btnActionBlock:^(id info){
-        DDLog(@"其他参数：%@",info)
-    } animateFinished:^(id info){
-        DDLog(@"动画结束，其他参数：%@",info)
-    }];
+        make.setAVPlayer(CGRectZero, [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]]);
+        make.setCenterBtnBlock(^(UIButton *btn) {
+            btn.hidden = NO;
+        });
+        make.setCountdownBtnActionBlock(^(id info) {
+            DDLog(@"倒计时按钮事件：%@",info)
+        });
+        make.setClickImageActionBlock(^(NSInteger selectIndex, NSString *selectImageStr, id info) {
+            DDLog(@"点击第%ld张，图片名称：%@，其他参数：%@",selectIndex,selectImageStr,info)
+        });
+        make.setCenterBtnActionBlock(^(id info) {
+            DDLog(@"中间按钮事件：%@",info)
+        });
+    } ];
     //控制台显示
     [[JKConsole sheareConsole] showAndVisible];
     
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        for (int i = 0; i<10; i++) {
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(i * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                //测试打印效果
-//                DDLog(@"日志打印：%ld",i)
-//            });
-//        }
-//    });
     return YES;
 }
 
