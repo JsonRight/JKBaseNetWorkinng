@@ -10,6 +10,6 @@
 
 @interface ViewController : UIViewController
 
-
+-(void)hehe;
 @end
 

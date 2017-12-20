@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<button onclick="click1()" style="height:50px;width:300px;font-size: 40px">click1</button>
+<h1>
+window.webkit.messageHandlers.WKScriptMessageHandler.postMessage({"funcName":"hehe","body":[]});<br>
+body格式:<br>
+funName:---->方法名<br>
+body:----->参数数组元素必须字符串，没有参数则传[]<br>
+{"funcName":"dismiss",<br>
+     "body":[]<br>
+}<br>
+</h1>
+<button onclick="click2()" style="height:50px;width:300px;font-size: 40px">click2</button>
+<h1 >
+window.webkit.messageHandlers.WKScriptMessageHandler.postMessage("");<br>
+不符合上述规范<br>
+</h1>
+<button onclick="click3()" style="height:50px;width:300px;font-size: 40px">click3</button>
+<h1 >
+window.webkit.messageHandlers.WKScriptMessageHandler.postMessage();<br>
+不符合上述规范<br>
+</h1>
+<br>
+<script>
+    function click1() {
+        alert("click1");
+        window.webkit.messageHandlers.WKScriptMessageHandler.postMessage({"funcName":"hehe","body":[]});
+    };
+    function click2() {
+        alert("click2");
+        window.webkit.messageHandlers.WKScriptMessageHandler.postMessage("");
+    };
+    function click3() {
+        alert("click3");
+        window.webkit.messageHandlers.WKScriptMessageHandler.postMessage();
+        
+    };
+
+</script>
+</body>
+</html>

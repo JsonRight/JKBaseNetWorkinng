@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewController.h"
 #import <WebKit/WebKit.h>
 #import "JKUtility.h"
 #import "UIImage+GIF.h"
@@ -31,7 +32,7 @@ typedef void(^ClickImageActionBlock)(NSInteger selectIndex,NSString *selectImage
 typedef void(^BtnActionBlock)(id guidePageinfo);
 typedef void(^AnimateFinishedBlock)(id guidePageinfo);
 
-@interface JKGuidePageViewController : UIViewController
+@interface JKGuidePageViewController : ViewController
 
 /**设置计时器相关属性
  timeMax 倒计时 时间

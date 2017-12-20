@@ -30,7 +30,7 @@ FOUNDATION_STATIC_INLINE SEL UnregisterSchemeSelector() {
 + (void)jk_registerSchemes:(NSArray<NSString * > *)schemes {
     Class cls = ContextControllerClass();
     SEL sel = RegisterSchemeSelector();
-    if ([(id)cls respondsToSelector:sel]) {
+    if ([(id)cls canRunToSelector:sel]) {
         for (NSString* str in schemes) {
              [(id)cls runSelector:sel withObjects:@[str]];
         }
@@ -41,7 +41,7 @@ FOUNDATION_STATIC_INLINE SEL UnregisterSchemeSelector() {
 + (void)jk_unregisterSchemes:(NSArray<NSString * > *)schemes {
     Class cls = ContextControllerClass();
     SEL sel = UnregisterSchemeSelector();
-    if ([(id)cls respondsToSelector:sel]) {
+    if ([(id)cls canRunToSelector:sel]) {
         for (NSString* str in schemes) {
             [(id)cls runSelector:sel withObjects:@[str]];
         }

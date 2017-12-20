@@ -23,11 +23,11 @@
     [guidePageWindow makeJKGuidePageWindow:^(JKGuidePageViewController *make) {
 //        make.setImageArr(@[@"https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Ftimgsa.baidu.com%2Ftimg%3Fimage%26quality%3D80%26size%3Db9999_10000%26sec%3D1513602295155%26di%3Db2a2f6126cebfc8ec7093118d92e1584%26imgtype%3D0%26src%3Dhttp%253A%252F%252Fimg.zcool.cn%252Fcommunity%252F0121be5715d3e132f8758c9b7e43de.gif&thumburl=https%3A%2F%2Fss3.bdstatic.com%2F70cFv8Sh_Q1YnxGkpoWK1HF6hhy%2Fit%2Fu%3D2128235232%2C2821001689%26fm%3D27%26gp%3D0.jpg"], YES ,YES);
         
-        make.setTimer(3,0,@"s跳过");
+//        make.setTimer(3,0,@"s跳过");
         
 //        make.setScrollViewStyle(nil, CGRectNull, CGSizeZero, YES);
         
-//        make.setWKWebView([UIScreen mainScreen].bounds, [NSURL URLWithString:@"http://172.16.23.102:9000/org/group.action?plid=1"]);
+        make.setWKWebView([UIScreen mainScreen].bounds, [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ajaxHtml" ofType:@"html"]]);
         
 //        make.setCustomViewAnimateWhenHiddenBlock(^CABasicAnimation *{
 //            CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"transform.scale"];
@@ -49,7 +49,7 @@
 //            return animation;
 //        });
         
-        make.setAVPlayer(CGRectZero, [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]]);
+//        make.setAVPlayer(CGRectZero, [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]]);
         
     } clickImageActionBlock:^(NSInteger selectIndex, NSString *selectImageStr ,id info) {
         DDLog(@"点击第%ld张，图片名称：%@，其他参数：%@",selectIndex,selectImageStr,info)

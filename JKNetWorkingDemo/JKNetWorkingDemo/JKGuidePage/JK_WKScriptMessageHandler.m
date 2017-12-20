@@ -23,8 +23,16 @@ static JK_WKScriptMessageHandler* scriptMessageHandler = nil;
     return self;
 }
 - (void)userContentController:(nonnull WKUserContentController *)userContentController didReceiveScriptMessage:(nonnull WKScriptMessage *)message {
-    if (self.delegate&&[self.delegate canRunToSelector:NSSelectorFromString(message.name)]) {
-        [self.delegate runSelector:NSSelectorFromString(message.name) withObjects:@[message.body]];
+    DDLog(@"(%@)",message.body)
+    if ([message.body isKindOfClass:[NSDictionary class]]) {
+        NSDictionary* dict = (NSDictionary*)message.body;
+        SEL sel = NSSelectorFromString(dict[@"funcName"]);
+            if (self.delegate&&[self.delegate respondsToSelector:sel]) {
+                DDLog(@"(%@)",dict[@"body"])
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.delegate runSelector:sel withObjects:dict[@"body"]];
+                });
+            }
     }
 }
 

@@ -209,7 +209,7 @@
         WKWebViewConfiguration* configuration = [[WKWebViewConfiguration alloc] init];
         configuration.userContentController = userContentController;
         JK_WKScriptMessageHandler* handler = [[JK_WKScriptMessageHandler alloc]initWith:self];
-        [configuration.userContentController addScriptMessageHandler:handler name:@"dismiss"];
+        [configuration.userContentController addScriptMessageHandler:handler name:kWKScriptMessageHandler];
         _webView = [[WKWebView alloc]initWithFrame:self.view.bounds configuration:configuration];
         _webView.UIDelegate=self;
         _webView.navigationDelegate=self;

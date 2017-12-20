@@ -35,7 +35,9 @@
    
     
 }
-
+-(void)hehe{
+    DDLog(@"hehe");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

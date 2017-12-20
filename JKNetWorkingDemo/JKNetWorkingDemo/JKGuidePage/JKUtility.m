@@ -11,6 +11,8 @@
 NSString * const kAppFirstInstall = @"LNAppFirstInstall";
 NSString * const kAppLastVersion = @"lastVersion";
 NSString * const kAppVersionString = @"CFBundleShortVersionString";
+NSString * const kJKGuidePageWindowDidDismiss = @"JKGuidePageWindowDidDismiss";
+NSString * const kWKScriptMessageHandler = @"WKScriptMessageHandler";
 CA_EXTERN NSString* JKGetStrFromUserDefaults(NSString* key) {
     if (key) return [[NSUserDefaults standardUserDefaults] stringForKey:key];
     return nil;

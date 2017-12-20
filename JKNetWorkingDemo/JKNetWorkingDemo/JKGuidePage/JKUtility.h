@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "JKConsole.h"
-CA_EXTERN NSString * const kAppFirstInstall;    //app首次启动保存至UserDefaults Key
-CA_EXTERN NSString * const kAppLastVersion;     //app每次更新保存版本号至UserDefaults Key
-CA_EXTERN NSString * const kAppVersionString;   //app获取当前版本 Key--CFBundleShortVersionString
+CA_EXTERN NSString * const kAppFirstInstall;                //app首次启动保存至UserDefaults Key
+CA_EXTERN NSString * const kAppLastVersion;                 //app每次更新保存版本号至UserDefaults Key
+CA_EXTERN NSString * const kAppVersionString;               //app获取当前版本 Key--CFBundleShortVersionString
+CA_EXTERN NSString * const kJKGuidePageWindowDidDismiss;    //app启动页消失   全局--通知 名称
+CA_EXTERN NSString * const kWKScriptMessageHandler;         //JK_WKScriptMessageHandler wk交互详细对象----->message.name
 
 typedef NS_OPTIONS(NSUInteger, APPLaunchStateOptions){
     APPLaunchStateNormal    = 1 << 0, //正常启动

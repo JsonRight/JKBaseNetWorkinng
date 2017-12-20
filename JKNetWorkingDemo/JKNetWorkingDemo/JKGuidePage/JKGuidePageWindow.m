@@ -59,6 +59,7 @@ static JKGuidePageWindow* guidePageWindow=nil;
         if (guidePageWindow.finished) {
             guidePageWindow.finished(nil);
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kJKGuidePageWindowDidDismiss object:nil];
         guidePageWindow=nil;
     }];
     
