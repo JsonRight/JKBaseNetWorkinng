@@ -8,7 +8,6 @@
 
 #import "JKGuidePageWindow.h"
 
-
 @interface JKGuidePageWindow ()
 /**<#Description#>*/
 @property (nonatomic, strong) JKGuidePageViewController *guidePageViewController;

@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <WebKit/WebKit.h>
 #import "JKUtility.h"
-#import "UIImage+GIF.h"
-#import "UIImageView+WebCache.h"
-#import <AVFoundation/AVFoundation.h>
+
 @class JKGuidePageViewController;
 
 typedef JKGuidePageViewController *(^BackGroundImageBlock)(NSString *url,BOOL isURL,BOOL isGif);

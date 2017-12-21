@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "JKConsole.h"
-#import "JKGuidePageWindow.h"
+#import "JKGuidePage.h"
 @interface AppDelegate ()
 
 @end

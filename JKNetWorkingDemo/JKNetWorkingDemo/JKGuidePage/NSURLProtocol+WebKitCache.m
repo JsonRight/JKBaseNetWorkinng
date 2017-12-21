@@ -8,6 +8,7 @@
 
 #import "NSURLProtocol+WebKitCache.h"
 #import <WebKit/WebKit.h>
+#import "NSObject+SelectorExtension.h"
 
 FOUNDATION_STATIC_INLINE Class ContextControllerClass() {
     static Class cls;

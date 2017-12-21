@@ -7,7 +7,10 @@
 //
 
 #import "JKGuidePageViewController.h"
-#import "UIImageView+AFNetworking.h"
+#import <WebKit/WebKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import "UIImage+GIF.h"
+#import "UIImageView+WebCache.h"
 #import "JKGuidePageWindow.h"
 #import "JK_WKScriptMessageHandler.h"
 @interface JKCollectionViewCell : UICollectionViewCell

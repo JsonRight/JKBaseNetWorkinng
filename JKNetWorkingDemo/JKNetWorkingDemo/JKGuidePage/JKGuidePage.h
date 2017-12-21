@@ -8,22 +8,14 @@
 
 #ifndef JKGuidePage_h
 #define JKGuidePage_h
-
-//#import <WebKit/WebKit.h>
 ////工具
-//#import "JKUtility.h"
+#import "JKUtility.h"
 ////方法替换
-//#import "NSObject+SelectorExtension.h"
+#import "NSObject+SelectorExtension.h"
 ////启动页 根window
-//#import "JKGuidePageWindow.h"
-////启动页核心控制器
-//#import "JKGuidePageViewController.h"
+#import "JKGuidePageWindow.h"
 ////jk启动页 web 交互 桥接
-//#import "JK_WKScriptMessageHandler.h"
-//
+#import "JK_WKScriptMessageHandler.h"
 ////pod SDWebImage 4.2.2
-//#import "UIImage+GIF.h"
-//#import "UIImageView+WebCache.h"
-//pod SDWebImage 4.2.2
 
 #endif /* JKGuidePage_h */

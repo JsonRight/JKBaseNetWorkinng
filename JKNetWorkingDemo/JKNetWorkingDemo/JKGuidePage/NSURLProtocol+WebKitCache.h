@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSObject+SelectorExtension.h"
 /*
  用于web缓存，但是wk好像不能用，具体原因不明
  */
