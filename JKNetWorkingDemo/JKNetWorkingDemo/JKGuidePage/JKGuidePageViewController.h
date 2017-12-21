@@ -14,6 +14,8 @@
 #import <AVFoundation/AVFoundation.h>
 @class JKGuidePageViewController;
 
+typedef JKGuidePageViewController *(^BackGroundImageBlock)(NSString *url,BOOL isURL,BOOL isGif);
+
 typedef JKGuidePageViewController *(^TimerBlock)(NSUInteger timeMax,NSUInteger timeDelay,NSString* timerTitle);
 typedef JKGuidePageViewController *(^ImageArrBlock)(NSArray *imageArr,BOOL isURL,BOOL isGif);
 typedef JKGuidePageViewController *(^ScrollViewStyleBlock)(UICollectionViewFlowLayout *layout,CGRect frame,CGSize itemSize,BOOL scrollDirectionVertical);
@@ -40,6 +42,13 @@ typedef JKGuidePageViewController *(^SetAnimateFinishedBlock)(AnimateFinishedBlo
 
 typedef JKGuidePageViewController *(^SetAPPLaunchStateOptions)(APPLaunchStateOptions block);
 @interface JKGuidePageViewController : UIViewController
+
+/**设置加载图片／gif相关属性
+ imageArr 图片数组
+ isURL 是否为链接
+ isGif 是否为Gif
+ */
+@property (nonatomic,copy,readonly) BackGroundImageBlock setBackGroundImage;
 
 /**设置计时器相关属性
  timeMax 倒计时 时间

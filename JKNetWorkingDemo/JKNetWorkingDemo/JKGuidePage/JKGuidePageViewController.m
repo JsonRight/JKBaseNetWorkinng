@@ -20,6 +20,7 @@
 - (UIImageView *)imageView{
     if (!_imageView) {
         _imageView = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        _imageView.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_imageView];
     }
     return _imageView;
@@ -98,6 +99,7 @@
 - (void)reloadData{
     
     [self.view addSubview:self.customView];
+    [self.customView addSubview:self.backGroundImageView];
     if (_collectionView) {
         [self.customView addSubview:self.collectionView];
         [self.collectionView reloadData];
@@ -105,9 +107,6 @@
     if (_webView&&self.webUrl) {
         [self.customView addSubview:self.webView];
     }
-    
-     [self.customView addSubview:self.backGroundImageView];
-
     if (!_countdownBtn) {
         self.setCountdownBtnBlock(^(UIButton *btn) {
             btn.layer.cornerRadius = 20;
@@ -120,7 +119,6 @@
     }
     
     if (self.avAset) {
-        self.backGroundImageView.hidden = NO;
         [self.avAset loadValuesAsynchronouslyForKeys:@[@"tracks"] completionHandler:^{
             AVKeyValueStatus stacks=[self.avAset statusOfValueForKey:@"tracks" error:nil];
             if (stacks==AVKeyValueStatusLoaded) {
@@ -132,32 +130,29 @@
                 [player play];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.backGroundImageView.hidden = YES;
-                    if (!_collectionView) {
-                        [self.customView addSubview:self.centerBtn];
-                        [self.customView addSubview:self.countdownBtn];
-                    }
+                    [self.customView addSubview:self.centerBtn];
+                    [self.customView addSubview:self.countdownBtn];
                     [self addTimer];
                 });
             }else if (stacks==AVKeyValueStatusFailed||stacks==AVKeyValueStatusCancelled){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.backGroundImageView.hidden = NO;
-                    if (!_collectionView) {
-                        [self.customView addSubview:self.centerBtn];
-                        [self.customView addSubview:self.countdownBtn];
-                    }
+                    [self.customView addSubview:self.centerBtn];
+                    [self.customView addSubview:self.countdownBtn];
                     [self addTimer];
                 });
             }
         }];
     }else{
-        if (!_collectionView) {
-            [self.customView addSubview:self.centerBtn];
-            [self.customView addSubview:self.countdownBtn];
-        }
+        [self.customView addSubview:self.centerBtn];
+        [self.customView addSubview:self.countdownBtn];
     }
 
-    if ((self.options & JKGetAppLaunchState()) && (self.imageArr.count>0 || self.webUrl.absoluteString.length>0 || self.avAset)) {
+    if ((self.options & JKGetAppLaunchState())) {
         [[JKGuidePageWindow sheareGuidePageWindow] show];
+        if (!(self.imageArr.count>0 || self.webUrl.absoluteString.length>0 || self.avAset)) {
+            [self addTimer];
+        }
     }
 }
 
@@ -165,7 +160,6 @@
     if (!_timer) {
         _timer = [[NSTimer alloc]initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:self.timeDelay] interval:1 target:self selector:@selector(doSomething:) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-        [self.customView addSubview:self.countdownBtn];
     }
 
 }
@@ -180,14 +174,14 @@
 - (UIView *)customView{
     if (!_customView) {
         _customView = [[UIView alloc]initWithFrame:self.view.bounds];
-        _customView.backgroundColor = [UIColor grayColor];
+        _customView.backgroundColor = [UIColor whiteColor];
     }
     return _customView;
 }
 - (UIButton *)countdownBtn{
     if (!_countdownBtn) {
         _countdownBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        _countdownBtn.backgroundColor = [UIColor whiteColor];
+        _countdownBtn.backgroundColor = [UIColor clearColor];
         [_countdownBtn setTitleColor:[UIColor lightGrayColor] forState:(UIControlStateNormal)];
         _countdownBtn.frame = CGRectMake(self.view.bounds.size.width-100, 64, 100, 40);
         [_countdownBtn setTitle:@"countdown" forState:(UIControlStateNormal)];
@@ -199,9 +193,9 @@
 - (UIButton *)centerBtn{
     if (!_centerBtn) {
         _centerBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        _centerBtn.backgroundColor = [UIColor whiteColor];
+        _centerBtn.backgroundColor = [UIColor clearColor];
         [_centerBtn setTitleColor:[UIColor lightGrayColor] forState:(UIControlStateNormal)];
-        _centerBtn.frame = CGRectMake(0, self.view.bounds.size.height-300, self.view.bounds.size.width, 300);
+        _centerBtn.frame = CGRectMake(0, self.view.bounds.size.height-120, self.view.bounds.size.width, 120);
         [_centerBtn setTitle:@"center" forState:(UIControlStateNormal)];
         _centerBtn.hidden = YES;
         [_centerBtn addTarget:self action:@selector(btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -222,6 +216,7 @@
         [_webView setMultipleTouchEnabled:YES];
         [_webView setAutoresizesSubviews:YES];
         _webView.scrollView.bounces = NO;
+        _webView.hidden = YES;
         [_webView.scrollView setAlwaysBounceVertical:YES];
     }
     return _webView;
@@ -230,7 +225,6 @@
     if (!_backGroundImageView) {
         _backGroundImageView = [[UIImageView alloc]initWithFrame:self.view.bounds];
         _backGroundImageView.image = [UIImage imageNamed:JKGetLaunchImageName()];
-        _backGroundImageView.hidden = YES;
     }
     return _backGroundImageView;
 }
@@ -246,6 +240,41 @@
         _animate.fillMode=kCAFillModeForwards;
     }
     return _animate;
+}
+- (BackGroundImageBlock)setBackGroundImage{
+    return ^(NSString *url,BOOL isURL,BOOL isGif){
+        if (!url) {
+            return self;
+        }
+        if(self.isURL){
+            JKDlog(@"网络图片");
+            if (self.isGif) {
+                [self.backGroundImageView setImage:[UIImage imageNamed:JKGetLaunchImageName()]];
+                [SDWebImageManager.sharedManager loadImageWithURL:[NSURL URLWithString:url] options:0 progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                    [self.backGroundImageView setImage:[UIImage sd_animatedGIFWithData:data]];
+                }];
+            }else{
+                [self.backGroundImageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:JKGetLaunchImageName()]];
+            }
+        }else if (self.isGif){
+            
+            UIImage * image= nil;
+            
+            NSString *path = [[NSBundle mainBundle] pathForResource:url ofType:@"gif"];
+            
+            NSData* data = [NSData dataWithContentsOfFile:path];
+            if (data) {
+                image = [UIImage sd_animatedGIFWithData:data];
+            }
+            JKDlog(@"本地gif");
+            [self.backGroundImageView setImage:image?image:[UIImage imageNamed:JKGetLaunchImageName()]];
+            
+            
+        }else{
+            [self.backGroundImageView setImage:[UIImage imageNamed:JKGetLaunchImageName()]];
+        }
+        return self;
+    };
 }
 - (APPLaunchStateOptions)options{
     if (!_options) {
@@ -296,7 +325,7 @@
         }else{
             _collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
         }
-        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.pagingEnabled = YES;
         _collectionView.bounces = NO;
         _collectionView.dataSource = self;
@@ -314,11 +343,7 @@
 }
 -(ImageArrBlock)setImageArr{
     return ^(NSArray *imageArr,BOOL isURL,BOOL isGif){
-        if (imageArr.count>0) {
-            self.imageArr = [imageArr mutableCopy];
-        }else{
-            self.imageArr = [imageArr mutableCopy];
-        }
+        self.imageArr = [imageArr mutableCopy];
         self.isURL = isURL;
         self.isGif = isGif;
         if (!_collectionView) {
@@ -402,7 +427,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     JKCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"JKCollectionViewCell" forIndexPath:indexPath];
-    
+    cell.backgroundColor = [UIColor clearColor];
+    cell.contentView.backgroundColor = [UIColor clearColor];
     if(self.isURL&&self.imageArr.count>indexPath.item&&self.imageArr[indexPath.item]){
         JKDlog(@"网络图片");
         if (self.isGif) {
@@ -433,9 +459,6 @@
         [cell.imageView setImage:image?image:[UIImage imageNamed:JKGetLaunchImageName()]];
     }else{
         [cell.imageView setImage:[UIImage imageNamed:JKGetLaunchImageName()]];
-    }
-    if (self.imageArr.count == indexPath.item+1) {
-        [cell.contentView addSubview:self.centerBtn];
     }
     if (self.imageArr.count==1) {
         [self scrollViewDidScroll:collectionView];
@@ -472,7 +495,7 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
  
     JKDlog(@"加载成功");
-    self.backGroundImageView.hidden = YES;
+    self.webView.hidden =NO;
     [self addTimer];
 }
 // 页面加载失败时调用
@@ -630,7 +653,7 @@
 - (void)dealloc{
     JKDlog(@"%@释放了",[self class])
     if (_webView) {
-        [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"dismiss"];
+        [_webView.configuration.userContentController removeScriptMessageHandlerForName:kWKScriptMessageHandler];
     }
 }
 
