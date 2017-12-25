@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "JKConsole.h"
+
 #import "JKGuidePage.h"
 @interface AppDelegate ()
 
@@ -47,18 +47,18 @@
 //            make.setAVPlayer(CGRectZero, [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]]);
             //设置倒计时按钮点击回调（启动页消失不需在block内处理）
             make.setCountdownBtnActionBlock(^(id info) {
-                DDLog(@"倒计时按钮事件：%@",info)
+                JKDlog(@"倒计时按钮事件：%@",info)
             });
             //设置中间按钮点击回调（启动页消失不需在block内处理）
             make.setCenterBtnActionBlock(^(id info) {
-                DDLog(@"中间按钮事件：%@",info)
+                JKDlog(@"中间按钮事件：%@",info)
             });
             //设置滚动图片点击回调（启动页消失不需在block内处理）
             make.setClickImageActionBlock(^(NSInteger selectIndex, NSString *selectImageStr, id info) {
-                DDLog(@"点击第%ld张，图片名称：%@，其他参数：%@",selectIndex,selectImageStr,info)
+                JKDlog(@"点击第%ld张，图片名称：%@，其他参数：%@",selectIndex,selectImageStr,info)
             });
             make.setAnimateFinishedBlock(^(id info) {
-                DDLog(@"启动页消失动画结束：%@",info)
+                JKDlog(@"启动页消失动画结束：%@",info)
             });
             //设置启动页显示时机：首次安装、更新后首次启动、正常启动（可传多种）
             make.setAPPLaunchStateOptions(APPLaunchStateFirst |APPLaunchStateNormal);
@@ -98,8 +98,7 @@
         
     }
    
-    //控制台显示
-    [[JKConsole sheareConsole] showAndVisible];
+
     
     return YES;
 }

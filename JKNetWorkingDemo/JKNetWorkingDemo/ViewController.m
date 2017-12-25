@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "BaseNetWorking.h"
-#import "JKConsole.h"
+
 @interface ViewController ()
 /**<#Description#>*/
 @property (nonatomic, strong) UIWindow *window;
@@ -36,7 +36,7 @@
     
 }
 -(void)hehe{
-    DDLog(@"hehe");
+    
 }
 
 - (void)didReceiveMemoryWarning {
