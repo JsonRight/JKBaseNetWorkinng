@@ -53,7 +53,13 @@
         return self;
     };
 }
-
+- (AuthorizationHeaderField)requestAuthorizationHeaderField{
+    return ^(NSString* username,NSString* password){
+        self->username = username;
+        self->password = password;
+        return self;
+    };
+}
 - (RequestHTTPHeaders)requestHTTPHeaders{
     return ^(NSDictionary <NSString *, NSString *> *HTTPRequestHeaders){
         self->HTTPRequestHeaders = HTTPRequestHeaders;

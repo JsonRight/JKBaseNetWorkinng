@@ -93,6 +93,8 @@
                                                               @"text/html",
                                                               @"text/xml",
                                                               nil];
+    //设置http用户名验证
+    [self updateRequestAuthorizationHeaderFieldWith:sessionManager sessionMessage:sessionMsg];
     //设置请求头
     [self updateRequestHTTPHeadersWith:sessionManager sessionMessage:sessionMsg];
     //设置服务器响应数据序列化格式
@@ -105,6 +107,13 @@
     sessionManager.securityPolicy  = [self updateSecurityPolicyWith:sessionManager sessionMessage:sessionMsg];
     
     return sessionManager;
+}
+//设置http用户名验证
+- (void)updateRequestAuthorizationHeaderFieldWith:(AFHTTPSessionManager*)sessionManager sessionMessage:(BaseSessionMessage *)sessionMsg {
+    
+    if (sessionMsg->username||sessionMsg->password) {
+        [sessionManager.requestSerializer setAuthorizationHeaderFieldWithUsername:sessionMsg->username password:sessionMsg->password];
+    }
 }
 //设置请求头
 - (void)updateRequestHTTPHeadersWith:(AFHTTPSessionManager*)sessionManager sessionMessage:(BaseSessionMessage *)sessionMsg {

@@ -36,6 +36,7 @@ typedef NS_OPTIONS(NSUInteger, ResponseDataTypes) {
 typedef BaseSessionMessage *(^RequestHTTPMethodType)(HTTPMethodTypes type);
 typedef BaseSessionMessage *(^RequestBodyType)(RequestBodyTypes type);
 typedef BaseSessionMessage *(^ResponseDataType)(ResponseDataTypes type);
+typedef BaseSessionMessage *(^AuthorizationHeaderField)(NSString *username, NSString* password);
 typedef BaseSessionMessage *(^RequestHTTPHeaders)(NSDictionary <NSString *, NSString *> *HTTPRequestHeaders);
 typedef BaseSessionMessage *(^TimeOut)(CGFloat time);
 typedef BaseSessionMessage *(^RequestCount)(NSInteger count);
@@ -53,6 +54,8 @@ typedef void (^ResponseBlock) (BaseSessionMessage *sessionMsg);
     HTTPMethodTypes HTTPMethodType;//请求格式
     RequestBodyTypes RequestBodyType;//请求体格式
     ResponseDataTypes ResponseDataType;//返回体格式
+    NSString *username;//Authorization---username
+    NSString *password;//Authorization---password
     NSDictionary <NSString *, NSString *> *HTTPRequestHeaders;//请求头
     CGFloat timeOut;//请求超时时间
     NSInteger requestCount;//请求次数
@@ -70,6 +73,7 @@ typedef void (^ResponseBlock) (BaseSessionMessage *sessionMsg);
 @property (nonatomic , copy , readonly)RequestHTTPMethodType requestHTTPMethodType;//get or post 设置
 @property (nonatomic , copy , readonly)RequestBodyType requestBodyType;// 请求数据类型
 @property (nonatomic , copy , readonly)ResponseDataType responseDataType;//返回数据类型
+@property (nonatomic , copy , readonly)AuthorizationHeaderField requestAuthorizationHeaderField;//设置http用户验证
 @property (nonatomic , copy , readonly)RequestHTTPHeaders requestHTTPHeaders;//设置请求头
 @property (nonatomic , copy , readonly)TimeOut requestTimeOut;//超时设置
 @property (nonatomic , copy , readonly)RequestCount requestCount;//请求次数设置
