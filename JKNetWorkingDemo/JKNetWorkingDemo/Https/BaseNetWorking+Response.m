@@ -11,12 +11,11 @@
 #import "BaseNetWorking+Encrypt.h"
 @implementation BaseNetWorking (Response)
 -(void)responseForm_HEAD_RequestToMsgWith:(NSURLSessionDataTask* )task msg:(BaseSessionMessage*)sessionMsg{
-    if (sessionMsg.isDlog) {
-        DLog(@"%@===>\n%@",sessionMsg.requestUrl,task);
+    if (sessionMsg->isDlog) {
+        DLog(@"%@===>\n%@",sessionMsg->requestUrl,task);
     }
-    
-    if (sessionMsg.successBlock) {
-        sessionMsg.successBlock(sessionMsg);
+    if (sessionMsg->successBlock) {
+        sessionMsg->successBlock(sessionMsg);
     }
 }
 
@@ -32,18 +31,12 @@
     
     sessionMsg.jsonItems=[NSMutableDictionary dictionaryWithDictionary:responseObject];
     
-
-    sessionMsg.dataDic=[sessionMsg.jsonItems objectForKey:@"result"];
-    sessionMsg.flag=[sessionMsg.jsonItems objectForKey:@"flag"];
-    sessionMsg.lockerFlag=[sessionMsg.jsonItems objectForKey:@"lockerFlag"];
-    sessionMsg.msg=[sessionMsg.jsonItems objectForKey:@"msg"];
-    
-    if (sessionMsg.isDlog) {
-        DLog(@"%@===>\n%@",sessionMsg.requestUrl,sessionMsg.responseString);
+    if (sessionMsg->isDlog) {
+        DLog(@"%@===>\n%@",sessionMsg->requestUrl,sessionMsg.responseString);
     }
     
-    if (sessionMsg.successBlock) {
-        sessionMsg.successBlock(sessionMsg);
+    if (sessionMsg->successBlock) {
+        sessionMsg->successBlock(sessionMsg);
     }
     
     
@@ -58,23 +51,25 @@
     sessionMsg.responseData=responseObject;
     sessionMsg.jsonItems=responseJson;
     
-    sessionMsg.dataDic=[sessionMsg.jsonItems objectForKey:@"result"];
-    sessionMsg.flag=[sessionMsg.jsonItems objectForKey:@"flag"];
-    sessionMsg.lockerFlag=[sessionMsg.jsonItems objectForKey:@"lockerFlag"];
-    sessionMsg.msg=[sessionMsg.jsonItems objectForKey:@"msg"];
-    
-    if (sessionMsg.isDlog) {
-        DLog(@"%@===>\n%@",sessionMsg.requestUrl,sessionMsg.responseString);
+    if (sessionMsg->isDlog) {
+        DLog(@"%@===>\n%@",sessionMsg->requestUrl,sessionMsg.responseString);
     }
     
-    if (sessionMsg.successBlock) {
-        sessionMsg.successBlock(sessionMsg);
+    if (sessionMsg->successBlock) {
+        sessionMsg->successBlock(sessionMsg);
     }
    
 }
 -(void)responseFailureWith:(NSURLSessionDataTask* )task error:(NSError*)error msg:(BaseSessionMessage*)sessionMsg{
    
     NSHTTPURLResponse * response=error.userInfo[@"com.alamofire.serialization.response.error.response"];
+    //当请求出现一下几种情况，验证请求次数，进行重复请求
+    if (response.statusCode == 403||response.statusCode == 404||response.statusCode == 408||(response.statusCode>=500&&response.statusCode<=505)) {
+        if (sessionMsg->requestCount>0) {
+            sessionMsg.sendSessionMessage();return;
+        }
+    }
+        
     NSData * data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
     NSString * str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     NSMutableDictionary*responseJson=nil;
@@ -84,39 +79,14 @@
        responseJson  = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingAllowFragments) error:&parseError];
     }
    
-
-    switch (response.statusCode) {
-        case 502://密匙错误
-        {
-           
-        }
-            break;
-        case 303:
-        {
-            
-        }
-            break;
-        
-            
-        default:
-        {
-            
-            
-        }
-            break;
-    }
- 
     sessionMsg.responseString=str;
     sessionMsg.responseData=data;
     sessionMsg.jsonItems=responseJson;
-    sessionMsg.flag=@"404";
-    sessionMsg.lockerFlag=@"网络错误";
-    sessionMsg.msg=@"连接出错了，检查一下网络？";
-    if (sessionMsg.isDlog) {
-        DLog(@"%@===>\n%@",sessionMsg.requestUrl,sessionMsg.responseString);
+    if (sessionMsg->isDlog) {
+        DLog(@"error:statusCode%ld %@===>\n%@",response.statusCode,sessionMsg->requestUrl,sessionMsg.responseString);
     }
-    if (sessionMsg.failureBlock) {
-        sessionMsg.failureBlock(sessionMsg);
+    if (sessionMsg->failureBlock) {
+        sessionMsg->failureBlock(sessionMsg);
     }
     
 }

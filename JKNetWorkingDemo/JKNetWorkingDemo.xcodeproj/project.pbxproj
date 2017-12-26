@@ -10,11 +10,7 @@
 		040C941C1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C941B1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.m */; };
 		040C941F1FE8D876005727A7 /* NSObject+SelectorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C941E1FE8D876005727A7 /* NSObject+SelectorExtension.m */; };
 		040C94221FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C94211FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m */; };
-		040C94251FE91C90005727A7 /* 1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 040C94241FE91C90005727A7 /* 1.mp4 */; };
-		040C94271FE9FC95005727A7 /* ajaxHtml.html in Resources */ = {isa = PBXBuildFile; fileRef = 040C94261FE9FC95005727A7 /* ajaxHtml.html */; };
-		040C942A1FEA60DC005727A7 /* ggg.gif in Resources */ = {isa = PBXBuildFile; fileRef = 040C94291FEA60DC005727A7 /* ggg.gif */; };
 		042911551FE3C99800812F17 /* JKGuidePageWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 042911541FE3C99800812F17 /* JKGuidePageWindow.m */; };
-		044DEB5E1FE0DC28006F5C35 /* BaseNetWorking+BaseUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9D71F7B7F95008A3F66 /* BaseNetWorking+BaseUrl.m */; };
 		044DEB5F1FE0DC2E006F5C35 /* BaseNetWorking+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9D91F7B7F95008A3F66 /* BaseNetWorking+Encrypt.m */; };
 		044DEB601FE0DC33006F5C35 /* BaseNetWorking+FailureRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9DB1F7B7F95008A3F66 /* BaseNetWorking+FailureRefresh.m */; };
 		044DEB611FE0DC38006F5C35 /* BaseNetWorking+HTTPMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9DD1F7B7F95008A3F66 /* BaseNetWorking+HTTPMethod.m */; };
@@ -39,10 +35,7 @@
 		040C941E1FE8D876005727A7 /* NSObject+SelectorExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SelectorExtension.m"; sourceTree = "<group>"; };
 		040C94201FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURLProtocol+WebKitCache.h"; sourceTree = "<group>"; };
 		040C94211FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WebKitCache.m"; sourceTree = "<group>"; };
-		040C94241FE91C90005727A7 /* 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.mp4; sourceTree = "<group>"; };
-		040C94261FE9FC95005727A7 /* ajaxHtml.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ajaxHtml.html; sourceTree = "<group>"; };
 		040C94281FEA2C36005727A7 /* JKGuidePage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKGuidePage.h; sourceTree = "<group>"; };
-		040C94291FEA60DC005727A7 /* ggg.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ggg.gif; sourceTree = "<group>"; };
 		042911531FE3C99800812F17 /* JKGuidePageWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKGuidePageWindow.h; sourceTree = "<group>"; };
 		042911541FE3C99800812F17 /* JKGuidePageWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKGuidePageWindow.m; sourceTree = "<group>"; };
 		044DEB661FE113E3006F5C35 /* MyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHelper.h; sourceTree = "<group>"; };
@@ -62,8 +55,6 @@
 		BF08F9CB1F7B7F0E008A3F66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF08F9CD1F7B7F0E008A3F66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF08F9CE1F7B7F0E008A3F66 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		BF08F9D61F7B7F95008A3F66 /* BaseNetWorking+BaseUrl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaseNetWorking+BaseUrl.h"; sourceTree = "<group>"; };
-		BF08F9D71F7B7F95008A3F66 /* BaseNetWorking+BaseUrl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BaseNetWorking+BaseUrl.m"; sourceTree = "<group>"; };
 		BF08F9D81F7B7F95008A3F66 /* BaseNetWorking+Encrypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaseNetWorking+Encrypt.h"; sourceTree = "<group>"; };
 		BF08F9D91F7B7F95008A3F66 /* BaseNetWorking+Encrypt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BaseNetWorking+Encrypt.m"; sourceTree = "<group>"; };
 		BF08F9DA1F7B7F95008A3F66 /* BaseNetWorking+FailureRefresh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaseNetWorking+FailureRefresh.h"; sourceTree = "<group>"; };
@@ -132,9 +123,6 @@
 		BF08F9B31F7B7F0E008A3F66 = {
 			isa = PBXGroup;
 			children = (
-				040C94261FE9FC95005727A7 /* ajaxHtml.html */,
-				040C94291FEA60DC005727A7 /* ggg.gif */,
-				040C94241FE91C90005727A7 /* 1.mp4 */,
 				BF08F9BE1F7B7F0E008A3F66 /* JKNetWorkingDemo */,
 				BF08F9BD1F7B7F0E008A3F66 /* Products */,
 				AB0C69AC91F81357FA7B5D88 /* Pods */,
@@ -173,8 +161,6 @@
 			children = (
 				044DEB6A1FE116FD006F5C35 /* Singleton.h */,
 				044DEB661FE113E3006F5C35 /* MyHelper.h */,
-				BF08F9D61F7B7F95008A3F66 /* BaseNetWorking+BaseUrl.h */,
-				BF08F9D71F7B7F95008A3F66 /* BaseNetWorking+BaseUrl.m */,
 				BF08F9D81F7B7F95008A3F66 /* BaseNetWorking+Encrypt.h */,
 				BF08F9D91F7B7F95008A3F66 /* BaseNetWorking+Encrypt.m */,
 				BF08F9DA1F7B7F95008A3F66 /* BaseNetWorking+FailureRefresh.h */,
@@ -253,9 +239,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF08F9CC1F7B7F0E008A3F66 /* LaunchScreen.storyboard in Resources */,
-				040C94251FE91C90005727A7 /* 1.mp4 in Resources */,
-				040C942A1FEA60DC005727A7 /* ggg.gif in Resources */,
-				040C94271FE9FC95005727A7 /* ajaxHtml.html in Resources */,
 				BF08F9C91F7B7F0E008A3F66 /* Assets.xcassets in Resources */,
 				BF08F9C71F7B7F0E008A3F66 /* Main.storyboard in Resources */,
 			);
@@ -331,7 +314,6 @@
 				040C941F1FE8D876005727A7 /* NSObject+SelectorExtension.m in Sources */,
 				044DEB601FE0DC33006F5C35 /* BaseNetWorking+FailureRefresh.m in Sources */,
 				044DEB5F1FE0DC2E006F5C35 /* BaseNetWorking+Encrypt.m in Sources */,
-				044DEB5E1FE0DC28006F5C35 /* BaseNetWorking+BaseUrl.m in Sources */,
 				BF08F9C41F7B7F0E008A3F66 /* ViewController.m in Sources */,
 				BF08F9CF1F7B7F0E008A3F66 /* main.m in Sources */,
 				BF08F9C11F7B7F0E008A3F66 /* AppDelegate.m in Sources */,

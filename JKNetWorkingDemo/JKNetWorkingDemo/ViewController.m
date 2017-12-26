@@ -18,22 +18,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    //normel
+    [SessionMessage(nil) requestHTTPWithURLString:@"" paramsDic:@{} progress:nil success:nil failure:nil];
     
+//方式1
+    [[BaseSessionMessage createSessionMessage:^(BaseSessionMessage *make) {
+        make.requestDlog(YES).requestTimeOut(60).requestBaseUrl(@"").requestCount(1);
+    }] requestHTTPWithURLString:@"" paramsDic:@{} progress:nil success:nil failure:nil];
     
-//    //网络请求
-//    [BaseSessionMessage createRequestHTTPWithURLString:@"" paramsDic:@{} progress:^(NSProgress *progress) {
-//        //进度
-//    } success:^(BaseSessionMessage *sessionMsg) {
-//        DDLog(@"%@",sessionMsg.responseString);
-//    } failure:^(BaseSessionMessage *sessionMsg) {
-//        DDLog(@"!%@!  %@",nil,@"2");
-//    }].requestDlog(YES)//是否打印
-//      .sendSessionMessage();//发送请求：必写，否则不会发送网络请求
-//    
+//方式2
+    [SessionMessage(^(BaseSessionMessage *make) {
+        make.requestDlog(YES)
+            .requestTimeOut(60)
+            .requestBaseUrl(@"")
+            .requestCount(1);
+    }) requestHTTPWithURLString:@"" paramsDic:@{} progress:nil success:nil failure:nil];
     
-   
-    
+//方式3
+    [SessionMessage(^(BaseSessionMessage *make) {
+        make.requestDlog(YES);
+        make.requestTimeOut(60);
+        make.requestBaseUrl(@"");
+        make.requestCount(1);
+    }) requestHTTPWithURLString:@"" paramsDic:@{} progress:nil success:nil failure:nil];
 }
 -(void)hehe{
     

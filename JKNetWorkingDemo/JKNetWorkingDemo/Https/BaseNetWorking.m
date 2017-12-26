@@ -20,20 +20,19 @@
     });
     return netWorking;
 }
--(void)setBaseUrl:(NSString *)baseUrl{
-    _baseUrl = baseUrl;
-}
+
 -(NSString *)baseUrl{
     if (!_baseUrl) {
         _baseUrl = @"";
     }
     return _baseUrl;
 }
+
 #pragma mark - 普通数据请求
 #pragma mark -- 普通http请求抽象接口
 - (NSURLSessionDataTask *)sendSessionMessage:(BaseSessionMessage *)sessionMsg {
 
-    switch (sessionMsg.baseHTTPMethodType) {
+    switch (sessionMsg->HTTPMethodType) {
         case GetType:
         {
             return [self getMethodWithSessionMessage:sessionMsg];
@@ -79,7 +78,6 @@
    
 }
 
-
 #pragma mark - 配置sessionManager
 - (AFHTTPSessionManager *)configSessionManagerWithSessionMessage:(BaseSessionMessage *)sessionMsg {
     
@@ -95,6 +93,8 @@
                                                               @"text/html",
                                                               @"text/xml",
                                                               nil];
+    //设置请求头
+    [self updateRequestHTTPHeadersWith:sessionManager sessionMessage:sessionMsg];
     //设置服务器响应数据序列化格式
     [self updateResponseSerializerWith:sessionManager sessionMessage:sessionMsg];
     //设置请求体序列化格式
@@ -106,11 +106,20 @@
     
     return sessionManager;
 }
+//设置请求头
+- (void)updateRequestHTTPHeadersWith:(AFHTTPSessionManager*)sessionManager sessionMessage:(BaseSessionMessage *)sessionMsg {
+    
+    if (sessionMsg->HTTPRequestHeaders) {
+        [sessionMsg->HTTPRequestHeaders enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop){
+            [sessionManager.requestSerializer setValue:value forHTTPHeaderField:key];
+        }];
+    }
+}
 
 //设置服务器响应数据序列化格式
 - (void)updateResponseSerializerWith:(AFHTTPSessionManager*)sessionManager sessionMessage:(BaseSessionMessage *)sessionMsg {
     
-    if (sessionMsg.baseResponseDataType == DefaultDataType) {
+    if (sessionMsg->ResponseDataType == DefaultDataType) {
         sessionManager.responseSerializer=[AFJSONResponseSerializer serializer];
     }else{
         sessionManager.responseSerializer=[AFHTTPResponseSerializer serializer];
@@ -120,11 +129,11 @@
 //设置请求体序列化格式
 - (void)updateRequestSerializerWith:(AFHTTPSessionManager*)sessionManager sessionMessage:(BaseSessionMessage *)sessionMsg {
     
-    if (sessionMsg.baseRequestBodyType == DefaultBodyType) {
+    if (sessionMsg->RequestBodyType == DefaultBodyType) {
         sessionManager.requestSerializer=[AFHTTPRequestSerializer serializer];
-    } else if (sessionMsg.baseRequestBodyType == JSONBodyType) {
+    } else if (sessionMsg->RequestBodyType == JSONBodyType) {
         sessionManager.requestSerializer=[AFJSONRequestSerializer serializer];
-    }  else if (sessionMsg.baseRequestBodyType == PropertyListBodyType) {
+    }  else if (sessionMsg->RequestBodyType == PropertyListBodyType) {
         sessionManager.requestSerializer=[AFPropertyListRequestSerializer serializer];
     }
     
@@ -134,7 +143,7 @@
 - (void)updateTimeoutIntervalWith:(AFHTTPSessionManager*)sessionManager sessionMessage:(BaseSessionMessage *)sessionMsg {
     
     [sessionManager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    sessionManager.requestSerializer.timeoutInterval=sessionMsg.timeOut;//设置请求超时时间
+    sessionManager.requestSerializer.timeoutInterval=sessionMsg->timeOut;//设置请求超时时间
     [sessionManager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
 }
 

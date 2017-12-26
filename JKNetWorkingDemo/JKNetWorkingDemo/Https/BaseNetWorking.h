@@ -10,13 +10,11 @@
 #import "AFHTTPSessionManager.h"
 #import "BaseSessionMessage.h"
 #import "MyHelper.h"
-@interface BaseNetWorking : NSObject{
-    NSString* _baseUrl;
-}
-@property (nonatomic, assign, getter=isConnected) BOOL connected;/**<网络是否连接*/
-@property(nonatomic ,assign) AFNetworkReachabilityStatus networkStatus;
+@interface BaseNetWorking : NSObject
+@property (nonatomic , assign, getter=isConnected) BOOL connected;/**<网络是否连接*/
+@property(nonatomic , assign) AFNetworkReachabilityStatus networkStatus;
 + (BaseNetWorking *) shareMannager;
-@property(nonatomic,strong)NSString* baseUrl;
+@property(nonatomic , strong)NSString* baseUrl;
 - (NSURLSessionDataTask *)sendSessionMessage:(BaseSessionMessage *)sessionMsg;
 #pragma mark - 配置sessionManager
 - (AFHTTPSessionManager *)configSessionManagerWithSessionMessage:(BaseSessionMessage *)sessionMsg;

@@ -9,103 +9,134 @@
 #import "BaseSessionMessage.h"
 #import "BaseNetWorking.h"
 @implementation BaseSessionMessage
-- (instancetype)initWithURLString:(NSString *)urlString
-                        paramsDic:(id)paramsDic
-                       upLoadData:(id)upLoadData
-                         progress:(ProgressBlock)uploadProgress
-                          success:(ResponseBlock)success
-                          failure:(ResponseBlock)failure
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.timeOut = 60.f;
-        self.baseHTTPMethodType = DefaultHTTPMethodType; //默认post方法
-        self.baseRequestBodyType=DefaultBodyType;
-        self.baseResponseDataType=DefaultDataType;
-        self.isSignError = NO;
-        self.isToken=NO;//默认都没有重新获取过token,当需要重新获取时置为YES
-        self.baseUrl=[BaseNetWorking shareMannager].baseUrl;//API_HOST
-        self.requestUrl = urlString;
-        self.paramsDic = [[NSMutableDictionary alloc] initWithDictionary:paramsDic];
-        self.upLoadData=[upLoadData copy];
-        self.progressBlock=uploadProgress;
-        self.successBlock=success;
-        self.failureBlock=failure;
-        self.isDlog=NO;
+        self->timeOut = 60.f;
+        self->requestCount = 1;
+        self->HTTPMethodType = DefaultHTTPMethodType; //默认post方法
+        self->RequestBodyType=DefaultBodyType;
+        self->ResponseDataType=DefaultDataType;
+        self->baseUrl=[BaseNetWorking shareMannager].baseUrl;//API_HOST
+        self->isDlog=NO;
     }
     return self;
 }
--(void)dealloc{
+
+- (void)dealloc{
     
     DLog(@"Msg我释放了")
 }
-+(BaseSessionMessage *)createRequestHTTPWithURLString:(NSString *)urlString paramsDic:(id)paramsDic progress:(ProgressBlock)uploadProgress success:(ResponseBlock)success failure:(ResponseBlock)failure{
-    return [[BaseSessionMessage alloc]initWithURLString:urlString paramsDic:paramsDic upLoadData:nil progress:uploadProgress success:success failure:failure];
-}
-+(BaseSessionMessage *)upLoadDataWithURLString:(NSString *)urlString paramsDic:(id)paramsDic upLoadData:(NSArray<UpLoadFileModel*> *)upLoadData progress:(ProgressBlock)uploadProgress success:(ResponseBlock)success failure:(ResponseBlock)failure{
-    return [[BaseSessionMessage alloc]initWithURLString:urlString paramsDic:paramsDic upLoadData:upLoadData progress:uploadProgress success:success failure:failure];
-}
--(void)sendSessionMsg{
+
+- (void)sendSessionMsg{
     [[BaseNetWorking shareMannager]sendSessionMessage:self];
 }
 
-
--(RequestHTTPMethodType)HTTPMethodType{
+- (RequestHTTPMethodType)HTTPMethodType{
     return ^(HTTPMethodTypes type){
-        self.baseHTTPMethodType=type;
+        self->HTTPMethodType=type;
         return self;
     };
 }
--(RequestBodyType)requestBodyType{
+
+- (RequestBodyType)requestBodyType{
     return ^(RequestBodyTypes type){
-        self.baseRequestBodyType=type;
+        self->RequestBodyType=type;
         return self;
     };
 }
--(ResponseDataType)responseDataType{
+
+- (ResponseDataType)responseDataType{
     return ^(ResponseDataTypes type){
-        self.baseResponseDataType=type;
+        self->ResponseDataType=type;
         return self;
     };
 }
--(TimeOut)requestTimeOut{
+
+- (RequestHTTPHeaders)requestHTTPHeaders{
+    return ^(NSDictionary <NSString *, NSString *> *HTTPRequestHeaders){
+        self->HTTPRequestHeaders = HTTPRequestHeaders;
+        return self;
+    };
+}
+
+- (TimeOut)requestTimeOut{
     return ^(CGFloat time){
-        self.timeOut=time;
+        self->timeOut=time;
         return self;
     };
 }
--(BaseURL)requestBaseUrl{
+
+- (RequestCount)requestCount{
+    return ^(NSInteger count){
+        self->requestCount = count;
+        return self;
+    };
+}
+
+- (BaseURL)requestBaseUrl{
     return ^(NSString* baseUrl){
-        self.baseUrl=baseUrl;
+        self->baseUrl=baseUrl;
         return self;
     };
 }
--(DlogRequest)requestDlog{
+
+- (DlogRequest)requestDlog{
     return ^(BOOL isDlog){
-        self.isDlog=isDlog;
+        self->isDlog=isDlog;
         return self;
     };
 }
--(SendSessionMessage)sendSessionMessage{
+
+- (SendSessionMessage)sendSessionMessage{
     return ^(){
-        [self sendSessionMsg];
+        [[BaseNetWorking shareMannager]sendSessionMessage:self];
         return self;
     };
 }
--(IsToken)setIsToken{
-    return ^(BOOL istoken){
-        self.isToken=istoken;
-        return self;
-    };
+
++ (BaseSessionMessage*)createSessionMessage:(void(^)(BaseSessionMessage *make))make{
+    BaseSessionMessage * baseSessionMessage = [[BaseSessionMessage alloc]init];
+    if (make) make(baseSessionMessage);
+    return baseSessionMessage;
 }
--(TokenFailMsg)setTokenFaileMsg{
-    return ^(BaseSessionMessage *tokenMsg){
-        self.tokenFailMsg=tokenMsg;
-        return self;
-    };
+
+- (BaseSessionMessage *)requestHTTPWithURLString:(NSString *)urlString
+                                       paramsDic:(id)paramsDic
+                                        progress:(ProgressBlock)uploadProgress
+                                         success:(ResponseBlock)success
+                                         failure:(ResponseBlock)failure{
+    
+    self->paramsDic = [[NSMutableDictionary alloc] initWithDictionary:paramsDic];
+    self->progressBlock=uploadProgress;
+    self->successBlock=success;
+    self->failureBlock=failure;
+    self.sendSessionMessage();
+    return self;
+}
+
+- (BaseSessionMessage *)upLoadDataWithURLString:(NSString *)urlString
+                                      paramsDic:(id)paramsDic
+                                     upLoadData:(NSArray<UpLoadFileModel*> *)upLoadData
+                                       progress:(ProgressBlock)uploadProgress
+                                        success:(ResponseBlock)success
+                                        failure:(ResponseBlock)failure{
+    self->paramsDic = [[NSMutableDictionary alloc] initWithDictionary:paramsDic];
+    self->upLoadData=[upLoadData copy];
+    self->progressBlock=uploadProgress;
+    self->successBlock=success;
+    self->failureBlock=failure;
+    self.sendSessionMessage();
+    return self;
 }
 
 @end
+CA_EXTERN BaseSessionMessage *SessionMessage(UploadSessionMessage make){
+    BaseSessionMessage * baseSessionMessage = [[BaseSessionMessage alloc]init];
+    if (make) make(baseSessionMessage);
+    return baseSessionMessage;
+};
 @implementation UpLoadFileModel
 
 @end
