@@ -11,8 +11,11 @@
 
 @implementation BaseNetWorking (Encrypt)
 - (void)encryptedUrlWithSessionMessage:(BaseSessionMessage *)sessionMsg{
-
-    sessionMsg->encryptedUrlString=[NSString stringWithFormat:@"%@%@",sessionMsg->baseUrl,sessionMsg->requestUrl];
+    if (sessionMsg->requestUrl) {
+        sessionMsg->encryptedUrlString=[NSString stringWithFormat:@"%@%@",sessionMsg->baseUrl,sessionMsg->requestUrl];
+    }else {
+        sessionMsg->encryptedUrlString=[NSString stringWithFormat:@"%@",sessionMsg->baseUrl];
+    }
     if (sessionMsg->isDlog) {
         DLog(@"baseUrl:%@\nrequestUrl:%@\n请求参数:\n%@",sessionMsg->baseUrl,sessionMsg->requestUrl,sessionMsg->paramsDic);
     }

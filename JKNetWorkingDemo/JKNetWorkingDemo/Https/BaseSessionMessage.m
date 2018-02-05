@@ -16,10 +16,10 @@
         self->timeOut = 60.f;
         self->requestCount = 1;
         self->HTTPMethodType = DefaultHTTPMethodType; //默认post方法
-        self->RequestBodyType=DefaultBodyType;
-        self->ResponseDataType=DefaultDataType;
-        self->baseUrl=[BaseNetWorking shareMannager].baseUrl;//API_HOST
-        self->isDlog=NO;
+        self->RequestBodyType = DefaultBodyType;
+        self->ResponseDataType = DefaultDataType;
+        self->baseUrl = [BaseNetWorking shareMannager].baseUrl;//API_HOST
+        self->isDlog = NO;
     }
     return self;
 }
@@ -30,26 +30,26 @@
 }
 
 - (void)sendSessionMsg{
-    [[BaseNetWorking shareMannager]sendSessionMessage:self];
+    [[BaseNetWorking shareMannager] sendSessionMessage:self];
 }
 
 - (RequestHTTPMethodType)HTTPMethodType{
     return ^(HTTPMethodTypes type){
-        self->HTTPMethodType=type;
+        self->HTTPMethodType = type;
         return self;
     };
 }
 
 - (RequestBodyType)requestBodyType{
     return ^(RequestBodyTypes type){
-        self->RequestBodyType=type;
+        self->RequestBodyType = type;
         return self;
     };
 }
 
 - (ResponseDataType)responseDataType{
     return ^(ResponseDataTypes type){
-        self->ResponseDataType=type;
+        self->ResponseDataType = type;
         return self;
     };
 }
@@ -69,7 +69,7 @@
 
 - (TimeOut)requestTimeOut{
     return ^(CGFloat time){
-        self->timeOut=time;
+        self->timeOut = time;
         return self;
     };
 }
@@ -83,21 +83,28 @@
 
 - (BaseURL)requestBaseUrl{
     return ^(NSString* baseUrl){
-        self->baseUrl=baseUrl;
+        self->baseUrl = baseUrl;
         return self;
     };
 }
 
 - (DlogRequest)requestDlog{
     return ^(BOOL isDlog){
-        self->isDlog=isDlog;
+        self->isDlog = isDlog;
+        return self;
+    };
+}
+
+- (RequestGroup)requestGroup{
+    return ^(dispatch_group_t group){
+        self->group = group;
         return self;
     };
 }
 
 - (SendSessionMessage)sendSessionMessage{
     return ^(){
-        [[BaseNetWorking shareMannager]sendSessionMessage:self];
+        [[BaseNetWorking shareMannager] sendSessionMessage:self];
         return self;
     };
 }
@@ -115,9 +122,9 @@
                                          failure:(ResponseBlock)failure{
     
     self->paramsDic = [[NSMutableDictionary alloc] initWithDictionary:paramsDic];
-    self->progressBlock=uploadProgress;
-    self->successBlock=success;
-    self->failureBlock=failure;
+    self->progressBlock = uploadProgress;
+    self->successBlock = success;
+    self->failureBlock = failure;
     self.sendSessionMessage();
     return self;
 }
@@ -129,16 +136,16 @@
                                         success:(ResponseBlock)success
                                         failure:(ResponseBlock)failure{
     self->paramsDic = [[NSMutableDictionary alloc] initWithDictionary:paramsDic];
-    self->upLoadData=[upLoadData copy];
-    self->progressBlock=uploadProgress;
-    self->successBlock=success;
-    self->failureBlock=failure;
+    self->upLoadData = [upLoadData copy];
+    self->progressBlock = uploadProgress;
+    self->successBlock = success;
+    self->failureBlock = failure;
     self.sendSessionMessage();
     return self;
 }
 
 @end
-CA_EXTERN BaseSessionMessage *SessionMessage(UploadSessionMessage make){
+extern BaseSessionMessage *SessionMessage(UploadSessionMessage make){
     BaseSessionMessage * baseSessionMessage = [[BaseSessionMessage alloc]init];
     if (make) make(baseSessionMessage);
     return baseSessionMessage;

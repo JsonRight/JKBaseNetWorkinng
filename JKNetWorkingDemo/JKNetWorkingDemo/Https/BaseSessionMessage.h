@@ -41,6 +41,7 @@ typedef BaseSessionMessage *(^RequestHTTPHeaders)(NSDictionary <NSString *, NSSt
 typedef BaseSessionMessage *(^TimeOut)(CGFloat time);
 typedef BaseSessionMessage *(^RequestCount)(NSInteger count);
 typedef BaseSessionMessage *(^BaseURL)(NSString* urlStr);
+typedef BaseSessionMessage *(^RequestGroup)(dispatch_group_t group);
 typedef BaseSessionMessage *(^DlogRequest)(BOOL delog);
 typedef BaseSessionMessage *(^SendSessionMessage)(void);
 typedef void (^UploadSessionMessage)(BaseSessionMessage *make);
@@ -65,6 +66,7 @@ typedef void (^ResponseBlock) (BaseSessionMessage *sessionMsg);
     NSMutableDictionary *paramsDic;//参数字典
     NSArray <UpLoadFileModel * > * upLoadData;//上传数据
     BOOL isDlog;//是否打印
+    dispatch_group_t group;
     ProgressBlock progressBlock;//处理下载进度的块
     ResponseBlock successBlock;//网络请求成功回调块
     ResponseBlock failureBlock;//网络请求失败回调块
@@ -79,6 +81,7 @@ typedef void (^ResponseBlock) (BaseSessionMessage *sessionMsg);
 @property (nonatomic , copy , readonly)RequestCount requestCount;//请求次数设置
 @property (nonatomic , copy , readonly)BaseURL requestBaseUrl;//baseURL设置
 @property (nonatomic , copy , readonly)DlogRequest requestDlog;//打印分析
+@property (nonatomic , copy , readonly)RequestGroup requestGroup;//请求组设置
 @property (nonatomic , copy , readonly)SendSessionMessage sendSessionMessage;//打印分析
 
 
@@ -88,7 +91,7 @@ typedef void (^ResponseBlock) (BaseSessionMessage *sessionMsg);
 @property (nonatomic , strong) NSMutableDictionary *jsonItems;//解析服务器返回的原始json字符串得到的字典，
 
 //初始化方法1
-CA_EXTERN BaseSessionMessage *SessionMessage(UploadSessionMessage make);
+extern BaseSessionMessage *SessionMessage(UploadSessionMessage make);
 //初始化方法2
 //初始化方法 二选一
 + (BaseSessionMessage*)createSessionMessage:(void(^)(BaseSessionMessage *make))make;

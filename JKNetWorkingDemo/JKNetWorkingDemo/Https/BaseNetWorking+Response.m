@@ -64,12 +64,12 @@
    
     NSHTTPURLResponse * response=error.userInfo[@"com.alamofire.serialization.response.error.response"];
     //当请求出现一下几种情况，验证请求次数，进行重复请求
-    if (response.statusCode == 403||response.statusCode == 404||response.statusCode == 408||(response.statusCode>=500&&response.statusCode<=505)) {
+//    if (response.statusCode == 403||response.statusCode == 404||response.statusCode == 408||(response.statusCode>=500&&response.statusCode<=505)) {
         if (sessionMsg->requestCount>0) {
             sessionMsg.sendSessionMessage();return;
         }
-    }
-        
+//    }r
+    
     NSData * data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
     NSString * str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     NSMutableDictionary*responseJson=nil;

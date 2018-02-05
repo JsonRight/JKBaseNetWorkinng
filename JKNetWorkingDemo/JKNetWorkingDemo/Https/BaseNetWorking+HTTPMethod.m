@@ -16,6 +16,7 @@
     AFHTTPSessionManager *sessionManager=[self configSessionManagerWithSessionMessage:sessionMsg];
      [self encryptedUrlWithSessionMessage:sessionMsg];
     if (sessionMsg->requestCount-- <= 0) return nil;
+    if (sessionMsg->group) dispatch_group_enter(sessionMsg->group);
     NSURLSessionDataTask *dataTask=[sessionManager GET:sessionMsg->encryptedUrlString parameters:nil progress:sessionMsg->progressBlock success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         DLog(@"GET")
         
@@ -28,10 +29,11 @@
             [self responseForDataToMsgWith:task responseObject:responseObject msg:sessionMsg];
             
         }
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         DLog(@"GET:error———————————— %@",error);
         [self responseFailureWith:task error:error msg:sessionMsg];
-  
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     }];
     return dataTask;
 }
@@ -40,6 +42,7 @@
     AFHTTPSessionManager *sessionManager=[self configSessionManagerWithSessionMessage:sessionMsg];
     [self encryptedUrlWithSessionMessage:sessionMsg];
     if (sessionMsg->requestCount-- <= 0) return nil;
+    if (sessionMsg->group) dispatch_group_enter(sessionMsg->group);
     NSURLSessionDataTask *dataTask=[sessionManager POST:sessionMsg->encryptedUrlString parameters:sessionMsg->paramsDic progress:sessionMsg->progressBlock success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         DLog(@"POST")
     
@@ -52,10 +55,11 @@
             [self responseForDataToMsgWith:task responseObject:responseObject msg:sessionMsg];
             
         }
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     }  failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         DLog(@"POST:error———————————— %@",error);
         [self responseFailureWith:task error:error msg:sessionMsg];
-        
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     }];
     return dataTask;
 }
@@ -63,6 +67,7 @@
     AFHTTPSessionManager *sessionManager=[self configSessionManagerWithSessionMessage:sessionMsg];
     [self encryptedUrlWithSessionMessage:sessionMsg];
     if (sessionMsg->requestCount-- <= 0) return nil;
+    if (sessionMsg->group) dispatch_group_enter(sessionMsg->group);
     NSURLSessionDataTask *dataTask = [sessionManager POST:sessionMsg->encryptedUrlString parameters:sessionMsg->paramsDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [sessionMsg->upLoadData enumerateObjectsUsingBlock:^(UpLoadFileModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [formData appendPartWithFileData:obj.data  name:obj.name fileName:obj.fileName mimeType:obj.mimeType];
@@ -79,10 +84,11 @@
             [self responseForDataToMsgWith:task responseObject:responseObject msg:sessionMsg];
             
         }
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         DLog(@"POST上传:error———————————— %@",error);
         [self responseFailureWith:task error:error msg:sessionMsg];
-        
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     }];
     return dataTask;
 }
@@ -90,14 +96,16 @@
     AFHTTPSessionManager *sessionManager=[self configSessionManagerWithSessionMessage:sessionMsg];
     [self encryptedUrlWithSessionMessage:sessionMsg];
     if (sessionMsg->requestCount-- <= 0) return nil;
+    if (sessionMsg->group) dispatch_group_enter(sessionMsg->group);
     NSURLSessionDataTask *dataTask = [sessionManager HEAD:sessionMsg->encryptedUrlString parameters:sessionMsg->paramsDic success:^(NSURLSessionDataTask * _Nonnull task) {
         DLog(@"HEAD")
         
         [self responseForm_HEAD_RequestToMsgWith:task msg:sessionMsg];
-        
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         DLog(@"HEAD:errpr———————————— %@",error);
         [self responseFailureWith:task error:error msg:sessionMsg];
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     }];
     return dataTask;
 }
@@ -105,6 +113,7 @@
     AFHTTPSessionManager *sessionManager=[self configSessionManagerWithSessionMessage:sessionMsg];
     [self encryptedUrlWithSessionMessage:sessionMsg];
     if (sessionMsg->requestCount-- <= 0) return nil;
+    if (sessionMsg->group) dispatch_group_enter(sessionMsg->group);
     NSURLSessionDataTask *dataTask = [sessionManager PUT:sessionMsg->encryptedUrlString parameters:sessionMsg->paramsDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         DLog(@"PUT")
         
@@ -117,10 +126,11 @@
             [self responseForDataToMsgWith:task responseObject:responseObject msg:sessionMsg];
             
         }
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         DLog(@"PUT:error———————————— %@",error);
         [self responseFailureWith:task error:error msg:sessionMsg];
-        
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     }];
     return dataTask;
 }
@@ -128,6 +138,7 @@
     AFHTTPSessionManager *sessionManager=[self configSessionManagerWithSessionMessage:sessionMsg];
     [self encryptedUrlWithSessionMessage:sessionMsg];
     if (sessionMsg->requestCount-- <= 0) return nil;
+    if (sessionMsg->group) dispatch_group_enter(sessionMsg->group);
     NSURLSessionDataTask *dataTask = [sessionManager PATCH:sessionMsg->encryptedUrlString parameters:sessionMsg->paramsDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         DLog(@"PATCH")
         
@@ -140,10 +151,11 @@
             [self responseForDataToMsgWith:task responseObject:responseObject msg:sessionMsg];
             
         }
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         DLog(@"PATCH:error———————————— %@",error);
         [self responseFailureWith:task error:error msg:sessionMsg];
-        
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     }];
     return dataTask;
 }
@@ -151,6 +163,7 @@
     AFHTTPSessionManager *sessionManager=[self configSessionManagerWithSessionMessage:sessionMsg];
     [self encryptedUrlWithSessionMessage:sessionMsg];
     if (sessionMsg->requestCount-- <= 0) return nil;
+    if (sessionMsg->group) dispatch_group_enter(sessionMsg->group);
     NSURLSessionDataTask *dataTask = [sessionManager DELETE:sessionMsg->encryptedUrlString parameters:sessionMsg->paramsDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         DLog(@"DELETE")
         
@@ -163,10 +176,11 @@
             [self responseForDataToMsgWith:task responseObject:responseObject msg:sessionMsg];
             
         }
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         DLog(@"DELETE:error———————————— %@",error);
         [self responseFailureWith:task error:error msg:sessionMsg];
-        
+        if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
     }];
     return dataTask;
 }
