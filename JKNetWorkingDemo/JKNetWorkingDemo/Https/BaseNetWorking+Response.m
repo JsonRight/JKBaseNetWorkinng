@@ -68,7 +68,7 @@
         if (sessionMsg->requestCount>0) {
             sessionMsg.sendSessionMessage();return;
         }
-//    }r
+//    }
     
     NSData * data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
     NSString * str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
@@ -88,6 +88,6 @@
     if (sessionMsg->failureBlock) {
         sessionMsg->failureBlock(sessionMsg);
     }
-    
+    if (sessionMsg->group) dispatch_group_leave(sessionMsg->group);
 }
 @end

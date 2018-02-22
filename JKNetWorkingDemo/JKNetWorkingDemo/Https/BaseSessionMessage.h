@@ -47,7 +47,7 @@ typedef BaseSessionMessage *(^SendSessionMessage)(void);
 typedef void (^UploadSessionMessage)(BaseSessionMessage *make);
 typedef void (^ProgressBlock) (NSProgress *progress);
 typedef void (^ResponseBlock) (BaseSessionMessage *sessionMsg);
-
+typedef void (^NetWorkRequestGroupBlock) (void);
 
 @interface BaseSessionMessage : NSObject
 {
@@ -92,6 +92,7 @@ typedef void (^ResponseBlock) (BaseSessionMessage *sessionMsg);
 
 //初始化方法1
 extern BaseSessionMessage *SessionMessage(UploadSessionMessage make);
+extern void SessionMessageGroup(NSArray <BaseSessionMessage * > * sessionMessage, NetWorkRequestGroupBlock reduceBlock);
 //初始化方法2
 //初始化方法 二选一
 + (BaseSessionMessage*)createSessionMessage:(void(^)(BaseSessionMessage *make))make;
@@ -109,7 +110,7 @@ extern BaseSessionMessage *SessionMessage(UploadSessionMessage make);
                                        progress:(ProgressBlock)uploadProgress
                                         success:(ResponseBlock)success
                                         failure:(ResponseBlock)failure;
-
++ (void)combineLatest:(NSArray <BaseSessionMessage * > *)sessionMessages reduce:(void(^)(void))reduceBlock;
 @end
 
 //上传数据使用

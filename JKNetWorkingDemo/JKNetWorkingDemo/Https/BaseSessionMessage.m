@@ -13,13 +13,14 @@
 {
     self = [super init];
     if (self) {
-        self->timeOut = 60.f;
-        self->requestCount = 1;
-        self->HTTPMethodType = DefaultHTTPMethodType; //默认post方法
-        self->RequestBodyType = DefaultBodyType;
-        self->ResponseDataType = DefaultDataType;
-        self->baseUrl = [BaseNetWorking shareMannager].baseUrl;//API_HOST
-        self->isDlog = NO;
+        self.requestTimeOut(60.0f);
+        self.requestCount(1);
+        self.HTTPMethodType(DefaultHTTPMethodType);
+        self.requestBodyType(DefaultBodyType);
+        self.responseDataType(DefaultDataType);
+        self.requestBaseUrl([BaseNetWorking shareMannager].baseUrl);
+        self.requestDlog(NO);
+        self.requestGroup(nil);
     }
     return self;
 }
@@ -27,10 +28,6 @@
 - (void)dealloc{
     
     DLog(@"Msg我释放了")
-}
-
-- (void)sendSessionMsg{
-    [[BaseNetWorking shareMannager] sendSessionMessage:self];
 }
 
 - (RequestHTTPMethodType)HTTPMethodType{
@@ -97,13 +94,14 @@
 
 - (RequestGroup)requestGroup{
     return ^(dispatch_group_t group){
-        self->group = group;
+        self->group = group?group:dispatch_group_create();
         return self;
     };
 }
 
 - (SendSessionMessage)sendSessionMessage{
     return ^(){
+        if (self->requestCount-- <= 0) return self;
         [[BaseNetWorking shareMannager] sendSessionMessage:self];
         return self;
     };
@@ -112,6 +110,7 @@
 + (BaseSessionMessage*)createSessionMessage:(void(^)(BaseSessionMessage *make))make{
     BaseSessionMessage * baseSessionMessage = [[BaseSessionMessage alloc]init];
     if (make) make(baseSessionMessage);
+    if (baseSessionMessage->group) dispatch_group_enter(baseSessionMessage->group);
     return baseSessionMessage;
 }
 
@@ -143,12 +142,41 @@
     self.sendSessionMessage();
     return self;
 }
++ (void)combineLatest:(NSArray <BaseSessionMessage * > *)sessionMessages reduce:(void(^)(void))reduceBlock{
+    dispatch_group_t group = dispatch_group_create();
+    for (BaseSessionMessage *sessionMessage in sessionMessages) {
+        if (sessionMessage->group) {
+            dispatch_group_enter(group);
+            dispatch_group_notify(sessionMessage->group, dispatch_get_main_queue(), ^{
+                dispatch_group_leave(group);
+            });
+        }
+    }
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        if (reduceBlock) reduceBlock();
+    });
+}
 
 @end
 extern BaseSessionMessage *SessionMessage(UploadSessionMessage make){
     BaseSessionMessage * baseSessionMessage = [[BaseSessionMessage alloc]init];
     if (make) make(baseSessionMessage);
+    if (baseSessionMessage->group) dispatch_group_enter(baseSessionMessage->group);
     return baseSessionMessage;
+};
+extern void SessionMessageGroup(NSArray <BaseSessionMessage * > * sessionMessages , NetWorkRequestGroupBlock reduceBlock){
+    dispatch_group_t group = dispatch_group_create();
+    for (BaseSessionMessage *sessionMessage in sessionMessages) {
+        if (sessionMessage->group) {
+            dispatch_group_enter(group);
+            dispatch_group_notify(sessionMessage->group, dispatch_get_main_queue(), ^{
+                dispatch_group_leave(group);
+            });
+        }
+    }
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        if (reduceBlock) reduceBlock();
+    });
 };
 @implementation UpLoadFileModel
 
