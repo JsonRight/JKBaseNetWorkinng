@@ -39,7 +39,7 @@ typedef BaseSessionMessage *(^ResponseDataType)(ResponseDataTypes type);
 typedef BaseSessionMessage *(^AuthorizationHeaderField)(NSString *username, NSString* password);
 typedef BaseSessionMessage *(^RequestHTTPHeaders)(NSDictionary <NSString *, NSString *> *HTTPRequestHeaders);
 typedef BaseSessionMessage *(^TimeOut)(CGFloat time);
-typedef BaseSessionMessage *(^RequestCount)(NSInteger count);
+typedef BaseSessionMessage *(^RequestCount)(NSUInteger count);
 typedef BaseSessionMessage *(^BaseURL)(NSString* urlStr);
 typedef BaseSessionMessage *(^RequestGroup)(dispatch_group_t group);
 typedef BaseSessionMessage *(^DlogRequest)(BOOL delog);
@@ -59,7 +59,8 @@ typedef void (^NetWorkRequestGroupBlock) (void);
     NSString *password;//Authorization---password
     NSDictionary <NSString *, NSString *> *HTTPRequestHeaders;//请求头
     CGFloat timeOut;//请求超时时间
-    NSInteger requestCount;//请求次数
+    CGFloat delayTimeOut;//请求超时时间
+    NSUInteger requestCount;//请求次数
     NSString *baseUrl;//请求url
     NSString *requestUrl;//请求url
     NSString *encryptedUrlString;//加密后的url
@@ -78,11 +79,12 @@ typedef void (^NetWorkRequestGroupBlock) (void);
 @property (nonatomic , copy , readonly)AuthorizationHeaderField requestAuthorizationHeaderField;//设置http用户验证
 @property (nonatomic , copy , readonly)RequestHTTPHeaders requestHTTPHeaders;//设置请求头
 @property (nonatomic , copy , readonly)TimeOut requestTimeOut;//超时设置
+@property (nonatomic , copy , readonly)TimeOut delayRepeatTimeOut;//延时二次请求超时设置
 @property (nonatomic , copy , readonly)RequestCount requestCount;//请求次数设置
 @property (nonatomic , copy , readonly)BaseURL requestBaseUrl;//baseURL设置
 @property (nonatomic , copy , readonly)DlogRequest requestDlog;//打印分析
 @property (nonatomic , copy , readonly)RequestGroup requestGroup;//请求组设置
-@property (nonatomic , copy , readonly)SendSessionMessage sendSessionMessage;//打印分析
+@property (nonatomic , copy , readonly)SendSessionMessage sendSessionMessage;//发请求
 
 
 #pragma mark - 服务器端正确响应信息
@@ -92,7 +94,7 @@ typedef void (^NetWorkRequestGroupBlock) (void);
 
 //初始化方法1
 extern BaseSessionMessage *SessionMessage(UploadSessionMessage make);
-extern void SessionMessageGroup(NSArray <BaseSessionMessage * > * sessionMessage, NetWorkRequestGroupBlock reduceBlock);
+
 //初始化方法2
 //初始化方法 二选一
 + (BaseSessionMessage*)createSessionMessage:(void(^)(BaseSessionMessage *make))make;
@@ -110,7 +112,12 @@ extern void SessionMessageGroup(NSArray <BaseSessionMessage * > * sessionMessage
                                        progress:(ProgressBlock)uploadProgress
                                         success:(ResponseBlock)success
                                         failure:(ResponseBlock)failure;
-+ (void)combineLatest:(NSArray <BaseSessionMessage * > *)sessionMessages reduce:(void(^)(void))reduceBlock;
+//创建请求组方法1
+/*请求组*/
++ (void)combineLatest:(NSArray <BaseSessionMessage * > *)sessionMessages reduce:(NetWorkRequestGroupBlock)reduceBlock;
+//创建请求组方法2
+/*请求组*/
+extern void SessionMessageGroup(NSArray <BaseSessionMessage * > * sessionMessage, NetWorkRequestGroupBlock reduceBlock);
 @end
 
 //上传数据使用
@@ -121,4 +128,6 @@ extern void SessionMessageGroup(NSArray <BaseSessionMessage * > * sessionMessage
 @property (nonatomic, copy) NSString * mimeType;//文件类型
 
 @end
+
+
 

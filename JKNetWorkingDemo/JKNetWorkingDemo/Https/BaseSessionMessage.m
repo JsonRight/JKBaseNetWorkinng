@@ -14,6 +14,7 @@
     self = [super init];
     if (self) {
         self.requestTimeOut(60.0f);
+        self.delayRepeatTimeOut(0.0f);
         self.requestCount(1);
         self.HTTPMethodType(DefaultHTTPMethodType);
         self.requestBodyType(DefaultBodyType);
@@ -66,13 +67,20 @@
 
 - (TimeOut)requestTimeOut{
     return ^(CGFloat time){
-        self->timeOut = time;
+        self->timeOut = time<=0?60:time;
+        return self;
+    };
+}
+
+- (TimeOut)delayRepeatTimeOut{
+    return ^(CGFloat time){
+        self->delayTimeOut = time<=0?0:time;
         return self;
     };
 }
 
 - (RequestCount)requestCount{
-    return ^(NSInteger count){
+    return ^(NSUInteger count){
         self->requestCount = count;
         return self;
     };
@@ -142,7 +150,7 @@
     self.sendSessionMessage();
     return self;
 }
-+ (void)combineLatest:(NSArray <BaseSessionMessage * > *)sessionMessages reduce:(void(^)(void))reduceBlock{
++ (void)combineLatest:(NSArray <BaseSessionMessage * > *)sessionMessages reduce:(NetWorkRequestGroupBlock)reduceBlock{
     dispatch_group_t group = dispatch_group_create();
     for (BaseSessionMessage *sessionMessage in sessionMessages) {
         if (sessionMessage->group) {

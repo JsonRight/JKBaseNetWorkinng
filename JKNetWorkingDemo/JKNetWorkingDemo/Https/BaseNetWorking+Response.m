@@ -66,7 +66,10 @@
     //当请求出现一下几种情况，验证请求次数，进行重复请求
 //    if (response.statusCode == 403||response.statusCode == 404||response.statusCode == 408||(response.statusCode>=500&&response.statusCode<=505)) {
         if (sessionMsg->requestCount>0) {
-            sessionMsg.sendSessionMessage();return;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(sessionMsg->delayTimeOut * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                sessionMsg.sendSessionMessage();
+            });
+            return;
         }
 //    }
     

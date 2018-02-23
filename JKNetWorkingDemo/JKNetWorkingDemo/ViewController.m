@@ -54,6 +54,7 @@
         DLog(@"%@",sessionMsg->baseUrl);
         DLog(@"%@",sessionMsg1->baseUrl);
         DLog(@"%@",sessionMsg2->baseUrl);
+        
     });
    
     
