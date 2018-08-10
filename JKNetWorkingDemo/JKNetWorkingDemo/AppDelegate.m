@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    return YES;
     JKGuidePageWindow* guidePageWindow =[JKGuidePageWindow sheareGuidePageWindow];
     {
         //启动页，全部属性设置

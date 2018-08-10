@@ -11,12 +11,6 @@
 		040C941F1FE8D876005727A7 /* NSObject+SelectorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C941E1FE8D876005727A7 /* NSObject+SelectorExtension.m */; };
 		040C94221FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C94211FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m */; };
 		042911551FE3C99800812F17 /* JKGuidePageWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 042911541FE3C99800812F17 /* JKGuidePageWindow.m */; };
-		044DEB5F1FE0DC2E006F5C35 /* BaseNetWorking+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9D91F7B7F95008A3F66 /* BaseNetWorking+Encrypt.m */; };
-		044DEB601FE0DC33006F5C35 /* BaseNetWorking+FailureRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9DB1F7B7F95008A3F66 /* BaseNetWorking+FailureRefresh.m */; };
-		044DEB611FE0DC38006F5C35 /* BaseNetWorking+HTTPMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9DD1F7B7F95008A3F66 /* BaseNetWorking+HTTPMethod.m */; };
-		044DEB621FE0DC3C006F5C35 /* BaseNetWorking+Response.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9DF1F7B7F95008A3F66 /* BaseNetWorking+Response.m */; };
-		044DEB631FE0DC41006F5C35 /* BaseNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9E11F7B7F95008A3F66 /* BaseNetWorking.m */; };
-		044DEB641FE0DC45006F5C35 /* BaseSessionMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9E31F7B7F95008A3F66 /* BaseSessionMessage.m */; };
 		04CE17E71FE7A30A002ECD5D /* JKUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE17E61FE7A30A002ECD5D /* JKUtility.m */; };
 		52C2AB303A85FE3FD72776C6 /* libPods-JKNetWorkingDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA38D6422FA13D7D2CD99420 /* libPods-JKNetWorkingDemo.a */; };
 		BF08F9C11F7B7F0E008A3F66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9C01F7B7F0E008A3F66 /* AppDelegate.m */; };
@@ -25,6 +19,12 @@
 		BF08F9C91F7B7F0E008A3F66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF08F9C81F7B7F0E008A3F66 /* Assets.xcassets */; };
 		BF08F9CC1F7B7F0E008A3F66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF08F9CA1F7B7F0E008A3F66 /* LaunchScreen.storyboard */; };
 		BF08F9CF1F7B7F0E008A3F66 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF08F9CE1F7B7F0E008A3F66 /* main.m */; };
+		BF505B15211D427200B6CC79 /* NetWorkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BF505B14211D427200B6CC79 /* NetWorkHelper.m */; };
+		BF505B18211D6CF800B6CC79 /* JKNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = BF505B17211D6CF800B6CC79 /* JKNetWorking.m */; };
+		BF505B1B211D6DE400B6CC79 /* JKNetWorking+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = BF505B1A211D6DE400B6CC79 /* JKNetWorking+Encrypt.m */; };
+		BF505B1E211D6E3A00B6CC79 /* JKNetWorking+FailureRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = BF505B1D211D6E3A00B6CC79 /* JKNetWorking+FailureRefresh.m */; };
+		BF505B21211D6E6900B6CC79 /* JKNetWorking+HTTPMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = BF505B20211D6E6900B6CC79 /* JKNetWorking+HTTPMethod.m */; };
+		BF505B24211D6EBD00B6CC79 /* JKNetWorking+Response.m in Sources */ = {isa = PBXBuildFile; fileRef = BF505B23211D6EBD00B6CC79 /* JKNetWorking+Response.m */; };
 		BF6240961FE635F900B336DE /* JKGuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6240951FE635F900B336DE /* JKGuidePageViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +38,6 @@
 		040C94281FEA2C36005727A7 /* JKGuidePage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKGuidePage.h; sourceTree = "<group>"; };
 		042911531FE3C99800812F17 /* JKGuidePageWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKGuidePageWindow.h; sourceTree = "<group>"; };
 		042911541FE3C99800812F17 /* JKGuidePageWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKGuidePageWindow.m; sourceTree = "<group>"; };
-		044DEB661FE113E3006F5C35 /* MyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHelper.h; sourceTree = "<group>"; };
-		044DEB6A1FE116FD006F5C35 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
 		04CE17E51FE7A30A002ECD5D /* JKUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKUtility.h; sourceTree = "<group>"; };
 		04CE17E61FE7A30A002ECD5D /* JKUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKUtility.m; sourceTree = "<group>"; };
 		680CCE8123418F9C37A49840 /* Pods-JKNetWorkingDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JKNetWorkingDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JKNetWorkingDemo/Pods-JKNetWorkingDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -55,18 +53,18 @@
 		BF08F9CB1F7B7F0E008A3F66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF08F9CD1F7B7F0E008A3F66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF08F9CE1F7B7F0E008A3F66 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		BF08F9D81F7B7F95008A3F66 /* BaseNetWorking+Encrypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaseNetWorking+Encrypt.h"; sourceTree = "<group>"; };
-		BF08F9D91F7B7F95008A3F66 /* BaseNetWorking+Encrypt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BaseNetWorking+Encrypt.m"; sourceTree = "<group>"; };
-		BF08F9DA1F7B7F95008A3F66 /* BaseNetWorking+FailureRefresh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaseNetWorking+FailureRefresh.h"; sourceTree = "<group>"; };
-		BF08F9DB1F7B7F95008A3F66 /* BaseNetWorking+FailureRefresh.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BaseNetWorking+FailureRefresh.m"; sourceTree = "<group>"; };
-		BF08F9DC1F7B7F95008A3F66 /* BaseNetWorking+HTTPMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaseNetWorking+HTTPMethod.h"; sourceTree = "<group>"; };
-		BF08F9DD1F7B7F95008A3F66 /* BaseNetWorking+HTTPMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BaseNetWorking+HTTPMethod.m"; sourceTree = "<group>"; };
-		BF08F9DE1F7B7F95008A3F66 /* BaseNetWorking+Response.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaseNetWorking+Response.h"; sourceTree = "<group>"; };
-		BF08F9DF1F7B7F95008A3F66 /* BaseNetWorking+Response.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BaseNetWorking+Response.m"; sourceTree = "<group>"; };
-		BF08F9E01F7B7F95008A3F66 /* BaseNetWorking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNetWorking.h; sourceTree = "<group>"; };
-		BF08F9E11F7B7F95008A3F66 /* BaseNetWorking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNetWorking.m; sourceTree = "<group>"; };
-		BF08F9E21F7B7F95008A3F66 /* BaseSessionMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseSessionMessage.h; sourceTree = "<group>"; };
-		BF08F9E31F7B7F95008A3F66 /* BaseSessionMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseSessionMessage.m; sourceTree = "<group>"; };
+		BF505B13211D427200B6CC79 /* NetWorkHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetWorkHelper.h; sourceTree = "<group>"; };
+		BF505B14211D427200B6CC79 /* NetWorkHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetWorkHelper.m; sourceTree = "<group>"; };
+		BF505B16211D6CF800B6CC79 /* JKNetWorking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKNetWorking.h; sourceTree = "<group>"; };
+		BF505B17211D6CF800B6CC79 /* JKNetWorking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKNetWorking.m; sourceTree = "<group>"; };
+		BF505B19211D6DE400B6CC79 /* JKNetWorking+Encrypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JKNetWorking+Encrypt.h"; sourceTree = "<group>"; };
+		BF505B1A211D6DE400B6CC79 /* JKNetWorking+Encrypt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JKNetWorking+Encrypt.m"; sourceTree = "<group>"; };
+		BF505B1C211D6E3A00B6CC79 /* JKNetWorking+FailureRefresh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JKNetWorking+FailureRefresh.h"; sourceTree = "<group>"; };
+		BF505B1D211D6E3A00B6CC79 /* JKNetWorking+FailureRefresh.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JKNetWorking+FailureRefresh.m"; sourceTree = "<group>"; };
+		BF505B1F211D6E6900B6CC79 /* JKNetWorking+HTTPMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JKNetWorking+HTTPMethod.h"; sourceTree = "<group>"; };
+		BF505B20211D6E6900B6CC79 /* JKNetWorking+HTTPMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JKNetWorking+HTTPMethod.m"; sourceTree = "<group>"; };
+		BF505B22211D6EBD00B6CC79 /* JKNetWorking+Response.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JKNetWorking+Response.h"; sourceTree = "<group>"; };
+		BF505B23211D6EBD00B6CC79 /* JKNetWorking+Response.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JKNetWorking+Response.m"; sourceTree = "<group>"; };
 		BF6240941FE635F900B336DE /* JKGuidePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKGuidePageViewController.h; sourceTree = "<group>"; };
 		BF6240951FE635F900B336DE /* JKGuidePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKGuidePageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,8 +139,8 @@
 		BF08F9BE1F7B7F0E008A3F66 /* JKNetWorkingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BF505B0C211D3F8500B6CC79 /* JKNetWorking */,
 				0429114F1FE3838400812F17 /* JKGuidePage */,
-				BF08F9D51F7B7F95008A3F66 /* Https */,
 				BF08F9BF1F7B7F0E008A3F66 /* AppDelegate.h */,
 				BF08F9C01F7B7F0E008A3F66 /* AppDelegate.m */,
 				BF08F9C21F7B7F0E008A3F66 /* ViewController.h */,
@@ -156,25 +154,23 @@
 			path = JKNetWorkingDemo;
 			sourceTree = "<group>";
 		};
-		BF08F9D51F7B7F95008A3F66 /* Https */ = {
+		BF505B0C211D3F8500B6CC79 /* JKNetWorking */ = {
 			isa = PBXGroup;
 			children = (
-				044DEB6A1FE116FD006F5C35 /* Singleton.h */,
-				044DEB661FE113E3006F5C35 /* MyHelper.h */,
-				BF08F9D81F7B7F95008A3F66 /* BaseNetWorking+Encrypt.h */,
-				BF08F9D91F7B7F95008A3F66 /* BaseNetWorking+Encrypt.m */,
-				BF08F9DA1F7B7F95008A3F66 /* BaseNetWorking+FailureRefresh.h */,
-				BF08F9DB1F7B7F95008A3F66 /* BaseNetWorking+FailureRefresh.m */,
-				BF08F9DC1F7B7F95008A3F66 /* BaseNetWorking+HTTPMethod.h */,
-				BF08F9DD1F7B7F95008A3F66 /* BaseNetWorking+HTTPMethod.m */,
-				BF08F9DE1F7B7F95008A3F66 /* BaseNetWorking+Response.h */,
-				BF08F9DF1F7B7F95008A3F66 /* BaseNetWorking+Response.m */,
-				BF08F9E01F7B7F95008A3F66 /* BaseNetWorking.h */,
-				BF08F9E11F7B7F95008A3F66 /* BaseNetWorking.m */,
-				BF08F9E21F7B7F95008A3F66 /* BaseSessionMessage.h */,
-				BF08F9E31F7B7F95008A3F66 /* BaseSessionMessage.m */,
+				BF505B13211D427200B6CC79 /* NetWorkHelper.h */,
+				BF505B14211D427200B6CC79 /* NetWorkHelper.m */,
+				BF505B16211D6CF800B6CC79 /* JKNetWorking.h */,
+				BF505B17211D6CF800B6CC79 /* JKNetWorking.m */,
+				BF505B19211D6DE400B6CC79 /* JKNetWorking+Encrypt.h */,
+				BF505B1A211D6DE400B6CC79 /* JKNetWorking+Encrypt.m */,
+				BF505B1C211D6E3A00B6CC79 /* JKNetWorking+FailureRefresh.h */,
+				BF505B1D211D6E3A00B6CC79 /* JKNetWorking+FailureRefresh.m */,
+				BF505B1F211D6E6900B6CC79 /* JKNetWorking+HTTPMethod.h */,
+				BF505B20211D6E6900B6CC79 /* JKNetWorking+HTTPMethod.m */,
+				BF505B22211D6EBD00B6CC79 /* JKNetWorking+Response.h */,
+				BF505B23211D6EBD00B6CC79 /* JKNetWorking+Response.m */,
 			);
-			path = Https;
+			path = JKNetWorking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,18 +298,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				044DEB641FE0DC45006F5C35 /* BaseSessionMessage.m in Sources */,
-				044DEB631FE0DC41006F5C35 /* BaseNetWorking.m in Sources */,
+				BF505B24211D6EBD00B6CC79 /* JKNetWorking+Response.m in Sources */,
 				042911551FE3C99800812F17 /* JKGuidePageWindow.m in Sources */,
 				040C941C1FE8C3E6005727A7 /* JK_WKScriptMessageHandler.m in Sources */,
+				BF505B15211D427200B6CC79 /* NetWorkHelper.m in Sources */,
 				040C94221FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m in Sources */,
+				BF505B21211D6E6900B6CC79 /* JKNetWorking+HTTPMethod.m in Sources */,
 				04CE17E71FE7A30A002ECD5D /* JKUtility.m in Sources */,
+				BF505B18211D6CF800B6CC79 /* JKNetWorking.m in Sources */,
 				BF6240961FE635F900B336DE /* JKGuidePageViewController.m in Sources */,
-				044DEB621FE0DC3C006F5C35 /* BaseNetWorking+Response.m in Sources */,
-				044DEB611FE0DC38006F5C35 /* BaseNetWorking+HTTPMethod.m in Sources */,
 				040C941F1FE8D876005727A7 /* NSObject+SelectorExtension.m in Sources */,
-				044DEB601FE0DC33006F5C35 /* BaseNetWorking+FailureRefresh.m in Sources */,
-				044DEB5F1FE0DC2E006F5C35 /* BaseNetWorking+Encrypt.m in Sources */,
+				BF505B1E211D6E3A00B6CC79 /* JKNetWorking+FailureRefresh.m in Sources */,
+				BF505B1B211D6DE400B6CC79 /* JKNetWorking+Encrypt.m in Sources */,
 				BF08F9C41F7B7F0E008A3F66 /* ViewController.m in Sources */,
 				BF08F9CF1F7B7F0E008A3F66 /* main.m in Sources */,
 				BF08F9C11F7B7F0E008A3F66 /* AppDelegate.m in Sources */,
