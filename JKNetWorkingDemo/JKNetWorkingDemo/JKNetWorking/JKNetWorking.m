@@ -23,7 +23,7 @@
 
 -(NSString *)baseUrl{
     if (!_baseUrl) {
-        _baseUrl = @"http://www.baidu.com";
+        _baseUrl = @"http://192.168.208.104/";
     }
     return _baseUrl;
 }

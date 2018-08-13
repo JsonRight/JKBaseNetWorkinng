@@ -168,17 +168,17 @@ extern SessionManager *SessionManagerMake(UploadSessionManager make){
 
 @implementation NetWorkHelper
 
-extern NSURLSessionDataTask * NetWorkMake(UploadSessionManager make){
+extern void NetWorkMake(UploadSessionManager make){
     if (make) {
         SessionManager * sessionMsg = SessionManagerMake(make);
         if (sessionMsg->requestCount-- <= 0) {
             JKNetWorkDLog(@"无效请求")
-            return nil;
+            return;
         }
-        return [[JKNetWorking shareMannager] sendSessionMessage:sessionMsg];
+        [[JKNetWorking shareMannager] sendSessionMessage:sessionMsg];
     }else {
         JKNetWorkDLog(@"无效请求")
-        return nil;
+        return;
     }
 };
 

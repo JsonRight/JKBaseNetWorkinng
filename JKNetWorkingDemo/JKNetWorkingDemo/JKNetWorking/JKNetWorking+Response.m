@@ -87,7 +87,8 @@
     sessionMsg.responseData=data;
     sessionMsg.jsonItems=responseJson;
     if (sessionMsg->isDlog) {
-        JKNetWorkDLog(@"error:statusCode%ld %@===>\n%@",response.statusCode,sessionMsg->requestUrl,sessionMsg.responseString);
+        JKNetWorkDLog(@"error:statusCode%ld %@===>\n%@,",response.statusCode,sessionMsg->requestUrl,sessionMsg.responseString);
+        JKNetWorkDLog(@"%@",error);
     }
     if (sessionMsg->failureBlock) {
         sessionMsg->failureBlock(sessionMsg);

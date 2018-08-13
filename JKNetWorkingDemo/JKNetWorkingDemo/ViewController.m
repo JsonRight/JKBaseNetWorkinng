@@ -59,6 +59,7 @@
 //
 //    });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
         NetWorkMake(^(SessionManager *make) {
             make.requestURL(@"words/word").paramsDic(@{@"str":@"和"}).HTTPMethodType(GetType);
             make.successBlock(^(SessionManager *sessionMsg) {
@@ -68,6 +69,24 @@
                 DLog(@"%@",sessionMsg->requestUrl);
             });
         });
+        
+        NetWorkMake(^(SessionManager *make) {
+            make.requestURL(@"words/word").paramsDic(@{@"str":@"和"}).HTTPMethodType(GetType)
+            .successBlock(^(SessionManager *sessionMsg) {
+                
+            })
+            .failureBlock(^(SessionManager *sessionMsg) {
+                DLog(@"%@",sessionMsg->requestUrl);
+            });
+        });
+        
+        NetWorkMake(^(SessionManager *make) {
+            make.requestURL(@"words/word").paramsDic(@{@"str":@"和"}).HTTPMethodType(GetType)
+            .successBlock(^(SessionManager *sessionMsg) {
+                
+            });
+        });
+        
     });
    
     

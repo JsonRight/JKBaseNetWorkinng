@@ -118,7 +118,7 @@ extern SessionManager *SessionManagerMake(UploadSessionManager make);
 
 @interface NetWorkHelper : NSObject
 
-extern NSURLSessionDataTask * NetWorkMake(UploadSessionManager make);
+extern void NetWorkMake(UploadSessionManager make);
 /*请求组*/
 extern void NetWorkMakesGroup(NSArray <SessionManager *> * sessionMsgs , NetWorkRequestGroupBlock reduceBlock);
 
