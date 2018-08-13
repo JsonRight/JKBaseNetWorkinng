@@ -23,7 +23,7 @@
 
 -(NSString *)baseUrl{
     if (!_baseUrl) {
-        _baseUrl = @"http://192.168.208.104/";
+        _baseUrl = @"http://api.jinxiansen.com/";
     }
     return _baseUrl;
 }

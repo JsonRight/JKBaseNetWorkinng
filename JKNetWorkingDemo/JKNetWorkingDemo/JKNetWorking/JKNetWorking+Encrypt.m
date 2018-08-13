@@ -11,9 +11,11 @@
 @implementation JKNetWorking (Encrypt)
 - (void)encryptedUrlWithSessionMessage:(SessionManager *)sessionMsg{
     if (sessionMsg->requestUrl) {
-        sessionMsg->encryptedUrlString=[NSString stringWithFormat:@"%@%@",sessionMsg->baseUrl,sessionMsg->requestUrl];
+        NSURL *encryptedUrl = [NSURL URLWithString:sessionMsg->requestUrl relativeToURL:[NSURL URLWithString:sessionMsg->baseUrl]];
+        sessionMsg->encryptedUrlString=encryptedUrl.absoluteString;
     }else {
-        sessionMsg->encryptedUrlString=[NSString stringWithFormat:@"%@",sessionMsg->baseUrl];
+        NSURL * encryptedUrl = [NSURL URLWithString:sessionMsg->baseUrl];
+        sessionMsg->encryptedUrlString=encryptedUrl.absoluteString;
     }
     if (sessionMsg->isDlog) {
         JKNetWorkDLog(@"baseUrl:%@\nrequestUrl:%@\n请求参数:\n%@",sessionMsg->baseUrl,sessionMsg->requestUrl,sessionMsg->params);
