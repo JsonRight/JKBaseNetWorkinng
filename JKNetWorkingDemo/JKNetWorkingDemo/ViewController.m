@@ -81,6 +81,11 @@
         NetWorkMake(^(SessionManager *make) {
             //初始化一个带上传数据的model，这个model干啥呢，点进去看看
             UpLoadFileModel * model = [UpLoadFileModel new];
+            model.data = [NSData data];
+            model.name = @"hehe";
+            model.fileName = @"heihei";
+            model.mimeType = @"image/jpeg";
+            
             //可以这个样子，一个make，对齐比较好看
             make.requestURL(@"words/word")
                 .paramsDic(@{@"str":@"和"})

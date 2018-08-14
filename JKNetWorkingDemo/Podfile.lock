@@ -1,18 +1,18 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
+  - AFNetworking (3.2.0):
+    - AFNetworking/NSURLSession (= 3.2.0)
+    - AFNetworking/Reachability (= 3.2.0)
+    - AFNetworking/Security (= 3.2.0)
+    - AFNetworking/Serialization (= 3.2.0)
+    - AFNetworking/UIKit (= 3.2.0)
+  - AFNetworking/NSURLSession (3.2.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
+  - AFNetworking/Reachability (3.2.0)
+  - AFNetworking/Security (3.2.0)
+  - AFNetworking/Serialization (3.2.0)
+  - AFNetworking/UIKit (3.2.0):
     - AFNetworking/NSURLSession
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
@@ -21,20 +21,32 @@ PODS:
   - ReactiveCocoa/no-arc (2.5)
   - ReactiveCocoa/UI (2.5):
     - ReactiveCocoa/Core
-  - SDWebImage (4.2.2):
-    - SDWebImage/Core (= 4.2.2)
-  - SDWebImage/Core (4.2.2)
+  - SDWebImage (4.3.0):
+    - SDWebImage/Core (= 4.3.0)
+  - SDWebImage/Core (4.3.0)
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
 
 DEPENDENCIES:
   - AFNetworking
   - ReactiveCocoa
   - SDWebImage
+  - YYKit
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - ReactiveCocoa
+    - SDWebImage
+    - YYKit
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
-  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
+  SDWebImage: 6da6c8bca115addc4de8613362e1b15f66333825
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 59cde4a2ec552c5423bf4e5f6ef62f129d7030fd
+PODFILE CHECKSUM: c7681d77f017a037d1081eec565692ac566cc3b3
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

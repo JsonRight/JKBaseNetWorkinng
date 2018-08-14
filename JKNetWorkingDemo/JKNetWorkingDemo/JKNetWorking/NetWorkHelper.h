@@ -109,10 +109,10 @@ extern SessionManager *SessionManagerMake(UploadSessionManager make);
 
 //上传数据使用
 @interface UpLoadFileModel : NSObject
-@property (nonatomic, copy) NSData   * data;//二进制数据
-@property (nonatomic, copy) NSString * name;//名称
-@property (nonatomic, copy) NSString * fileName;//文件名
-@property (nonatomic, copy) NSString * mimeType;//文件类型
+@property (nonatomic, copy) NSData   * data;//二进制数据 不能为空
+@property (nonatomic, copy) NSString * name;//名称 不能为空
+@property (nonatomic, copy) NSString * fileName;//文件名 不能为空
+@property (nonatomic, copy) NSString * mimeType;//文件类型 不能为空
 
 @end
 

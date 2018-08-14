@@ -9,7 +9,6 @@
 #import "JKNetWorking+HTTPMethod.h"
 #import "JKNetWorking+Encrypt.h"
 #import "JKNetWorking+Response.h"
-
 @implementation JKNetWorking (HTTPMethod)
 #pragma mark -- 普通Get请求和Post请求
 - (NSURLSessionDataTask *)getMethodWithSessionMessage:(SessionManager *)sessionMsg {

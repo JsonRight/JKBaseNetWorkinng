@@ -18,7 +18,7 @@
         sessionMsg->encryptedUrlString=encryptedUrl.absoluteString;
     }
     if (sessionMsg->isDlog) {
-        JKNetWorkDLog(@"baseUrl:%@\nrequestUrl:%@\n请求参数:\n%@",sessionMsg->baseUrl,sessionMsg->requestUrl,sessionMsg->params);
+        JKNetWorkDLog(@"baseUrl:%@\nrequestUrl:%@\nencryptedUrlString:%@\n请求参数:\n%@",sessionMsg->baseUrl,sessionMsg->requestUrl,sessionMsg->encryptedUrlString,sessionMsg->params);
     }
 }
 @end

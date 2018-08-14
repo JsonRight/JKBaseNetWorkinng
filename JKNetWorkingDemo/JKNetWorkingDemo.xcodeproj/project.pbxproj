@@ -26,6 +26,10 @@
 		BF505B21211D6E6900B6CC79 /* JKNetWorking+HTTPMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = BF505B20211D6E6900B6CC79 /* JKNetWorking+HTTPMethod.m */; };
 		BF505B24211D6EBD00B6CC79 /* JKNetWorking+Response.m in Sources */ = {isa = PBXBuildFile; fileRef = BF505B23211D6EBD00B6CC79 /* JKNetWorking+Response.m */; };
 		BF6240961FE635F900B336DE /* JKGuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6240951FE635F900B336DE /* JKGuidePageViewController.m */; };
+		BFBF372C212276FC008E54C0 /* NSObject+JKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBF372B212276FC008E54C0 /* NSObject+JKModel.m */; };
+		BFBF372F212279B0008E54C0 /* NSArray+Traversal.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBF372E212279B0008E54C0 /* NSArray+Traversal.m */; };
+		BFBF373221227B23008E54C0 /* NSDictionary+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBF373121227B23008E54C0 /* NSDictionary+JSON.m */; };
+		BFBF373521227BB1008E54C0 /* NSString+Base.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBF373421227BB1008E54C0 /* NSString+Base.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +71,14 @@
 		BF505B23211D6EBD00B6CC79 /* JKNetWorking+Response.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JKNetWorking+Response.m"; sourceTree = "<group>"; };
 		BF6240941FE635F900B336DE /* JKGuidePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKGuidePageViewController.h; sourceTree = "<group>"; };
 		BF6240951FE635F900B336DE /* JKGuidePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKGuidePageViewController.m; sourceTree = "<group>"; };
+		BFBF372A212276FC008E54C0 /* NSObject+JKModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+JKModel.h"; sourceTree = "<group>"; };
+		BFBF372B212276FC008E54C0 /* NSObject+JKModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JKModel.m"; sourceTree = "<group>"; };
+		BFBF372D212279B0008E54C0 /* NSArray+Traversal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Traversal.h"; sourceTree = "<group>"; };
+		BFBF372E212279B0008E54C0 /* NSArray+Traversal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Traversal.m"; sourceTree = "<group>"; };
+		BFBF373021227B23008E54C0 /* NSDictionary+JSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JSON.h"; sourceTree = "<group>"; };
+		BFBF373121227B23008E54C0 /* NSDictionary+JSON.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JSON.m"; sourceTree = "<group>"; };
+		BFBF373321227BB1008E54C0 /* NSString+Base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Base.h"; sourceTree = "<group>"; };
+		BFBF373421227BB1008E54C0 /* NSString+Base.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +151,7 @@
 		BF08F9BE1F7B7F0E008A3F66 /* JKNetWorkingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BFBF37292122766F008E54C0 /* JKModelExtension */,
 				BF505B0C211D3F8500B6CC79 /* JKNetWorking */,
 				0429114F1FE3838400812F17 /* JKGuidePage */,
 				BF08F9BF1F7B7F0E008A3F66 /* AppDelegate.h */,
@@ -173,6 +186,21 @@
 			path = JKNetWorking;
 			sourceTree = "<group>";
 		};
+		BFBF37292122766F008E54C0 /* JKModelExtension */ = {
+			isa = PBXGroup;
+			children = (
+				BFBF372A212276FC008E54C0 /* NSObject+JKModel.h */,
+				BFBF372B212276FC008E54C0 /* NSObject+JKModel.m */,
+				BFBF372D212279B0008E54C0 /* NSArray+Traversal.h */,
+				BFBF372E212279B0008E54C0 /* NSArray+Traversal.m */,
+				BFBF373021227B23008E54C0 /* NSDictionary+JSON.h */,
+				BFBF373121227B23008E54C0 /* NSDictionary+JSON.m */,
+				BFBF373321227BB1008E54C0 /* NSString+Base.h */,
+				BFBF373421227BB1008E54C0 /* NSString+Base.m */,
+			);
+			path = JKModelExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -184,8 +212,6 @@
 				BF08F9B81F7B7F0E008A3F66 /* Sources */,
 				BF08F9B91F7B7F0E008A3F66 /* Frameworks */,
 				BF08F9BA1F7B7F0E008A3F66 /* Resources */,
-				4F34739CDB8D1F668688DD08 /* [CP] Embed Pods Frameworks */,
-				D43E2C47EAD5E10E0DCB9E28 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -243,21 +269,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4F34739CDB8D1F668688DD08 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JKNetWorkingDemo/Pods-JKNetWorkingDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		51AC2D4E836DC0275DEDFABE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -276,21 +287,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D43E2C47EAD5E10E0DCB9E28 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JKNetWorkingDemo/Pods-JKNetWorkingDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -304,10 +300,14 @@
 				BF505B15211D427200B6CC79 /* NetWorkHelper.m in Sources */,
 				040C94221FE8EA8D005727A7 /* NSURLProtocol+WebKitCache.m in Sources */,
 				BF505B21211D6E6900B6CC79 /* JKNetWorking+HTTPMethod.m in Sources */,
+				BFBF373521227BB1008E54C0 /* NSString+Base.m in Sources */,
+				BFBF372C212276FC008E54C0 /* NSObject+JKModel.m in Sources */,
 				04CE17E71FE7A30A002ECD5D /* JKUtility.m in Sources */,
+				BFBF373221227B23008E54C0 /* NSDictionary+JSON.m in Sources */,
 				BF505B18211D6CF800B6CC79 /* JKNetWorking.m in Sources */,
 				BF6240961FE635F900B336DE /* JKGuidePageViewController.m in Sources */,
 				040C941F1FE8D876005727A7 /* NSObject+SelectorExtension.m in Sources */,
+				BFBF372F212279B0008E54C0 /* NSArray+Traversal.m in Sources */,
 				BF505B1E211D6E3A00B6CC79 /* JKNetWorking+FailureRefresh.m in Sources */,
 				BF505B1B211D6DE400B6CC79 /* JKNetWorking+Encrypt.m in Sources */,
 				BF08F9C41F7B7F0E008A3F66 /* ViewController.m in Sources */,
