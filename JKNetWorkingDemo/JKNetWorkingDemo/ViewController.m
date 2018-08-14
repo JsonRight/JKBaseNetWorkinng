@@ -59,9 +59,9 @@
 //
 //    });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
+        NSDictionary * dict = @{@"str":@"和"};
         NetWorkMake(^(SessionManager *make) {
-            make.requestURL(@"words/word").paramsDic(@{@"str":@"和"}).HTTPMethodType(GetType);
+            make.requestURL(@"words/word").paramsDic(dict).HTTPMethodType(GetType);
             make.successBlock(^(SessionManager *sessionMsg) {
 
             });
@@ -70,22 +70,32 @@
             });
         });
 
-        NetWorkMake(^(SessionManager *make) {
-            make.requestURL(@"words/word").paramsDic(@{@"str":@"和"}).HTTPMethodType(GetType)
-            .successBlock(^(SessionManager *sessionMsg) {
-
-            })
-            .failureBlock(^(SessionManager *sessionMsg) {
-                DLog(@"%@",sessionMsg->requestUrl);
-            });
-        });
-
-        NetWorkMake(^(SessionManager *make) {
-            make.requestURL(@"words/word").paramsDic(@{@"str":@"和"}).HTTPMethodType(GetType)
-            .successBlock(^(SessionManager *sessionMsg) {
-
-            });
-        });
+//        NetWorkMake(^(SessionManager *make) {
+//            make.requestURL(@"words/word").paramsDic(@{@"str":@"和"}).HTTPMethodType(GetType)
+//            .successBlock(^(SessionManager *sessionMsg) {
+//
+//            })
+//            .failureBlock(^(SessionManager *sessionMsg) {
+//                DLog(@"%@",sessionMsg->requestUrl);
+//            });
+//        });
+//
+//        NetWorkMake(^(SessionManager *make) {
+//            make.requestURL(@"words/word").paramsDic(@{@"str":@"和"}).HTTPMethodType(GetType)
+//            .successBlock(^(SessionManager *sessionMsg) {
+//
+//            });
+//        });
+//        NetWorkMake(^(SessionManager *make) {
+//            UpLoadFileModel * model = [UpLoadFileModel new];
+//            make.requestURL(@"words/word")
+//            .paramsDic(@{@"str":@"和"})
+//            .HTTPMethodType(PostType)
+//            .upLoadDataArr(@[model])
+//            .successBlock(^(SessionManager *sessionMsg) {
+//
+//            });
+//        });
 
     });
     NSURL *baseURL = [NSURL URLWithString:@"http://example.com/v1/"];
