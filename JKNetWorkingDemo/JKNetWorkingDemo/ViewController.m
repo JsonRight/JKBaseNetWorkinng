@@ -58,44 +58,38 @@
 //        DLog(@"%@",sessionMsg2->baseUrl);
 //
 //    });
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSDictionary * dict = @{@"str":@"和"};
+        NSDictionary * dict = @{@"str":@"和"};//写里面/外面没啥影响
+        
         NetWorkMake(^(SessionManager *make) {
-            make.requestURL(@"words/word").paramsDic(dict).HTTPMethodType(GetType);
+            make.requestURL(@"words/word")
+                .paramsDic(dict)
+                .HTTPMethodType(GetType);  //默认Post，使用默认值的话可以不写
+            
             make.successBlock(^(SessionManager *sessionMsg) {
-
+                DLog(@"%@",sessionMsg.responseString);
             });
+            
             make.failureBlock(^(SessionManager *sessionMsg) {
-                DLog(@"%@",sessionMsg->requestUrl);
+                DLog(@"%@",sessionMsg.responseString);
             });
+            
         });
 
-//        NetWorkMake(^(SessionManager *make) {
-//            make.requestURL(@"words/word").paramsDic(@{@"str":@"和"}).HTTPMethodType(GetType)
-//            .successBlock(^(SessionManager *sessionMsg) {
-//
-//            })
-//            .failureBlock(^(SessionManager *sessionMsg) {
-//                DLog(@"%@",sessionMsg->requestUrl);
-//            });
-//        });
-//
-//        NetWorkMake(^(SessionManager *make) {
-//            make.requestURL(@"words/word").paramsDic(@{@"str":@"和"}).HTTPMethodType(GetType)
-//            .successBlock(^(SessionManager *sessionMsg) {
-//
-//            });
-//        });
-//        NetWorkMake(^(SessionManager *make) {
-//            UpLoadFileModel * model = [UpLoadFileModel new];
-//            make.requestURL(@"words/word")
-//            .paramsDic(@{@"str":@"和"})
-//            .HTTPMethodType(PostType)
-//            .upLoadDataArr(@[model])
-//            .successBlock(^(SessionManager *sessionMsg) {
-//
-//            });
-//        });
+        //上传数据
+        NetWorkMake(^(SessionManager *make) {
+            //初始化一个带上传数据的model，这个model干啥呢，点进去看看
+            UpLoadFileModel * model = [UpLoadFileModel new];
+            //可以这个样子，一个make，对齐比较好看
+            make.requestURL(@"words/word")
+                .paramsDic(@{@"str":@"和"})
+                .HTTPMethodType(UpLoadDataType)//设定请求格式。虽然上传数据也是post，但是不要写PostType哟，它有专门的请求格式：UpLoadDataType
+                .upLoadDataArr(@[model])//设置上传的数据
+                .successBlock(^(SessionManager *sessionMsg) {
+                    DLog(@"%@",sessionMsg.responseString);
+                });
+        });
 
     });
     NSURL *baseURL = [NSURL URLWithString:@"http://example.com/v1/"];
