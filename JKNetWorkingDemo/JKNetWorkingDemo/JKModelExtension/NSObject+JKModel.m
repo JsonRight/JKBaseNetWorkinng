@@ -35,7 +35,7 @@
 - (id)modelCopy
 {
     NSDictionary* dic = [self toDictionary];
-    return [[self class] objectFromDictionary:dic];
+    return [[self class] modelFromDictionary:dic];
 }
 
 #pragma mark - Encode
@@ -50,7 +50,7 @@
 }
 
 #pragma mark - Static Utility
-+ (id)objectFromDictionary:(NSDictionary*)dictionary
++ (id)modelFromDictionary:(NSDictionary*)dictionary
 {
     if (!dictionary || ![dictionary isKindOfClass:[NSDictionary class]]) {
         return nil;
@@ -59,17 +59,17 @@
     return [[self alloc] initWithDictionary:dictionary];
 }
 
-+ (id)objectFromJSONString: (NSString*)JSONString
++ (id)modelFromJSONString: (NSString*)JSONString
 {
     
     NSDictionary* dic = [NSDictionary dictionaryWithJSONString:JSONString];
-    return [self objectFromDictionary:dic];
+    return [self modelFromDictionary:dic];
 }
 
-+ (NSArray*)objectArrayFromDictionaryArray: (NSArray*)dictionaryArray
++ (NSArray*)modelArrayFromDictionaryArray: (NSArray*)dictionaryArray
 {
     return [dictionaryArray arrayByMappingArrayWithBlock:^id(NSInteger index, NSDictionary* dic) {
-        return [self objectFromDictionary:dic];
+        return [self modelFromDictionary:dic];
     }];
 }
 

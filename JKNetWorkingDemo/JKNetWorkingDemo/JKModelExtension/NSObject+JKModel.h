@@ -20,8 +20,8 @@
 - (id)modelInitWithCoder:(NSCoder *)aDecoder;
 
 #pragma mark - Static Utility
-+ (id)objectFromDictionary:(NSDictionary*)dictionary;
-+ (id)objectFromJSONString: (NSString*)JSONString;
-+ (NSArray*)objectArrayFromDictionaryArray: (NSArray*)dictionaryArray;
++ (id)modelFromDictionary:(NSDictionary*)dictionary;
++ (id)modelFromJSONString: (NSString*)JSONString;
++ (NSArray*)modelArrayFromDictionaryArray: (NSArray*)dictionaryArray;
 + (NSArray*)dictionaryArrayFromObjectArray: (NSArray*)objectArray;
 @end
