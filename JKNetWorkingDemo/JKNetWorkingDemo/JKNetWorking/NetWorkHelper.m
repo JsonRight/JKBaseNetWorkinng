@@ -103,9 +103,8 @@
 
 - (RequestParams)paramsDic{
     return ^(id paramsDic){
-        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:0];
-        [dict addEntriesFromDictionary:paramsDic];
-        self->params = dict;
+        self->params = [NSMutableDictionary dictionaryWithCapacity:0];
+        [self->params addEntriesFromDictionary:paramsDic];
         return self;
     };
 }
