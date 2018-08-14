@@ -60,6 +60,8 @@
 //    });
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        //普通请求
         NSDictionary * dict = @{@"str":@"和"};//写里面/外面没啥影响
         
         NetWorkMake(^(SessionManager *make) {
@@ -94,6 +96,38 @@
                 .successBlock(^(SessionManager *sessionMsg) {
                     DLog(@"%@",sessionMsg.responseString);
                 });
+        });
+        
+        //网络请求组
+        SessionManager *sessage1 = SessionManagerMake(^(SessionManager *make) {
+            make.requestURL(@"a/a");
+            make.successBlock(^(SessionManager *sessionMsg) {
+                DLog(@"网络请求1完成");
+            });
+            make.failureBlock(^(SessionManager *sessionMsg) {
+                DLog(@"网络请求1失败");
+            });
+        });
+        SessionManager *sessage2 = SessionManagerMake(^(SessionManager *make) {
+            make.requestURL(@"b/b");
+            make.successBlock(^(SessionManager *sessionMsg) {
+                DLog(@"网络请求2完成");
+            });
+            make.failureBlock(^(SessionManager *sessionMsg) {
+                DLog(@"网络请求2失败");
+            });
+        });
+        SessionManager *sessage3 = SessionManagerMake(^(SessionManager *make) {
+            make.requestURL(@"c/c");
+            make.successBlock(^(SessionManager *sessionMsg) {
+                DLog(@"网络请求3完成");
+            });
+            make.failureBlock(^(SessionManager *sessionMsg) {
+                DLog(@"网络请求3失败");
+            });
+        });
+        NetWorkMakesGroup(@[sessage1,sessage2,sessage3], ^{
+            DLog(@"网络请求组结束");
         });
 
     });
